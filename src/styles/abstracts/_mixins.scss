@@ -23,7 +23,11 @@
 }
 
 @mixin respond-to($size) {
-  @if $size == xl {
+  @if $size == xxl {
+    @media (max-width: $breakpoint-xxl) {
+      @content;
+    }
+  } @else if $size == xl {
     @media (max-width: $breakpoint-xl) {
       @content;
     }
@@ -37,10 +41,6 @@
     }
   } @else if $size == sm {
     @media (max-width: $breakpoint-sm) {
-      @content;
-    }
-  } @else if $size == xxl {
-    @media (max-width: $breakpoint-xxl) {
       @content;
     }
   } @else if $size == xsm {
