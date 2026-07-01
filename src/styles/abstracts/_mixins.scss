@@ -8,10 +8,46 @@
   gap: $gap;
 }
 
+@mixin grid-auto($minWidth, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($minWidth, 1fr));
+  gap: $gap;
+}
+
 @mixin global_content_wrapper() {
   max-width: var(--container-content-md);
   margin: 0 auto;
   width: 100%;
   padding-inline: clamp(var(--space-lg), 5vw, var(--space-2xl));
   box-sizing: border-box;
+}
+
+@mixin respond-to($size) {
+  @if $size == xl {
+    @media (max-width: $breakpoint-xl) {
+      @content;
+    }
+  } @else if $size == lg {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $size == md {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $size == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $size == xxl {
+    @media (max-width: $breakpoint-xxl) {
+      @content;
+    }
+  } @else if $size == xsm {
+    @media (max-width: $breakpoint-xsm) {
+      @content;
+    }
+  } @else {
+    @error "Unbekannter Breakpoint: #{$size}.";
+  }
 }
