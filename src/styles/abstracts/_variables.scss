@@ -1,0 +1,127 @@
+:root {
+  // --- GENERAL COLORS ---
+
+  --clr-blue-light: #29abe2;
+  --clr-blue-muted: #2a3647;
+  --clr-blue-dark: #091931;
+
+  --clr-black: #000000;
+  --clr-white: #ffffff;
+  --clr-tinted-grey: #f6f7f8;
+
+  // --- FEEDBACK COLORS ---
+  --clr-feedback-error: #e60026;
+  --clr-feedback-urgent: #ff3d00;
+  --clr-feedback-medium: #ffa800;
+  --clr-feedback-low: #7ae229;
+
+  --clr-feedback-disabled: #d1d1d1;
+
+  // --- USER COLORS ---
+  --clr-user-tangerine: #ff7a00;
+  --clr-user-flamingo: #ff5eb3;
+  --clr-user-iris: #6e52ff;
+  --clr-user-amethyst: #9327ff;
+  --clr-user-sky: #00bee8;
+  --clr-user-mint: #1fd7c1;
+  --clr-user-salmon: #ff745e;
+  --clr-user-apricot: #ffa35e;
+  --clr-user-fuchsia: #fc71ff;
+  --clr-user-sunflower: #ffc701;
+  --clr-user-cobalt: #0038ff;
+  --clr-user-lime: #c3ff2b;
+  --clr-user-lemon: #ffe62b;
+  --clr-user-cherry: #ff4646;
+  --clr-user-marigold: #ffbb2b;
+
+  // --- CATEGORY COLORS ---
+  --clr-category-userstory: #0038ff;
+  --clr-category-technical: #1fd7c1;
+
+  // --- FONT FAMILIES ---
+  --ff-display: 'Inter', sans-serif;
+  --ff-body: 'Inter', sans-serif;
+
+  // --- FONT WEIGHTS ---
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  // --- LINE HEIGHTS ---
+  --lh-body: 1.5;
+  --lh-heading: 1.2;
+
+  // --- FONT SIZES ---
+
+  // Headings (Mulish Bold)
+  --fs-h1: 1.25rem; // 20px
+  --fs-h2: 4rem; // 64px
+  --fs-h3: 1.6875rem; // 27px
+  --fs-h4: 1.25rem; // 20px
+  --fs-h5: 1rem; // 16px
+
+  // Body
+  --fs-body-large: 1.25rem; // 20px
+  --fs-body-medium: 1.125rem; // 18px
+  --fs-body-normal: 1rem; // 16px
+
+  // --- SPACING ---
+  --space-xs: 0.25rem; // 4px
+  --space-sm: 0.5rem; // 8px
+  --space-md: 1rem; // 16px
+  --space-lg: 1.5rem; // 24px
+  --space-xl: 2rem; // 32px
+  --space-2xl: 3rem; // 48px
+  --space-3xl: 4rem; // 64px
+  --space-4xl: 6rem; // 96px
+
+  // --- BORDER RADIUS ---
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  // --- SHADOWS ---
+  --shadow-allaround: 0px 0px 12px rgba(0, 0, 0, 0.15);
+  --shadow-bottom: 0px 8px 12px -6px rgba(0, 0, 0, 0.15);
+  --shadow-top: 0px -8px 12px -6px rgba(0, 0, 0, 0.15);
+  --shadow-right: 8px 0px 12px -6px rgba(0, 0, 0, 0.15);
+  --shadow-left: -8px 0px 12px -6px rgba(0, 0, 0, 0.15);
+
+  /*   Bsp.:
+  box-shadow: var(--shadow-allaround); */
+
+  // --- LAYOUT ---
+  --container-content-md: 1440px;
+
+  // --- DESIGN-TOKENS ---
+
+  // TEXTS
+  --text-color-ultradark: var(--clr-black);
+  --text-color-dark: var(--clr-blue-dark);
+  --text-color-light: var(--clr-feedback-disabled);
+  --text-color-ultralight: var(--clr-white);
+  --text-color-special: var(--clr-blue-light);
+
+  --bg-ultralight: var(--clr-white);
+  --bg-light: var(--clr-tinted-grey);
+  --bg-dark: var(--clr-blue-dark);
+  --bg-special: var(--clr-blue-light);
+
+  --bg-category-userstory: var(--clr-category-userstory);
+  --bg-category-technical: var(--clr-category-technical);
+
+  --border-clr-ultralight: var(--clr-white);
+  --border-clr-light: var(--clr-feedback-disabled);
+
+  --border-clr-error: var(--clr-feedback-error);
+  --border-clr-active: var(--clr-blue-light);
+}
+
+// --- Breakpoints ---
+$breakpoint-xsm: 410px; // Mobile Landscape
+$breakpoint-sm: 576px; // Mobile Landscape
+$breakpoint-md: 768px; // Tablet
+$breakpoint-lg: 992px; // Small Desktop
+$breakpoint-xl: 1200px; // Large Desktop
+$breakpoint-xxl: 1500px; // Large Desktop

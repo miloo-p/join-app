@@ -1,0 +1,55 @@
+// ==========================================
+// BASE HTML TAGS
+// ==========================================
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body-normal);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--text-color-ultradark);
+  background-color: var(--bg-light);
+}
+
+// Alle Überschriften teilen sich Inter, Bold und Line-Height 1.2
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--ff-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  margin-bottom: var(--space-md);
+}
+
+// Zuweisung der exakten Heading Größen
+h1 {
+  font-size: var(--fs-h1);
+}
+h2 {
+  font-size: var(--fs-h2);
+}
+h3 {
+  font-size: var(--fs-h3);
+}
+h4 {
+  font-size: var(--fs-h4);
+}
+h5 {
+  font-size: var(--fs-h5);
+}
+
+// Links
+a {
+  color: var(--clr-blue-light);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: var();
+  }
+  &:active {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,25 @@
+@use '../abstracts/variables' as *;
+
+// ==========================================
+// GLOBALE UTILITY-KLASSEN
+// ==========================================
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.hidden-mobile {
+  @media (max-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @media (min-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
