@@ -1,6 +1,6 @@
 Das ist ein Test um zu schauen ob ihr pushen könnt:
 
-Jonathan []
+Jonathan [X]
 Magdalena []
 Jérôme []
 Denis []
