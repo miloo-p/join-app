@@ -1,0 +1,59 @@
+@use '../../../styles/abstracts/mixins' as *;
+
+.sidebar {
+  @include flexbox(column, space-between, center, 0);
+  background-color: var(--bg-muted);
+  color: var(--text-color-ultralight);
+  width: 232px;
+  min-height: 100vh;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-xl);
+
+  &__logo-container {
+    margin-bottom: var(--space-4xl);
+  }
+
+  &__logo {
+    width: 100px;
+  }
+
+  &__nav {
+    @include flexbox(column, flex-start, stretch, var(--space-sm));
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  &__link {
+    @include flexbox(row, flex-start, center, var(--space-md));
+    padding: var(--space-sm) var(--space-2xl);
+    color: var(--text-color-light);
+    text-decoration: none;
+
+    &:hover {
+      background-color: var(--bg-dark);
+    }
+
+    &.active {
+      background-color: var(--bg-special);
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__legal {
+    @include flexbox(column, center, center, var(--space-sm));
+    width: 100%;
+  }
+
+  &__legal-link {
+    color: var(--text-color-light);
+    font-size: var(--fs-body-normal);
+
+    &:hover {
+      color: var(--text-color-special);
+    }
+  }
+}
