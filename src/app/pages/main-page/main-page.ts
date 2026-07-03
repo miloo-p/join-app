@@ -15,5 +15,6 @@ export class MainPage {
 
   ngOnInit() {
     this.dbService.getContacts();
+    this.dbService.subscribeToContacts();
   }
 }
