@@ -22,6 +22,7 @@ export class Supabase {
     .select('*')
     if(!contacts) return
     this.contacts.set(contacts)
+    console.log(contacts);
   }
 
 
@@ -37,11 +38,11 @@ export class Supabase {
       console.error('Supabase insert error', error);
       return;
     }
-
     return data;
   }
 
   //Subscribe
+
   async subscribeToContacts() {
   this.channels = this.supabase
   .channel('contacts-channel')
