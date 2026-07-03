@@ -1,18 +1,10 @@
-import { Component } from '@angular/core';
-import { createClient } from '@supabase/supabase-js';
-import { environment } from '../../../environments/environment';
+import { Component, inject } from '@angular/core';
 
 @Component({
-  selector: 'app-contacts',
+  selector: 'app-contact-list',
   imports: [],
-  templateUrl: './contacts.html',
-  styleUrl: './contacts.scss',
+  templateUrl: './contacts-list.html',
+  styleUrl: './contacts-list.scss',
 })
-export class Contacts {
-
-  supabase = createClient(environment.apiUrl, environment.apiKey);
-
-  fetchData(){
-
-  }
+export class ContactList {
 }
