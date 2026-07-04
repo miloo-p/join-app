@@ -1,0 +1,7 @@
+<button [class]="'custom-btn ' + variant()" (click)="onButtonClick()">
+
+    <span>{{ text() }}</span>
+
+
+    <ng-content></ng-content>
+</button>

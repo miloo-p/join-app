@@ -1,0 +1,36 @@
+@use 'styles/abstracts/mixins' as *;
+
+.custom-btn {
+    @include flexbox(row, center, center, var(--space-md));
+    width: 352px;
+    height: 56px;
+    padding: 12px var(--space-md);
+
+    font-size: 21px;     
+    font-weight: var(--fw-bold);             
+    line-height: var(--lh-heading);          
+    color: var(--text-color-ultralight) !important; 
+
+    
+    background-color: var(--bg-dark);
+    border: 1px solid var(--bg-dark);        
+    border-radius: 10px;                     
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--bg-special);
+        border-color: var(--bg-special);
+    }
+
+    &:active {
+        background-color: var(--clr-blue-dark); 
+        border-color: var(--clr-blue-dark);
+    }
+}
+
+::ng-deep svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
