@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, computed, inject, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button';
 import { Supabase } from '../../shared/services/supabase';
 
-/** Internal structure for alphabetically grouped contacts */
 interface ContactGroup {
   letter: string;
   contacts: any[];
@@ -20,6 +19,8 @@ export class ContactList implements OnInit {
   public supabaseService = inject(Supabase);
   public selectedContact = signal<any | null>(null);
 
+  @Output() public contactSelected = new EventEmitter<any>();
+
   public availableColors: string[] = [
     'var(--clr-user-tangerine)', 'var(--clr-user-flamingo)', 'var(--clr-user-iris)',
     'var(--clr-user-amethyst)', 'var(--clr-user-sky)', 'var(--clr-user-mint)',
@@ -32,7 +33,6 @@ export class ContactList implements OnInit {
     const rawContacts = this.supabaseService.contacts();
     if (!rawContacts || rawContacts.length === 0) return [];
     
-  
     const sorted = [...rawContacts].sort((a, b) => a.firstname.localeCompare(b.firstname));
     return this.buildAlphabeticalGroups(sorted);
   });
@@ -43,7 +43,9 @@ export class ContactList implements OnInit {
   }
 
   public selectContact(contact: any): void {
-    this.selectedContact.set(contact);
+    const transformed = this.transformContactData(contact);
+    this.selectedContact.set(transformed);
+    this.contactSelected.emit(transformed);
   }
 
   private buildAlphabeticalGroups(sorted: any[]): ContactGroup[] {

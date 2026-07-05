@@ -1,7 +1,4 @@
 <div class="contacts-layout">
-    <!-- Left Side: Contacts List -->
-    <app-contacts-list></app-contacts-list>
-
-    <!-- Right Side: Contact Details -->
-    <app-contacts-detail></app-contacts-detail>
+    <app-contacts-list (contactSelected)="handleContactSelection($event)"></app-contacts-list>
+    <app-contacts-detail [contact]="activeContact()"></app-contacts-detail>
 </div>
