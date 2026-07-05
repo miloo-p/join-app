@@ -1,50 +1,60 @@
-<!-- Right Side: Contact details view (initially empty) -->
 <main class="contacts-main-content">
 
-    <!-- Header Area (Always visible) -->
     <div class="contacts-header">
         <h1 class="main-title">Contacts</h1>
         <div class="header-divider"></div>
         <span class="slogan">Better with a team</span>
     </div>
 
-    <!-- Details Box (State B: Visible when a contact is selected) -->
-    <!-- TODO: Jonathan will toggle this block dynamically via Angular condition later -->
+    @if (contact) {
     <div class="contact-details-view">
-
-        <!-- Profile Info & Buttons Header -->
         <div class="details-profile-header">
-            <div class="large-avatar bg-tangerine">AM</div>
+            <div class="large-avatar" [style.background-color]="contact.avatarColor">
+                {{ contact.initials }}
+            </div>
             <div class="profile-name-actions">
-                <h2 class="profile-name">Anton Mayer</h2>
+                <h2 class="profile-name">{{ contact.name }}</h2>
                 <div class="action-buttons">
-                    <button class="contact-edit-btn">
-                        <span class="edit-icon"></span>
+                    <button class="contact-edit-btn" (click)="onEditContact()">
+                        <svg class="action-icon" width="24" height="24" viewBox="0 0 19 19" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2 17H3.4L13.2 7.2L11.8 5.8L2 15.6V17ZM1 18V15.2L13.9 2.3C14.1 2.1 14.3 2 14.6 2C14.9 2 15.1 2.1 15.3 2.3L16.7 3.7C16.9 3.9 17 4.1 17 4.4C17 4.7 16.9 4.9 16.7 5.1L3.8 18H1ZM12.5 6.5L11.8 5.8L13.2 7.2L12.5 6.5Z"
+                                fill="currentColor" />
+                        </svg>
                         Edit
                     </button>
-                    <button class="contact-delete-btn">
-                        <span class="delete-icon"></span>
+
+                    <button class="contact-delete-btn" (click)="onDeleteContact()">
+                        <svg width="24" height="24" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3 18C2.45 18 1.97917 17.8042 1.5875 17.4125C1.19583 17.0208 1 16.55 1 16V3C0.716667 3 0.479167 2.90417 0.2875 2.7125C0.0958333 2.52083 0 2.28333 0 2C0 1.71667 0.0958333 1.47917 0.2875 1.2875C0.479167 1.09583 0.716667 1 1 1H5C5 0.716667 5.09583 0.479167 5.2875 0.2875C5.47917 0.0958333 5.71667 0 6 0H10C10.2833 0 10.5208 0.0958333 10.7125 0.2875C10.9042 0.479167 11 0.716667 11 1H15C15.2833 1 15.5208 1.09583 15.7125 1.2875C15.9042 1.47917 16 1.71667 16 2C16 2.28333 15.9042 2.52083 15.7125 2.7125C15.5208 2.90417 15.2833 3 15 3V16C15 16.55 14.8042 17.0208 14.4125 17.4125C14.0208 17.8042 13.55 18 13 18H3ZM3 3V16H13V3H3ZM5 13C5 13.2833 5.09583 13.5208 5.2875 13.7125C5.47917 13.9042 5.71667 14 6 14C6.28333 14 6.52083 13.9042 6.7125 13.7125C6.90417 13.5208 7 13.2833 7 13V6C7 5.71667 6.90417 5.47917 6.7125 5.2875C6.52083 5.09583 6.28333 5 6 5C5.71667 5 5.47917 5.09583 5.2875 5.2875C5.09583 5.47917 5 5.71667 5 6V13ZM9 13C9 13.2833 9.09583 13.5208 9.2875 13.7125C9.47917 13.9042 9.71667 14 10 14C10.2833 14 10.5208 13.9042 10.7125 13.7125C10.9042 13.5208 11 13.2833 11 13V6C11 5.71667 10.9042 5.47917 10.7125 5.2875C10.5208 5.09583 10.2833 5 10 5C9.71667 5 9.47917 5.09583 9.2875 5.2875C9.09583 5.47917 9 5.71667 9 6V13Z"
+                                fill="#2A3647" />
+                        </svg>
                         Delete
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Contact Information Section -->
         <div class="info-title">
             <h3 class="section-subtitle">Contact Information</h3>
         </div>
 
-        <!-- Specific Contact Data Fields -->
         <div class="info-data-block">
             <div class="data-group">
                 <span class="label">Email</span>
-                <a href="mailto:antonm@gmail.com" class="value email-link">antonm@gmail.com</a>
+                <a [href]="'mailto:' + contact.email" class="value email-link">
+                    {{ contact.email }}
+                </a>
             </div>
             <div class="data-group">
                 <span class="label">Phone</span>
-                <span class="value">+49 1111 111 11 1</span>
+                <a [href]="'tel:' + contact.telephone" class="value phone-link">
+                    {{ contact.telephone }}
+                </a>
             </div>
         </div>
     </div>
+    }
 </main>
