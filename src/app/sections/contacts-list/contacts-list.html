@@ -12,15 +12,16 @@
         </app-button>
     </div>
 
-    <!--Scroll area for the list of contacts-->
+    <!-- Scroll area wrapper restored! -->
     <div class="contacts-scroll-area" role="region" aria-label="Contacts">
+        @for (group of groupedContacts(); track group.letter) {
         <div class="alphabet-section">
-            <span class="letter-badge">A</span>
+            <span class="letter-badge">{{ group.letter }}</span>
+            <hr class="contacts-separator">
 
-            <!-- Dynamically render all contacts -->
-            @for (contact of contacts; track contact.email) {
-            <!-- Tip: With [class.active]="contact.name === 'Anton Mayer'" we simulate the Figma selection -->
-            <div class="contact-card" [class.active]="contact.name === 'Anton Mayer'">
+            @for (contact of group.contacts; track contact.email) {
+            <div class="contact-card" [class.active]="contact.email === selectedContact()?.email"
+                (click)="selectContact(contact)">
                 <div class="avatar" [style.background-color]="contact.avatarColor">
                     {{ contact.initials }}
                 </div>
@@ -31,5 +32,6 @@
             </div>
             }
         </div>
+        }
     </div>
 </aside>

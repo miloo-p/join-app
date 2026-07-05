@@ -1,11 +1,11 @@
-@use 'styles/abstracts/mixins' as *;
+@use '../../../styles/abstracts/mixins' as *;
 
 .contacts-sidebar {
-    width: 400px; 
+    width: 424px; 
     height: 100vh;
     background-color: var(--bg-ultralight); 
     border-right: 1px solid var(--border-clr-light);
-    box-shadow: var(--shadow-right);
+    box-shadow: 4px 0px 6px 0px #00000014;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -21,18 +21,31 @@
 }
 
 .contacts-scroll-area {
-    flex: 1;
-    overflow-y: auto; 
+    flex: 1;               
+    overflow-y: auto;     
     overflow-x: hidden;
-    padding: var(--space-md) var(--space-sm) var(--space-xl) var(--space-lg);   
+    
+    padding-top: var(--space-md);    
+    padding-bottom: var(--space-xl);  
+    padding-left: var(--space-lg);    
+    padding-right: var(--space-sm);   
     box-sizing: border-box;
 
-    &::-webkit-scrollbar { width: 6px; }
-    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar {
+        width: 6px;      
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+
     &::-webkit-scrollbar-thumb {
         background-color: var(--border-clr-light); 
         border-radius: var(--radius-pill);         
-        &:hover { background-color: var(--text-color-light); }
+        
+        &:hover {
+            background-color: var(--text-color-light); 
+        }
     }
 }
 
@@ -61,7 +74,7 @@
     border-radius: var(--radius-md);
     background-color: var(--bg-ultralight);
     cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
+    transition: background-color 0.1s ease-in-out; 
 
     &:hover { background-color: var(--bg-light); }
 
@@ -119,3 +132,4 @@
     border: none;
     margin-block: var(--space-sm);
 }
+
