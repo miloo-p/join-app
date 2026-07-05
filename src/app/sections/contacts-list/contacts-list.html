@@ -1,5 +1,5 @@
 <!-- Left Side: Contacts List -->
-<aside class="contacts-sidebar" aria-label="Contact list">
+<section class="contacts-sidebar" aria-label="Contact list">
 
     <!--Button top-->
     <div class="action-area">
@@ -12,7 +12,7 @@
         </app-button>
     </div>
 
-    <!-- Scroll area wrapper restored! -->
+    <!-- Scroll area wrapper -->
     <div class="contacts-scroll-area" role="region" aria-label="Contacts">
         @for (group of groupedContacts(); track group.letter) {
         <div class="alphabet-section">
@@ -34,4 +34,4 @@
         </div>
         }
     </div>
-</aside>
+</section>

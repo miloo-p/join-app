@@ -5,10 +5,55 @@
     height: 100vh;
     background-color: var(--bg-ultralight); 
     border-right: 1px solid var(--border-clr-light);
-    box-shadow: 4px 0px 6px 0px #00000014;
+    box-shadow: var(--shadow-right);
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+
+    overflow-y: scroll; 
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 24px;      
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--border-clr-light); 
+        background-clip: padding-box; 
+        border: 8px solid transparent; 
+        border-radius: 11px;
+        min-height: 53px;
+        
+        &:hover {
+            background-color: var(--text-color-light); 
+        }
+    }
+
+    &::-webkit-scrollbar-button {
+        display: block;
+        height: 40px;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        opacity: 1;
+        
+        
+        &:vertical:single-button:decrement {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='4' viewBox='0 0 10 4'%3E%3Cpath d='M0 4L5 0L10 4Z' fill='%23A8A8A8'/%3E%3C/svg%3E");
+            
+            background-position: center top 20px; 
+        }
+
+        
+        &:vertical:single-button:increment {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='4' viewBox='0 0 10 4'%3E%3Cpath d='M0 0L5 4L10 0Z' fill='%23A8A8A8'/%3E%3C/svg%3E");
+    
+            background-position: center bottom 20px;
+        }
+    }
 }
 
 .action-area {
@@ -18,35 +63,22 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--bg-ultralight); 
 }
 
 .contacts-scroll-area {
     flex: 1;               
-    overflow-y: auto;     
-    overflow-x: hidden;
+    overflow: visible;
     
     padding-top: var(--space-md);    
     padding-bottom: var(--space-xl);  
     padding-left: var(--space-lg);    
     padding-right: var(--space-sm);   
     box-sizing: border-box;
-
-    &::-webkit-scrollbar {
-        width: 6px;      
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent; 
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: var(--border-clr-light); 
-        border-radius: var(--radius-pill);         
-        
-        &:hover {
-            background-color: var(--text-color-light); 
-        }
-    }
 }
 
 .alphabet-section {
@@ -61,7 +93,7 @@
         font-weight: var(--fw-regular);   
         line-height: var(--lh-heading);    
         color: var(--text-color-dark);
-        padding: 17px 36px;               
+        padding: 17px 36px;           
         width: 100%;
         box-sizing: border-box;
         display: block;
@@ -81,19 +113,17 @@
     &.active {
         background-color: var(--bg-dark);
         .name { color: var(--text-color-ultralight); }
-        .email { color: var(--clr-blue-light); }
+        .email { color: #007CEE; }
     }
 }
 
 .avatar {
     @include flexbox(row, center, center, 0);
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px;
-    min-height: 42px;
+    width: 42px;
+    height: 42px;
     border-radius: var(--radius-pill);
     border: 2px solid var(--bg-ultralight);
-    color: var(--text-color-ultralight) !important;
+    color: var(--text-color-ultralight);
     font-weight: var(--fw-semibold);
     font-size: var(--fs-h5);
     box-sizing: border-box;
@@ -107,8 +137,8 @@
     overflow: hidden;
 
     .name {
-        font-size: var(--fs-body-normal);
-        font-weight: var(--fw-semibold);
+        font-size: var(--fs-body-large); 
+        font-weight: var(--fw-regular);   
         color: var(--text-color-dark);
     }
 
@@ -118,7 +148,6 @@
         font-weight: var(--fw-regular);    
         line-height: var(--lh-heading);     
         color: var(--text-color-special);  
-        
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -132,4 +161,3 @@
     border: none;
     margin-block: var(--space-sm);
 }
-
