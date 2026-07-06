@@ -6,7 +6,10 @@ import { Component, computed, input, output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
+  host: {
+    '[class.full-width-host]': 'isFullWidthClass()'
+  }
 })
 export class ButtonComponent {
   text = input.required<string>();

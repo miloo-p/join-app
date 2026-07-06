@@ -1,5 +1,14 @@
 @use '../../../../styles/abstracts/mixins' as *;
 
+:host {
+    display: inline-block;
+}
+
+:host(.full-width-host) {
+    display: block;
+    width: 100%;
+}
+
 .custom-btn {
     @include flexbox(row, center, center, var(--space-sm));
     width: auto;
@@ -8,6 +17,10 @@
     box-sizing: border-box;
     outline: none;
     transition: background-color 100ms ease-in-out, border-color 100ms ease-in-out, color 100ms ease-in-out, box-shadow 100ms ease-in-out;
+
+    &.full-width {
+    width: 100% !important;
+}
 }
 
 .btn-sm {
@@ -94,3 +107,4 @@
         box-shadow: none;
     }
 }
+
