@@ -14,20 +14,7 @@ export class Supabase {
 
   channels: RealtimeChannel | undefined;
 
-  //Read
-
-  async getContacts() {
-    const { data: contacts, error } = await this.supabase
-    .from('contacts')
-    .select('*')
-    if(!contacts) return
-    this.contacts.set(contacts)
-    console.log(contacts);
-  }
-
-
   // Create
-
   async setContact(contacts: Contact[]) {
     const { data, error } = await this.supabase
       .from('contacts')
@@ -41,8 +28,49 @@ export class Supabase {
     return data;
   }
 
-  //Subscribe
+  //Read
+  async getContacts() {
+    const { data: contacts, error } = await this.supabase
+    .from('contacts')
+    .select('*')
+    if(!contacts) return
+    this.contacts.set(contacts)
+    console.log(contacts);
+  }
 
+  async getSingleContact(id: number) {
+    const { data: contact, error } = await this.supabase
+      .from('contacts')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error) {
+      console.error('Supabase get single contact error', error);
+      return;
+    }
+    return contact;
+  }
+
+  //Update
+  async updateContact(contact: { id: number, firstname: string, lastname: string, telephone: string, email: string }) {
+    const { error } = await this.supabase
+      .from('contacts')
+      .update(contact)
+      .eq('id', contact.id);
+    if (error) {
+      console.error('Supabase update contact error', error);
+    }
+  }
+
+  //Delete
+  async deleteContact(id:number){
+    const response = await this.supabase
+      .from('contacts')
+      .delete()
+      .eq('id', id)
+  }
+
+  //Subscribe
   async subscribeToContacts() {
   this.channels = this.supabase
   .channel('contacts-channel')
@@ -51,6 +79,7 @@ export class Supabase {
   })
   .subscribe();
   }
+
 
   ngOnDestroy() {
     if (this.channels) {
