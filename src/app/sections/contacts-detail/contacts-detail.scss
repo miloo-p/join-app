@@ -2,7 +2,7 @@
 
 .contacts-main-content {
     @include flexbox(column, flex-start, flex-start, var(--space-xl)); 
-    width: 100%;
+    width: 569px;
     height: 100%;
     padding: var(--space-4xl) var(--space-xl);
     box-sizing: border-box;
@@ -10,8 +10,11 @@
 
 .contacts-header {
     @include flexbox(row, flex-start, center, 30px); 
-    width: 569px; 
+    width: 100%; 
     box-sizing: border-box;
+    flex-shrink: 0;
+    transform: translateY(0);
+    transition: transform 100ms ease-in-out;
     
     .main-title {
         font-size: 61px; 
@@ -39,29 +42,48 @@
 
 .contact-details-view {
     @include flexbox(column, flex-start, flex-start, var(--space-xl)); 
-    width: 569px;
+    width: 100%;
     box-sizing: border-box;
+    margin-top: var(--space-md);
+
+    animation: slideInRight 100ms ease-in-out forwards;
+}
+
+.contacts-main-content.has-selected-contact {
+    .contacts-header {
+        transform: translateY(16px);
+    }
 }
 
 .details-profile-header {
     @include flexbox(row, flex-start, center, 54px);
-    width: 461px; 
-    height: 120px; 
+    width: 100%;
+    min-height: 120px;
     box-sizing: border-box;
 }
 
 .profile-name-actions {
     @include flexbox(column, center, flex-start, var(--space-sm));
-    
-    width: 287px;
+
+    flex: 1;
+    min-width: 0;
     box-sizing: border-box;
 
     .profile-name {
-        font-size: 47px; 
-        font-weight: var(--fw-bold);
+        width: auto;
+        max-width: 100%;
+        font-size: 47px;
+        font-family: var(--ff-body);
+        font-weight: 500;
+        font-style: normal;
         color: var(--text-color-ultradark);
         margin: 0;
-        line-height: var(--lh-heading);
+        line-height: 1.2;
+        letter-spacing: 0;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-break: normal;
+        overflow-wrap: normal;
     }
 }
 
@@ -113,24 +135,26 @@
 }
 
 .info-data-block {
-    @include flexbox(column, flex-start, flex-start, var(--space-lg));
+    @include flexbox(column, flex-start, flex-start, 22px);
     width: 100%;
     
     .data-group {
-        @include flexbox(column, flex-start, flex-start, var(--space-xs));
+        @include flexbox(column, flex-start, flex-start, 15px);
+        box-sizing: border-box;
         
         .label {
             font-weight: var(--fw-bold);
-            font-size: var(--fs-body-normal);
+            font-size: var(--fs-body-normal); 
             color: var(--text-color-ultradark);
+            margin: 0;
         }
         
         .value {
             font-size: var(--fs-body-normal);
-            color: var(--text-color-dark);
+            margin: 0;
             
             &.email-text {
-                color: var(--clr-blue-light);
+                color: var(--clr-blue-light); 
             }
 
             &.phone-text {
@@ -157,3 +181,28 @@
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.40);
 }
 
+.info-title {
+    @include flexbox(row, flex-start, center, 0);
+    width: 207px;  
+    height: 74px;  
+    box-sizing: border-box;
+}
+
+.section-subtitle {
+    font-size: var(--fs-h4); 
+    font-weight: var(--fw-regular);
+    color: var(--text-color-ultradark);
+    margin: 0;
+    line-height: var(--lh-heading);
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
