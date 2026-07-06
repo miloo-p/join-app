@@ -52,7 +52,7 @@ export class Supabase {
   }
 
   //Update
-  async updateContact(contact: { id: number, firstname: string, lastname: string, telephone: string, email: string }) {
+  async updateContact(contact: Contact) {
     const { error } = await this.supabase
       .from('contacts')
       .update(contact)
