@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from './layout/sidebar/sidebar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: './app.html',
-  styles: [],
+  styleUrls: ['./app.scss'],
 })
 export class App {
   protected readonly title = signal('join-app');
