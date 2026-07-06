@@ -1,0 +1,96 @@
+@use '../../../../styles/abstracts/mixins' as *;
+
+.custom-btn {
+    @include flexbox(row, center, center, var(--space-sm));
+    width: auto;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+    outline: none;
+    transition: background-color 100ms ease-in-out, border-color 100ms ease-in-out, color 100ms ease-in-out, box-shadow 100ms ease-in-out;
+}
+
+.btn-sm {
+    min-height: var(--space-3xl);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+
+    font-family: var(--ff-body);
+    font-size: var(--fs-body-normal);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-body);
+}
+
+.btn-md {
+    min-height: 56px;
+    padding: 12px var(--space-md);
+    border-radius: 10px;
+    gap: var(--space-md);
+
+    font-family: var(--ff-body);
+    font-size: 21px;
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-heading);
+}
+
+.gap-sm {
+    gap: var(--space-xs) !important;
+}
+
+.btn-compact-md {
+    padding: var(--space-md) !important;
+    gap: var(--space-xs) !important;
+    font-size: var(--fs-h4);
+
+    &.btn-secondary,
+    &.btn-outline {
+        font-weight: var(--fw-regular);
+    }
+}
+
+.btn-primary {
+    color: var(--text-color-ultralight); 
+    background-color: var(--bg-dark); 
+    border: 1px solid var(--bg-dark);
+
+    &:hover {
+        background-color: var(--bg-special);
+        border-color: var(--bg-special);
+    }
+
+    &:active {
+        background-color: var(--clr-blue-dark);
+        border-color: var(--clr-blue-dark);
+    }
+
+    &:focus-visible {
+        background-color: var(--bg-dark);
+        border-color: var(--bg-dark);
+    }
+}
+
+.btn-secondary, .btn-outline {
+    color: var(--text-color-dark); 
+    background-color: var(--bg-ultralight); 
+    border: 1px solid var(--text-color-dark);
+
+    &:hover {
+        color: var(--clr-blue-light);
+        border-color: var(--clr-blue-light);
+        box-shadow: var(--shadow-allaround); 
+    }
+
+    &:active {
+        color: var(--clr-blue-dark);
+        border-color: var(--clr-blue-dark);
+        background-color: var(--bg-light);
+        box-shadow: var(--shadow-allaround);
+    }
+
+    &:focus-visible {
+        color: var(--text-color-dark);
+        background-color: var(--bg-ultralight);
+        border-color: var(--text-color-dark);
+        box-shadow: none;
+    }
+}

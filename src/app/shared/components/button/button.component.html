@@ -1,0 +1,20 @@
+<button [type]="buttonType()" [disabled]="disabled() || loading()" [attr.aria-busy]="loading() ? 'true' : null"
+    [attr.aria-disabled]="disabled() || loading() ? 'true' : null" (click)="onButtonClick()" class="custom-btn"
+    [ngClass]="{
+    'btn-primary': variant() === 'primary',
+    'btn-secondary': variant() === 'secondary',
+    'btn-outline': variant() === 'outline',
+    'btn-sm': size() === 'sm',
+    'btn-md': size() === 'md',
+    'btn-lg': size() === 'lg',
+    'full-width': isFullWidthClass()
+    }">
+
+    <span class="btn-label">{{ text() }}</span>
+
+    @if (loading()) {
+    <span class="btn-spinner" aria-hidden="true"></span>
+    } @else {
+    <ng-content></ng-content>
+    }
+</button>
