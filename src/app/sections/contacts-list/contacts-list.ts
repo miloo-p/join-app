@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, computed, inject, signal } from '@angular/core';
-import { ButtonComponent } from '../../shared/components/button/button';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Supabase } from '../../shared/services/supabase';
 
 interface ContactGroup {

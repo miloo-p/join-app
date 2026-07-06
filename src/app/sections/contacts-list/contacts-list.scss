@@ -2,16 +2,14 @@
 
 .contacts-sidebar {
     width: 424px; 
-    height: 100vh;
+    height: 928px;
     background-color: var(--bg-ultralight); 
     border-right: 1px solid var(--border-clr-light);
     box-shadow: var(--shadow-right);
-    display: flex;
-    flex-direction: column;
+    @include flexbox(column, flex-start, flex-start, 0);
     box-sizing: border-box;
 
-    overflow-y: scroll; 
-    overflow-x: hidden;
+    overflow-y: auto; 
 
     &::-webkit-scrollbar {
         width: 24px;      
@@ -40,17 +38,13 @@
         background-repeat: no-repeat;
         opacity: 1;
         
-        
         &:vertical:single-button:decrement {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='4' viewBox='0 0 10 4'%3E%3Cpath d='M0 4L5 0L10 4Z' fill='%23A8A8A8'/%3E%3C/svg%3E");
-            
             background-position: center top 20px; 
         }
 
-        
         &:vertical:single-button:increment {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='4' viewBox='0 0 10 4'%3E%3Cpath d='M0 0L5 4L10 0Z' fill='%23A8A8A8'/%3E%3C/svg%3E");
-    
             background-position: center bottom 20px;
         }
     }
@@ -59,8 +53,7 @@
 .action-area {
     padding: var(--space-xl) var(--space-lg) var(--space-md) var(--space-lg); 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox(row, center, center, 0);
     width: 100%;
     box-sizing: border-box;
 
@@ -72,7 +65,6 @@
 
 .contacts-scroll-area {
     flex: 1;               
-    overflow: visible;
     
     padding-top: var(--space-md);    
     padding-bottom: var(--space-xl);  
@@ -81,9 +73,9 @@
     box-sizing: border-box;
 }
 
+
 .alphabet-section {
-    display: flex;
-    flex-direction: column;
+    @include flexbox(column, flex-start, stretch, var(--space-sm));
     gap: var(--space-sm); 
     width: 100%;
 
@@ -131,9 +123,7 @@
 }
 
 .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
+    @include flexbox(column, flex-start, stretch, var(--space-xs));
 
     .name {
         font-size: var(--fs-body-large); 
