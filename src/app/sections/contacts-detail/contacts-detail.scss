@@ -9,14 +9,15 @@
 }
 
 .contacts-header {
-    @include flexbox(row, flex-start, center, 30px);
+    @include flexbox(row, flex-start, center, 30px); 
     width: 569px; 
     box-sizing: border-box;
     
     .main-title {
-        font-size: var(--fs-h2); 
+        font-size: 61px; 
         font-weight: var(--fw-bold);
         color: var(--text-color-ultradark);
+        line-height: var(--lh-heading);
         margin: 0;
     }
 
@@ -24,12 +25,15 @@
         width: 3px;
         height: 59px;
         background-color: var(--clr-blue-light); 
+        box-sizing: border-box;
     }
 
-    .slogan {
-        font-size: var(--fs-h3); 
-        font-weight: var(--fw-regular);
-        color: var(--text-color-dark);
+.slogan {
+        font-family: var(--ff-body); 
+        font-size: 27px; 
+        font-weight: 400; 
+        line-height: var(--lh-heading); 
+        color: var(--text-color-dark); 
     }
 }
 
@@ -58,18 +62,29 @@
 }
 
 .action-buttons {
-    @include flexbox(row, flex-start, center, var(--space-md));
+    @include flexbox(row, flex-start, center, var(--space-md)); 
+    width: 159px;  
+    height: 24px;  
+    box-sizing: border-box;
     
     button {
         background: unset;
         border: unset;
         cursor: pointer;
-        font-size: var(--fs-body-normal);
+        font-size: var(--fs-body-normal); 
+        font-weight: var(--fw-regular);
         color: var(--text-color-dark);
-        display: flex;
-        align-items: center;
-        gap: var(--space-xs);
-        transition: color 0.1s ease-in-out;
+        
+        @include flexbox(row, flex-start, center, var(--space-sm)); 
+        height: 100%;
+        padding: 0;
+    
+        transition: color 0.1s ease-in-out, font-weight 0.1s ease-in-out;
+
+        .action-icon {
+            display: block;
+            flex-shrink: 0;
+        }
 
         &:hover {
             color: var(--clr-blue-light);
@@ -101,10 +116,13 @@
         .value {
             font-size: var(--fs-body-normal);
             color: var(--text-color-dark);
-            text-decoration: none;
             
-            &.email-link {
+            &.email-text {
                 color: var(--clr-blue-light);
+            }
+
+            &.phone-text {
+                color: var(--text-color-dark);
             }
         }
     }
@@ -126,3 +144,4 @@
 
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
 }
+

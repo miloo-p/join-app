@@ -5,17 +5,23 @@
     @include global_content_wrapper();
     
     width: 100%;
-    min-height: 928px;
-    height: 100vh;
+    min-height: calc(100vh - 96px); 
     box-sizing: border-box;
-    background-color: var(--bg-light);
+    background-color: var(--bg-light); 
 }
 
 app-contacts-list {
     flex-shrink: 0;
+    height: calc(100vh - 96px); 
+    position: sticky; 
+    top: 96px; 
+    
+    display: flex;
+    flex-direction: column; 
 }
+
 
 app-contacts-detail {
     flex: 1;
-    height: 100%;
+    height: auto; 
 }
