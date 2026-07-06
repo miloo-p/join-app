@@ -63,22 +63,25 @@
 
 .btn-primary {
     color: var(--text-color-ultralight); 
-    background-color: var(--bg-dark); 
-    border: 1px solid var(--bg-dark);
+    background-color: var(--clr-blue-muted); 
+    border: 1px solid var(--clr-blue-muted);
 
     &:hover {
-        background-color: var(--bg-special);
-        border-color: var(--bg-special);
+        background-color: var(--clr-blue-light);
+        border-color: var(--clr-blue-light);
+        box-shadow: 0px 4px 4px 0px #00000040;
     }
 
     &:active {
         background-color: var(--clr-blue-dark);
         border-color: var(--clr-blue-dark);
+        box-shadow: none;
     }
 
     &:focus-visible {
-        background-color: var(--bg-dark);
-        border-color: var(--bg-dark);
+        background-color: var(--clr-blue-dark);
+        border-color: var(--clr-blue-dark);
+        box-shadow: none;
     }
 }
 

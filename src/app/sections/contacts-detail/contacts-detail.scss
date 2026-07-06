@@ -1,7 +1,7 @@
 @use '../../../styles/abstracts/mixins' as *;
 
 .contacts-main-content {
-    @include flexbox(column, flex-start, flex-start, var(--space-2xl)); 
+    @include flexbox(column, flex-start, flex-start, var(--space-xl)); 
     width: 100%;
     height: 100%;
     padding: var(--space-4xl) var(--space-xl);
@@ -38,8 +38,8 @@
 }
 
 .contact-details-view {
-    @include flexbox(column, flex-start, flex-start, 21px);
-    width: 461px; 
+    @include flexbox(column, flex-start, flex-start, var(--space-xl)); 
+    width: 569px;
     box-sizing: border-box;
 }
 
@@ -53,11 +53,15 @@
 .profile-name-actions {
     @include flexbox(column, center, flex-start, var(--space-sm));
     
+    width: 287px;
+    box-sizing: border-box;
+
     .profile-name {
         font-size: 47px; 
         font-weight: var(--fw-bold);
         color: var(--text-color-ultradark);
         margin: 0;
+        line-height: var(--lh-heading);
     }
 }
 
@@ -81,14 +85,22 @@
     
         transition: color 0.1s ease-in-out, font-weight 0.1s ease-in-out;
 
-        .action-icon {
-            display: block;
-            flex-shrink: 0;
-        }
+        &.contact-edit-btn {
+        width: 62px; 
+    }
 
-        &:hover {
-            color: var(--clr-blue-light);
-            font-weight: var(--fw-bold);
+    &.contact-delete-btn {
+        width: auto;
+    }
+
+    .action-icon {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        color: var(--clr-blue-light);
+        font-weight: var(--fw-bold);
         }
     }
 }
@@ -142,6 +154,6 @@
     box-sizing: border-box;
     flex-shrink: 0;
 
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.40);
 }
 
