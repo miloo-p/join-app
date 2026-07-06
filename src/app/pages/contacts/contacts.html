@@ -1,0 +1,7 @@
+<div class="contacts-layout">
+    <app-contacts-list (contactSelected)="handleContactSelection($event)"></app-contacts-list>
+    <app-contacts-detail [contact]="activeContact()" (edit)="openEditContact($event)"></app-contacts-detail>
+</div>
+
+<app-edit-contact *ngIf="isEditContactOpen()" [contact]="activeContact()"
+    (closeOverlay)="closeEditContact()"></app-edit-contact>
