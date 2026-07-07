@@ -106,5 +106,3 @@ Wir nutzen GitHub Projects zur Aufgabenverwaltung. Um den Überblick zu behalten
 - **Draft to Issue:** Bevor jemand aktiv an einem Draft zu arbeiten beginnt, **muss** dieser in ein echtes _Issue_ umgewandelt werden. Erst dann startet die eigentliche Entwicklung.
 - **Ein Ticket, ein Entwickler:** Niemand arbeitet an einem Issue, das ihm nicht offiziell im Board zugewiesen ist.
 - **Automatisches Schließen:** Um das Board sauber zu halten, schließen wir Issues direkt über die Commit-Nachricht des finalen Commits (durch Anhängen von z.B. `closes #12` oder `closed #12`). Das Issue wandert dadurch automatisch auf "Done".
-
-Test
