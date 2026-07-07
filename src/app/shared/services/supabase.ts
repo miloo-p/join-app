@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../app/environments/environment';
 import { createClient, RealtimeChannel } from '@supabase/supabase-js';
 import { Contact } from '../interfaces/contact';
 
