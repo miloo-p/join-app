@@ -35,7 +35,6 @@ export class Supabase {
     .select('*')
     if(!contacts) return
     this.contacts.set(contacts)
-    console.log(contacts);
   }
 
   async getSingleContact(id: number) {
@@ -72,14 +71,32 @@ export class Supabase {
 
   //Subscribe
   async subscribeToContacts() {
+  if(this.channels) {
+    return;
+  }
   this.channels = this.supabase
   .channel('contacts-channel')
   .on('postgres_changes', { event: '*', schema: 'public', table: 'contacts' }, (payload) => {
-    this.getContacts();
+    this.handlePayload(payload);
   })
   .subscribe();
   }
 
+  handlePayload(payload: any) {
+    if (payload.eventType === 'INSERT') {
+      this.contacts.update((contacts) => [...contacts, payload.new]);
+    }else if (payload.eventType === 'UPDATE') {
+      this.contacts.update((contacts) =>
+        contacts.map((contact) =>
+          contact.id === payload.new.id ? payload.new : contact
+        )
+      );
+    } else if (payload.eventType === 'DELETE') {
+      this.contacts.update((contacts) =>
+        contacts.filter((contact) => contact.id !== payload.old.id)
+      );
+    }
+  }
 
   ngOnDestroy() {
     if (this.channels) {
