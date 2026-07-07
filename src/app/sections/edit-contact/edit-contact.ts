@@ -27,6 +27,12 @@ export class EditContactComponent {
    */
   @Output() public saveContact = new EventEmitter<UIContact>();
 
+  /** 
+   * Emits when the user requests to delete the current contact.
+   * @type {EventEmitter<UIContact>} 
+   */
+  @Output() public deleteContact = new EventEmitter<UIContact>();
+
   /**
    * Triggers the event to close the edit contact overlay/view.
    * @returns {void}
@@ -43,6 +49,17 @@ export class EditContactComponent {
   public onSaveContact(): void {
     if (this.contact) {
       this.saveContact.emit(this.contact);
+    }
+  }
+
+  /**
+   * Triggers the delete event for the currently edited contact.
+   * Fulfills User Story 4 (deleting option).
+   * @returns {void}
+   */
+  public onDeleteContact(): void {
+    if (this.contact) {
+      this.deleteContact.emit(this.contact);
     }
   }
 }

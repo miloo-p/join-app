@@ -115,8 +115,13 @@
                     </div>
 
                     <div class="edit-contact__actions">
-                        <button type="button" class="edit-contact__btn edit-contact__btn--secondary">Delete</button>
-                        <button type="submit" class="edit-contact__btn edit-contact__btn--primary">
+                        <button type="button" class="edit-contact__btn edit-contact__btn--secondary"
+                            (click)="onDeleteContact()">
+                            Delete
+                        </button>
+
+                        <button type="submit" class="edit-contact__btn edit-contact__btn--primary"
+                            (click)="$event.preventDefault(); onSaveContact()">
                             Save
                             <span class="edit-contact__btn-check" aria-hidden="true">✓</span>
                         </button>
