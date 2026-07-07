@@ -21,11 +21,28 @@ export class EditContactComponent {
    */
   @Output() public closeOverlay = new EventEmitter<void>();
 
+  /** 
+   * Emits the updated contact object back to the parent component for saving.
+   * @type {EventEmitter<UIContact>} 
+   */
+  @Output() public saveContact = new EventEmitter<UIContact>();
+
   /**
    * Triggers the event to close the edit contact overlay/view.
    * @returns {void}
    */
   public onCloseOverlay(): void {
     this.closeOverlay.emit();
+  }
+
+  /**
+   * Dispatches the updated contact data to the parent component to trigger the backend save.
+   * Fulfills User Story 4 (submitting modified values).
+   * @returns {void}
+   */
+  public onSaveContact(): void {
+    if (this.contact) {
+      this.saveContact.emit(this.contact);
+    }
   }
 }
