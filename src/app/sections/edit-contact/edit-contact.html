@@ -46,15 +46,15 @@
 
             <div class="edit-contact__body">
                 <div class="edit-contact__avatar"
-                    [style.background-color]="contact?.avatarColor ?? 'var(--clr-user-sunflower)'">
-                    {{ contact?.initials ?? 'TW' }}
+                    [style.background-color]="editingContact?.avatarColor ?? 'var(--clr-user-sunflower)'">
+                    {{ editingContact?.initials ?? 'TW' }}
                 </div>
 
                 <form novalidate class="edit-contact__form">
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
                             <input type="text" name="name" placeholder="Name" class="edit-contact__input"
-                                [value]="contact?.name ?? ''">
+                                [(ngModel)]="editingContact!.name">
                             <span class="edit-contact__icon edit-contact__icon--user">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
                             <input type="email" name="email" placeholder="Email" class="edit-contact__input"
-                                [value]="contact?.email ?? ''">
+                                [(ngModel)]="editingContact!.email">
                             <span class="edit-contact__icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +96,7 @@
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
                             <input type="tel" name="phone" placeholder="Phone" class="edit-contact__input"
-                                [value]="contact?.telephone ?? ''">
+                                [(ngModel)]="editingContact!.telephone">
                             <span class="edit-contact__icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
