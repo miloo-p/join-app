@@ -1,0 +1,188 @@
+@use '../../../styles/abstracts/mixins' as *;
+
+.contacts-main {
+    @include flexbox(column, flex-start, flex-start, var(--space-xl)); 
+    width: 569px;
+    height: 100%;
+    padding: var(--space-4xl) var(--space-xl);
+    box-sizing: border-box;
+
+    &--has-selected-contact {
+        .contacts-main__header {
+            transform: translateY(16px);
+        }
+    }
+
+    &__header {
+        @include flexbox(row, flex-start, center, 30px); 
+        width: 100%; 
+        box-sizing: border-box;
+        flex-shrink: 0;
+        transform: translateY(0);
+        transition: transform 100ms ease-in-out;
+    }
+
+    &__title {
+        font-size: 61px; 
+        font-weight: var(--fw-bold);
+        color: var(--text-color-ultradark);
+        line-height: var(--lh-heading);
+        margin: 0;
+    }
+
+    &__header-divider {
+        width: 3px;
+        height: 59px;
+        background-color: var(--clr-blue-light); 
+        box-sizing: border-box;
+    }
+
+    &__slogan {
+        font-family: var(--ff-body); 
+        font-size: 27px; 
+        font-weight: 400; 
+        line-height: var(--lh-heading); 
+        color: var(--text-color-dark); 
+    }
+
+    &__details-view {
+        @include flexbox(column, flex-start, flex-start, var(--space-xl)); 
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: var(--space-md);
+        animation: slideInRight 100ms ease-in-out forwards;
+    }
+
+    &__profile-header {
+        @include flexbox(row, flex-start, center, 54px);
+        width: 100%;
+        min-height: 120px;
+        box-sizing: border-box;
+    }
+
+    &__large-avatar {
+        @include flexbox(row, center, center, 0);
+        width: 120px; 
+        height: 120px; 
+        border-radius: var(--radius-pill);
+        border: 3px solid var(--clr-white); 
+        color: var(--text-color-ultralight); 
+        font-size: 47px; 
+        font-weight: var(--fw-semibold);
+        box-sizing: border-box;
+        flex-shrink: 0;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.40);
+    }
+
+    &__name-actions {
+        @include flexbox(column, center, flex-start, var(--space-sm));
+        flex: 1;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    &__profile-name {
+        width: auto;
+        max-width: 100%;
+        font-size: 47px;
+        font-family: var(--ff-body);
+        font-weight: 500;
+        font-style: normal;
+        color: var(--text-color-ultradark);
+        margin: 0;
+        line-height: 1.2;
+        letter-spacing: 0;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-break: normal;
+        overflow-wrap: normal;
+    }
+
+    &__action-buttons {
+        @include flexbox(row, flex-start, center, var(--space-md)); 
+        width: 159px;  
+        height: 24px;  
+        box-sizing: border-box;
+    }
+
+    &__action-btn {
+        background: unset;
+        border: unset;
+        cursor: pointer;
+        font-size: var(--fs-body-normal); 
+        font-weight: var(--fw-regular);
+        color: var(--text-color-dark);
+        @include flexbox(row, flex-start, center, var(--space-sm)); 
+        height: 100%;
+        padding: 0;
+        transition: color 0.1s ease-in-out, font-weight 0.1s ease-in-out;
+
+        &:hover {
+            color: var(--clr-blue-muted);
+            font-weight: var(--fw-bold);
+        }
+
+        &--edit {
+            width: 62px; 
+        }
+
+        &--delete {
+            width: auto;
+        }
+    }
+
+    &__info-title {
+        @include flexbox(row, flex-start, center, 0);
+        width: 207px;  
+        height: 74px;  
+        box-sizing: border-box;
+    }
+
+    &__section-subtitle {
+        font-size: var(--fs-h4); 
+        font-weight: var(--fw-regular);
+        color: var(--text-color-ultradark);
+        margin: 0;
+    }
+
+    &__info-data-block {
+        @include flexbox(column, flex-start, flex-start, 22px);
+        width: 100%;
+    }
+
+    &__data-group {
+        @include flexbox(column, flex-start, flex-start, 15px);
+        box-sizing: border-box;
+    }
+
+    &__label {
+        font-weight: var(--fw-bold);
+        font-size: var(--fs-body-normal); 
+        color: var(--text-color-ultradark);
+        margin: 0;
+    }
+
+    &__value {
+        font-size: var(--fs-body-normal);
+        margin: 0;
+        
+        &--email {
+            color: var(--clr-blue-light); 
+        }
+
+        &--phone {
+            color: var(--text-color-dark);
+        }
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%); 
+        opacity: 0;                  
+    }
+    to {
+        transform: translateX(0);   
+        opacity: 1;
+    }
+}

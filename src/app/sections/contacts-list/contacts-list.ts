@@ -1,0 +1,110 @@
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output, computed, inject, signal } from '@angular/core';
+import { ButtonComponent } from '../../shared/components/button/button.component';
+import { Supabase } from '../../shared/services/supabase';
+
+type RawSupabaseContact = ReturnType<Supabase['contacts']>[number];
+
+export interface UIContact extends RawSupabaseContact {
+  name: string;
+  initials: string;
+  avatarColor: string;
+}
+
+interface ContactGroup {
+  letter: string;
+  contacts: UIContact[];
+}
+
+@Component({
+  selector: 'app-contacts-list',
+  standalone: true,
+  imports: [CommonModule, ButtonComponent],
+  templateUrl: './contacts-list.html',
+  styleUrls: ['./contacts-list.scss'],
+})
+export class ContactList implements OnInit {
+  public supabaseService = inject(Supabase);
+  public selectedContact = signal<UIContact | null>(null);
+
+  @Output() public contactSelected = new EventEmitter<UIContact>();
+
+  public availableColors: string[] = [
+    'var(--clr-user-tangerine)', 'var(--clr-user-flamingo)', 'var(--clr-user-iris)',
+    'var(--clr-user-amethyst)', 'var(--clr-user-sky)', 'var(--clr-user-mint)',
+    'var(--clr-user-salmon)', 'var(--clr-user-apricot)', 'var(--clr-user-fuchsia)',
+    'var(--clr-user-sunflower)', 'var(--clr-user-cobalt)', 'var(--clr-user-lime)',
+    'var(--clr-user-lemon)', 'var(--clr-user-cherry)', 'var(--clr-user-marigold)'
+  ];
+
+  /**
+   * Computed signal that automatically groups and sorts contacts alphabetically.
+   * Fulfills User Story 1 (alphabetical sorting and section splitting).
+   */
+  public groupedContacts = computed<ContactGroup[]>(() => {
+    const rawContacts = this.supabaseService.contacts();
+    if (!rawContacts || rawContacts.length === 0) return [];
+    
+    const sorted = [...rawContacts].sort((a, b) => a.firstname.localeCompare(b.firstname));
+    return this.buildAlphabeticalGroups(sorted);
+  });
+
+  /**
+   * Angular lifecycle hook. Initializes contact data and sets up realtime subscription.
+   * @returns {void}
+   */
+  ngOnInit(): void {
+    this.supabaseService.getContacts();
+    this.supabaseService.subscribeToContacts();
+  }
+
+  /**
+   * Selects a contact, transforms its data for the UI, and emits the selection event.
+   * Fulfills User Story 2 (viewing contact details).
+   * @param {RawSupabaseContact} contact - The raw contact object received from Supabase.
+   * @returns {void}
+   */
+  public selectContact(contact: RawSupabaseContact): void {
+    const transformed = this.transformContactData(contact);
+    this.selectedContact.set(transformed);
+    this.contactSelected.emit(transformed);
+  }
+
+  /**
+   * Groups a sorted list of contacts into alphabetical sections based on the first letter.
+   * @param {RawSupabaseContact[]} sorted - Array of sorted raw contacts.
+   * @returns {ContactGroup[]} Array of grouped contacts containing the letter and matching UI contacts.
+   */
+  private buildAlphabeticalGroups(sorted: RawSupabaseContact[]): ContactGroup[] {
+    const groups: { [key: string]: UIContact[] } = {};
+    
+    for (const contact of sorted) {
+      const firstLetter = contact.firstname?.charAt(0).toUpperCase() || 'A';
+      if (!groups[firstLetter]) {
+        groups[firstLetter] = [];
+      }
+      groups[firstLetter].push(this.transformContactData(contact));
+    }
+    
+    return Object.keys(groups)
+      .sort((a, b) => a.localeCompare(b))
+      .map(letter => ({ letter, contacts: groups[letter] }));
+  }
+
+  /**
+   * Transforms raw Supabase database fields into UI-ready fields like combined name, initials, and colors.
+   * @param {RawSupabaseContact} contact - The raw database contact object.
+   * @returns {UIContact} The enriched contact object including UI properties.
+   */
+  private transformContactData(contact: RawSupabaseContact): UIContact {
+    const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
+    const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
+    const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
+    return {
+      ...contact,
+      name: `${contact.firstname} ${contact.lastname}`,
+      initials: `${firstLetter}${lastLetter}`,
+      avatarColor: this.availableColors[colorIndex]
+    };
+  }
+}
