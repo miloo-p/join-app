@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, computed, inject, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { Contact } from '../../shared/interfaces/contact';
 import { Supabase } from '../../shared/services/supabase';
 
-type RawSupabaseContact = ReturnType<Supabase['contacts']>[number];
-
-export interface UIContact extends RawSupabaseContact {
+export interface UIContact extends Contact {
   name: string;
   initials: string;
   avatarColor: string;
@@ -61,10 +60,10 @@ export class ContactList implements OnInit {
   /**
    * Selects a contact, transforms its data for the UI, and emits the selection event.
    * Fulfills User Story 2 (viewing contact details).
-   * @param {RawSupabaseContact} contact - The raw contact object received from Supabase.
+   * @param {Contact} contact - The contact object received from Supabase.
    * @returns {void}
    */
-  public selectContact(contact: RawSupabaseContact): void {
+  public selectContact(contact: Contact): void { 
     const transformed = this.transformContactData(contact);
     this.selectedContact.set(transformed);
     this.contactSelected.emit(transformed);
@@ -72,10 +71,10 @@ export class ContactList implements OnInit {
 
   /**
    * Groups a sorted list of contacts into alphabetical sections based on the first letter.
-   * @param {RawSupabaseContact[]} sorted - Array of sorted raw contacts.
+   * @param {Contact[]} sorted - Array of sorted raw contacts.
    * @returns {ContactGroup[]} Array of grouped contacts containing the letter and matching UI contacts.
    */
-  private buildAlphabeticalGroups(sorted: RawSupabaseContact[]): ContactGroup[] {
+  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { // <--- Hier jetzt Contact
     const groups: { [key: string]: UIContact[] } = {};
     
     for (const contact of sorted) {
@@ -93,10 +92,10 @@ export class ContactList implements OnInit {
 
   /**
    * Transforms raw Supabase database fields into UI-ready fields like combined name, initials, and colors.
-   * @param {RawSupabaseContact} contact - The raw database contact object.
+   * @param {Contact} contact - The raw database contact object.
    * @returns {UIContact} The enriched contact object including UI properties.
    */
-  private transformContactData(contact: RawSupabaseContact): UIContact {
+  private transformContactData(contact: Contact): UIContact {
     const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
     const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
     const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
