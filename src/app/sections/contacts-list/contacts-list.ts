@@ -63,7 +63,7 @@ export class ContactList implements OnInit {
    * @param {Contact} contact - The contact object received from Supabase.
    * @returns {void}
    */
-  public selectContact(contact: Contact): void { // <--- Hier jetzt Contact
+  public selectContact(contact: Contact): void { 
     const transformed = this.transformContactData(contact);
     this.selectedContact.set(transformed);
     this.contactSelected.emit(transformed);
