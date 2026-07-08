@@ -45,28 +45,52 @@
             </svg>
         </div>
 
-        <form class="dialog__form__inputs" (ngSubmit)="createContact()">
-            <input class="dialog__form__inputs__name" required type="text" placeholder="Name" name="name"
-                [(ngModel)]="contactForm.name">
-            @if (nameError) {
-            <p class="input-error">{{ nameError }}</p>
+        <form class="dialog__form__inputs" [formGroup]="contactForm" (ngSubmit)="createContact()">
+            <input class="dialog__form__inputs__name" type="text" placeholder="Name" formControlName="name">
+
+            @if (contactForm.controls.name.invalid && contactForm.controls.name.touched) {
+            @if (contactForm.controls.name.errors?.['required']) {
+            <p class="input-error">Bitte gib einen Namen ein.</p>
             }
 
-            <input class="dialog__form__inputs__mail" required type="email" placeholder="Email" name="email"
-                [(ngModel)]="contactForm.email">
-            @if (emailError) {
-            <p class="input-error">{{ emailError }}</p>
+            @if (contactForm.controls.name.errors?.['pattern']) {
+            <p class="input-error">
+                Bitte gib mindestens Vor- und Nachnamen mit jeweils 2 Zeichen ein.
+            </p>
+            }
             }
 
-            <input class="dialog__form__inputs__phone" required type="tel" placeholder="Phone" name="telephone"
-                [(ngModel)]="contactForm.telephone">
-            @if (telephoneError) {
-            <p class="input-error">{{ telephoneError }}</p>
+            <input class="dialog__form__inputs__mail" type="email" placeholder="Email" formControlName="email">
+
+            @if (contactForm.controls.email.invalid && contactForm.controls.email.touched) {
+            @if (contactForm.controls.email.errors?.['required']) {
+            <p class="input-error">Bitte gib eine E-Mail-Adresse ein.</p>
+            }
+
+            @if (contactForm.controls.email.errors?.['pattern']) {
+            <p class="input-error">
+                Bitte gib eine E-Mail mit @ und der Endung .com oder .de ein.
+            </p>
+            }
+            }
+
+            <input class="dialog__form__inputs__phone" type="tel" placeholder="Phone" formControlName="telephone">
+
+            @if (contactForm.controls.telephone.invalid && contactForm.controls.telephone.touched) {
+            @if (contactForm.controls.telephone.errors?.['required']) {
+            <p class="input-error">Bitte gib eine Telefonnummer ein.</p>
+            }
+
+            @if (contactForm.controls.telephone.errors?.['pattern']) {
+            <p class="input-error">
+                Bitte gib eine Telefonnummer ein, die mit +49 beginnt.
+            </p>
+            }
             }
 
             <div class="dialog__form__buttons">
                 <app-button text="Cancel" variant="secondary" size="md" width="auto" buttonType="button"
-                    (click)="closeDialog()">
+                    (btnClick)="closeDialog()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                             width="24" height="24">
@@ -79,6 +103,7 @@
                         </g>
                     </svg>
                 </app-button>
+
                 <app-button text="Create Contact" variant="primary" size="md" width="auto" buttonType="submit">
                     <svg width="24" height="24" viewBox="0 0 37 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.5 14.566L14.7288 25.6321L33.4434 3.5" stroke="white" stroke-width="3"
