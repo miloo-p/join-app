@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, computed, inject, signal } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, computed, inject, signal, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Contact } from '../../shared/interfaces/contact';
 import { Supabase } from '../../shared/services/supabase';
+import { ContactAddNewContactDialog } from '../contact-add-new-contact-dialog/contact-add-new-contact-dialog';
 
 export interface UIContact extends Contact {
   name: string;
@@ -18,13 +19,20 @@ interface ContactGroup {
 @Component({
   selector: 'app-contacts-list',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, ContactAddNewContactDialog],
   templateUrl: './contacts-list.html',
   styleUrls: ['./contacts-list.scss'],
 })
 export class ContactList implements OnInit {
   public supabaseService = inject(Supabase);
   public selectedContact = signal<UIContact | null>(null);
+
+  @ViewChild(ContactAddNewContactDialog)
+  public addContactDialog!: ContactAddNewContactDialog;
+
+  public openAddContactDialog(): void {
+    this.addContactDialog.openDialog();
+  }
 
   @Output() public contactSelected = new EventEmitter<UIContact>();
 
@@ -43,7 +51,7 @@ export class ContactList implements OnInit {
   public groupedContacts = computed<ContactGroup[]>(() => {
     const rawContacts = this.supabaseService.contacts();
     if (!rawContacts || rawContacts.length === 0) return [];
-    
+
     const sorted = [...rawContacts].sort((a, b) => a.firstname.localeCompare(b.firstname));
     return this.buildAlphabeticalGroups(sorted);
   });
@@ -63,7 +71,7 @@ export class ContactList implements OnInit {
    * @param {Contact} contact - The contact object received from Supabase.
    * @returns {void}
    */
-  public selectContact(contact: Contact): void { 
+  public selectContact(contact: Contact): void {
     const transformed = this.transformContactData(contact);
     this.selectedContact.set(transformed);
     this.contactSelected.emit(transformed);
@@ -76,7 +84,7 @@ export class ContactList implements OnInit {
    */
   private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { // <--- Hier jetzt Contact
     const groups: { [key: string]: UIContact[] } = {};
-    
+
     for (const contact of sorted) {
       const firstLetter = contact.firstname?.charAt(0).toUpperCase() || 'A';
       if (!groups[firstLetter]) {
@@ -84,7 +92,7 @@ export class ContactList implements OnInit {
       }
       groups[firstLetter].push(this.transformContactData(contact));
     }
-    
+
     return Object.keys(groups)
       .sort((a, b) => a.localeCompare(b))
       .map(letter => ({ letter, contacts: groups[letter] }));
