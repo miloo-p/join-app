@@ -1,12 +1,15 @@
 @use '../../../styles/abstracts/mixins' as *;
 
 .contacts-layout {
-    @include flexbox(row, flex-start, stretch, 55px);
-    
+    @include flexbox(row, flex-start, stretch, var(--space-md)); // Abstand verringert von 55px
     width: 100%;
     min-height: calc(100vh - 96px); 
     box-sizing: border-box;
     background-color: var(--bg-light); 
+
+    @media (max-width: 900px) {
+        gap: 0; 
+    }
 }
 
 app-contacts-list {
@@ -14,13 +17,29 @@ app-contacts-list {
     height: calc(100vh - 96px); 
     position: sticky; 
     top: 96px; 
-    
     display: flex;
     flex-direction: column; 
-}
 
+    @media (max-width: 900px) {
+        width: 100%;
+
+        .contacts-layout--has-contact & {
+            display: none !important;
+        }
+    }
+}
 
 app-contacts-detail {
     flex: 1;
     height: auto; 
+    min-width: 0; 
+
+    @media (max-width: 900px) {
+        width: 100%;
+        display: none; 
+
+        .contacts-layout--has-contact & {
+            display: flex !important;
+        }
+    }
 }
