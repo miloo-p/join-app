@@ -1,20 +1,22 @@
 <main class="contacts-main" [class.contacts-main--has-selected-contact]="!!contact">
 
     <div class="contacts-main__header" role="banner">
-        <h1 class="contacts-main__title">Contacts</h1>
-        <span class="contacts-main__slogan">Better with a team</span>
-        <div class="contacts-main__header-divider"></div>
-
         @if (contact) {
         <button class="contacts-main__btn-back hidden-desktop" aria-label="Go back to list" (click)="contact = null">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="16" fill="currentColor" />
+            <svg class="contacts-main__btn-back-svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
                 <path
-                    d="M8.70752 14.6667H26.1981C26.9345 14.6667 27.5314 15.2637 27.5314 16.0001C27.5314 16.7364 26.9345 17.3334 26.1981 17.3334H8.70752L14.9169 23.5427C15.4375 24.0634 15.4375 24.9074 14.9168 25.4281C14.3962 25.9487 13.5521 25.9487 13.0315 25.4281L5.01773 17.4143C4.23668 16.6332 4.23668 15.3669 5.01773 14.5858L13.0315 6.57206C13.5521 6.05144 14.3962 6.05144 14.9168 6.57206C15.4375 7.09268 15.4375 7.93677 14.9168 8.45739L8.70752 14.6667Z"
+                    d="M10.437 14.6667H25.333C26.0694 14.6667 26.6663 15.2637 26.6663 16.0001C26.6663 16.7364 26.0694 17.3334 25.333 17.3334H10.437L16.6463 23.5427C17.167 24.0634 17.167 24.9074 16.6463 25.4281C16.1257 25.9487 15.2816 25.9487 14.761 25.4281L6.74722 17.4143C5.96617 16.6332 5.96617 15.3669 6.74722 14.5858L14.761 6.57206C15.2816 6.05144 16.1257 6.05144 16.6463 6.57206C17.167 7.09268 17.167 7.93677 16.6463 8.45739L10.437 14.6667Z"
                     fill="currentColor" />
             </svg>
         </button>
         }
+
+        <div class="contacts-main__header-text">
+            <h1 class="contacts-main__title">Contacts</h1>
+            <div class="contacts-main__header-divider"></div>
+            <span class="contacts-main__slogan">Better with a team</span>
+        </div>
     </div>
 
     @if (contact) {
@@ -66,7 +68,8 @@
         </div>
 
         <button class="contacts-main__btn-options-mobile hidden-desktop" aria-label="Contact options">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="contacts-main__btn-options-svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_71395_17969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32"
                     height="32">
                     <rect width="32" height="32" fill="#D9D9D9" />
