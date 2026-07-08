@@ -98,7 +98,8 @@ export class ContactList implements OnInit {
   private transformContactData(contact: Contact): UIContact {
     const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
     const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
-    const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
+    const contactId = typeof contact.id === 'number' ? contact.id : 0;
+    const colorIndex = Math.abs(contactId) % this.availableColors.length;
     return {
       ...contact,
       name: `${contact.firstname} ${contact.lastname}`,

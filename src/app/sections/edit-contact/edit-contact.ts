@@ -59,6 +59,15 @@ export class EditContactComponent {
   }
 
   /**
+   * Closes the overlay only when the backdrop itself is clicked.
+   */
+  public onOverlayClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) {
+      this.onCloseOverlay();
+    }
+  }
+
+  /**
    * Dispatches the updated contact data to the parent component to trigger the backend save.
    * Fulfills User Story 4 (submitting modified values).
    */
