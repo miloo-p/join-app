@@ -21,6 +21,9 @@
                     <app-logo-white class="contact_logo"></app-logo-white>
                     <h2>Add contact</h2>
                     <h3>Tasks are better with a team!</h3>
+                    <div class="dialog__edit_contact__wrapper__text__line">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,15 +45,18 @@
             </svg>
         </div>
 
-        <form class="dialog__form__inputs">
-            <input class="dialog__form__inputs__name" required type="text" placeholder="Name">
+        <form class="dialog__form__inputs" (ngSubmit)="createContact()">
+            <input class="dialog__form__inputs__name" required type="text" placeholder="Name" name="name"
+                [(ngModel)]="contactForm.name">
 
-            <input class="dialog__form__inputs__mail" required type="number" placeholder="Email">
+            <input class="dialog__form__inputs__mail" required type="email" placeholder="Email" name="email"
+                [(ngModel)]="contactForm.email">
 
-            <input class="dialog__form__inputs__phone" required type="email" placeholder="Phone">
+            <input class="dialog__form__inputs__phone" required type="tel" placeholder="Phone" name="telephone"
+                [(ngModel)]="contactForm.telephone">
 
             <div class="dialog__form__buttons">
-                <app-button text="Cancel" variant="secondary" size="md" width="auto">
+                <app-button text="Cancel" variant="secondary" size="md" width="auto" buttonType="button" (click)="closeDialog()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                             width="24" height="24">
@@ -63,7 +69,7 @@
                         </g>
                     </svg>
                 </app-button>
-                <app-button text="Create Contact" variant="primary" size="md" width="auto">
+                <app-button text="Create Contact" variant="primary" size="md" width="auto" buttonType="submit">
                     <svg width="24" height="24" viewBox="0 0 37 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.5 14.566L14.7288 25.6321L33.4434 3.5" stroke="white" stroke-width="3"
                             stroke-linecap="round" stroke-linejoin="round" />

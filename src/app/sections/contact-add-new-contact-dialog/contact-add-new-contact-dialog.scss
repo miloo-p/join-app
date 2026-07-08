@@ -54,7 +54,12 @@
             &__text {
                 @include flexbox(column, center, flex-start, var(--space-xl));
 
-
+                &__line {
+                    width: 90px;
+                    height: 3px;
+                    border-radius: 3px;
+                    background-color: var(--clr-blue-light);
+                }
             }
         }
     }
@@ -71,8 +76,8 @@
         }
 
         &__icon {
-            width: 10rem;
-            height: 10rem;
+            min-width: 8rem;
+            min-height: 8rem;
             background-color: var(--clr-feedback-disabled);
             border-radius: var(--radius-pill);
             color: var(--clr-white);
@@ -92,7 +97,7 @@
                 padding-inline: var(--space-md);
                 border-radius: var(--radius-md);
                 background-repeat: no-repeat;
-                background-position: right;
+                background-position: right 16px center;
             }
 
             &__name {
