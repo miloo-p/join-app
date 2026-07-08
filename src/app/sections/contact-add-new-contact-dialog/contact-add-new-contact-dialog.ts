@@ -18,4 +18,8 @@ export class ContactAddNewContactDialog {
   openDialog() {
     this.dialog.nativeElement.showModal();
   }
+
+  closeDialog() {
+    this.dialog.nativeElement.close()
+  }
 }
