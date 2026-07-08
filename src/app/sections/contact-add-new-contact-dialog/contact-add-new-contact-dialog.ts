@@ -2,8 +2,13 @@ import { Component, inject, ElementRef, ViewChild } from '@angular/core';
 import { Supabase } from '../../shared/services/supabase';
 import { LogoWhite } from '../../shared/components/logo-white/logo-white';
 import { ButtonComponent } from '../../shared/components/button/button.component';
-import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-contact-add-new-contact-dialog',
@@ -14,18 +19,12 @@ import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } 
 })
 export class ContactAddNewContactDialog {
   contactForm = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^\S{2,}\s+\S{2,}.*$/),
-    ]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^\S{2,}\s+\S{2,}.*$/)]),
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(/^[^\s@]+@[^\s@]+\.(com|de)$/i),
     ]),
-    telephone: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^\s*\+49[\d\s]+$/),
-    ]),
+    telephone: new FormControl('', [Validators.required, Validators.pattern(/^\s*\+49[\d\s]+$/)]),
   });
 
   private supabaseService = inject(Supabase);
@@ -50,41 +49,6 @@ export class ContactAddNewContactDialog {
     });
   }
 
-  // private isValidName(name: string): boolean {
-  //   const parts = name.trim().split(/\s+/);
-
-  //   return parts.length >= 2 && parts.every(part => part.length >= 2);
-  // }
-
-  // private isValidEmail(email: string): boolean {
-  //   const trimmedEmail = email.trim().toLowerCase();
-
-  //   return trimmedEmail.includes('@') &&
-  //     (trimmedEmail.endsWith('.com') || trimmedEmail.endsWith('.de'));
-  // }
-
-  // private isValidTelephone(telephone: string): boolean {
-  //   const cleanedTelephone = telephone.replace(/\s/g, '');
-  //   return cleanedTelephone.startsWith('+49');
-  // }
-
-  // private isFormValid(): boolean {
-  //   this.resetErrorMsg();
-  //   if (!this.isValidName(this.contactForm.name)) {
-  //     this.nameError = 'Bitte gib mindestens Vor- und Nachnamen mit jeweils 2 Zeichen ein.';
-  //     return false;
-  //   }
-  //   if (!this.isValidEmail(this.contactForm.email)) {
-  //     this.emailError = 'Bitte gib eine E-Mail mit @ und der Endung .com oder .de ein.';
-  //     return false;
-  //   }
-  //   if (!this.isValidTelephone(this.contactForm.telephone)) {
-  //     this.telephoneError = 'Bitte gib eine Telefonnummer ein, die mit +49 beginnt.';
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   async createContact() {
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
@@ -107,5 +71,15 @@ export class ContactAddNewContactDialog {
     await this.supabaseService.setContact([newContact]);
 
     this.closeDialog();
+  }
+
+  closeDialogBubbleProtection(event: Event) {
+    event.stopPropagation();
+  }
+
+  onDialogClick(event: MouseEvent) {
+    if (event.target === this.dialog.nativeElement) {
+      this.closeDialog();
+    }
   }
 }
