@@ -2,8 +2,19 @@
 
     <div class="contacts-main__header" role="banner">
         <h1 class="contacts-main__title">Contacts</h1>
-        <div class="contacts-main__header-divider"></div>
         <span class="contacts-main__slogan">Better with a team</span>
+        <div class="contacts-main__header-divider"></div>
+
+        @if (contact) {
+        <button class="contacts-main__btn-back hidden-desktop" aria-label="Go back to list" (click)="contact = null">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="16" fill="currentColor" />
+                <path
+                    d="M8.70752 14.6667H26.1981C26.9345 14.6667 27.5314 15.2637 27.5314 16.0001C27.5314 16.7364 26.9345 17.3334 26.1981 17.3334H8.70752L14.9169 23.5427C15.4375 24.0634 15.4375 24.9074 14.9168 25.4281C14.3962 25.9487 13.5521 25.9487 13.0315 25.4281L5.01773 17.4143C4.23668 16.6332 4.23668 15.3669 5.01773 14.5858L13.0315 6.57206C13.5521 6.05144 14.3962 6.05144 14.9168 6.57206C15.4375 7.09268 15.4375 7.93677 14.9168 8.45739L8.70752 14.6667Z"
+                    fill="currentColor" />
+            </svg>
+        </button>
+        }
     </div>
 
     @if (contact) {
@@ -53,6 +64,20 @@
                 <span class="contacts-main__value contacts-main__value--phone">{{ contact.telephone }}</span>
             </div>
         </div>
+
+        <button class="contacts-main__btn-options-mobile hidden-desktop" aria-label="Contact options">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_71395_17969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32"
+                    height="32">
+                    <rect width="32" height="32" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_71395_17969)">
+                    <path
+                        d="M15.9997 26.6666C15.2663 26.6666 14.6386 26.4055 14.1163 25.8833C13.5941 25.361 13.333 24.7333 13.333 23.9999C13.333 23.2666 13.5941 22.6388 14.1163 22.1166C14.6386 21.5944 15.2663 21.3333 15.9997 21.3333C16.733 21.3333 17.3608 21.5944 17.883 22.1166C18.4052 22.6388 18.6663 23.2666 18.6663 23.9999C18.6663 24.7333 18.4052 25.361 17.883 25.8833C17.3608 26.4055 16.733 26.6666 15.9997 26.6666ZM15.9997 18.6666C15.2663 18.6666 14.6386 18.4055 14.1163 17.8833C13.5941 17.361 13.333 16.7333 13.333 15.9999C13.333 15.2666 13.5941 14.6388 14.1163 14.1166C14.6386 13.5944 15.2663 13.3333 15.9997 13.3333C16.733 13.3333 17.3608 13.5944 17.883 14.1166C18.4052 14.6388 18.6663 15.2666 18.6663 15.9999C18.6663 16.7333 18.4052 17.361 17.883 17.8833C17.3608 18.4055 16.733 18.6666 15.9997 18.6666ZM15.9997 10.6666C15.2663 10.6666 14.6386 10.4055 14.1163 9.88325C13.5941 9.36103 13.333 8.73325 13.333 7.99992C13.333 7.26659 13.5941 6.63881 14.1163 6.11659C14.6386 5.59436 15.2663 5.33325 15.9997 5.33325C16.733 5.33325 17.3608 5.59436 17.883 6.11659C18.4052 6.63881 18.6663 7.26659 18.6663 7.99992C18.6663 8.73325 18.4052 9.36103 17.883 9.88325C17.3608 10.4055 16.733 10.6666 15.9997 10.6666Z"
+                        fill="currentColor" />
+                </g>
+            </svg>
+        </button>
     </div>
     }
 </main>
