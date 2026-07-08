@@ -22,9 +22,11 @@ app-contacts-list {
 
     @include respond-to(lg) {
         width: 100%;
+        flex-grow: 1;
+        flex-shrink: 1;
 
         .contacts-layout--has-contact & {
-            display: none !important;
+            display: none;
         }
     }
 }
@@ -39,7 +41,7 @@ app-contacts-detail {
         display: none; 
 
         .contacts-layout--has-contact & {
-            display: flex !important;
+            display: flex;
         }
     }
 }
