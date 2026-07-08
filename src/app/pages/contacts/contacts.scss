@@ -2,7 +2,6 @@
 
 .contacts-layout {
     @include flexbox(row, flex-start, stretch, 55px);
-    @include global_content_wrapper();
     
     width: 100%;
     min-height: calc(100vh - 96px); 
