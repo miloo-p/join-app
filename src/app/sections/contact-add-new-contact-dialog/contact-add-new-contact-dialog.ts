@@ -13,25 +13,44 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contact-add-new-contact-dialog.scss',
 })
 export class ContactAddNewContactDialog {
+  contactForm = {
+    name: '',
+    email: '',
+    telephone: '',
+  };
+  nameError = '';
+  emailError = '';
+  telephoneError = '';
+
   private supabaseService = inject(Supabase);
 
   @ViewChild('dialog_add_contact') dialog!: ElementRef<HTMLDialogElement>;
 
   openDialog() {
     this.dialog.nativeElement.showModal();
+    this.resetForm();
+    this.resetErrorMsg();
   }
 
   closeDialog() {
-    this.dialog.nativeElement.close()
+    this.dialog.nativeElement.close();
+    this.resetForm();
+    this.resetErrorMsg();
   }
 
-  contactForm = {
-    name: '',
-    email: '',
-    telephone: '',
-  };
+  resetForm() {
+    this.contactForm = {
+      name: '',
+      email: '',
+      telephone: '',
+    };
+  }
 
-  nameError = '';
+  resetErrorMsg() {
+    this.nameError = '';
+    this.emailError = '';
+    this.telephoneError = '';
+  }
 
   private isValidName(name: string): boolean {
     const parts = name.trim().split(/\s+/);
@@ -39,13 +58,36 @@ export class ContactAddNewContactDialog {
     return parts.length >= 2 && parts.every(part => part.length >= 2);
   }
 
-  async createContact() {
-    this.nameError = '';
+  private isValidEmail(email: string): boolean {
+    const trimmedEmail = email.trim().toLowerCase();
 
+    return trimmedEmail.includes('@') &&
+      (trimmedEmail.endsWith('.com') || trimmedEmail.endsWith('.de'));
+  }
+
+  private isValidTelephone(telephone: string): boolean {
+    return telephone.trim().startsWith('+49');
+  }
+
+  private isFormValid(): boolean {
+    this.resetErrorMsg();
     if (!this.isValidName(this.contactForm.name)) {
       this.nameError = 'Bitte gib mindestens Vor- und Nachnamen mit jeweils 2 Zeichen ein.';
-      return;
+      return false;
     }
+    if (!this.isValidEmail(this.contactForm.email)) {
+      this.emailError = 'Bitte gib eine E-Mail mit @ und der Endung .com oder .de ein.';
+      return false;
+    }
+    if (!this.isValidTelephone(this.contactForm.telephone)) {
+      this.telephoneError = 'Bitte gib eine Telefonnummer ein, die mit +49 beginnt.';
+      return false;
+    }
+    return true;
+  }
+
+  async createContact() {
+    if (!this.isFormValid()) return;
 
     const trimmedName = this.contactForm.name.trim();
     const [firstname, ...lastnameParts] = trimmedName.split(' ');
@@ -59,11 +101,7 @@ export class ContactAddNewContactDialog {
 
     await this.supabaseService.setContact([newContact]);
 
-    this.contactForm = {
-      name: '',
-      email: '',
-      telephone: '',
-    };
+    this.resetForm();
 
     this.closeDialog();
   }

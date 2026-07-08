@@ -48,15 +48,25 @@
         <form class="dialog__form__inputs" (ngSubmit)="createContact()">
             <input class="dialog__form__inputs__name" required type="text" placeholder="Name" name="name"
                 [(ngModel)]="contactForm.name">
+            @if (nameError) {
+            <p class="input-error">{{ nameError }}</p>
+            }
 
             <input class="dialog__form__inputs__mail" required type="email" placeholder="Email" name="email"
                 [(ngModel)]="contactForm.email">
+            @if (emailError) {
+            <p class="input-error">{{ emailError }}</p>
+            }
 
             <input class="dialog__form__inputs__phone" required type="tel" placeholder="Phone" name="telephone"
                 [(ngModel)]="contactForm.telephone">
+            @if (telephoneError) {
+            <p class="input-error">{{ telephoneError }}</p>
+            }
 
             <div class="dialog__form__buttons">
-                <app-button text="Cancel" variant="secondary" size="md" width="auto" buttonType="button" (click)="closeDialog()">
+                <app-button text="Cancel" variant="secondary" size="md" width="auto" buttonType="button"
+                    (click)="closeDialog()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                             width="24" height="24">
