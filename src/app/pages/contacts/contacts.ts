@@ -86,4 +86,11 @@ export class Contacts {
     this.activeContact.set(updatedContact);
     this.closeEditContact();
   }
+
+    /**
+   * Resets the active contact to null to return to the list view on mobile.
+   */
+  public handleBackToList(): void {
+    this.activeContact.set(null);
+  }
 }

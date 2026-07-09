@@ -71,10 +71,23 @@ export class ContactList implements OnInit {
    * @param {Contact} contact - The contact object received from Supabase.
    * @returns {void}
    */
-  public selectContact(contact: Contact): void {
+  public selectContact(contact: Contact): void { 
+    const isFirstTime = this.selectedContact() === null;
     const transformed = this.transformContactData(contact);
+    (transformed as any).isFirstClick = isFirstTime;
+
     this.selectedContact.set(transformed);
     this.contactSelected.emit(transformed);
+
+    if (isFirstTime) {
+      setTimeout(() => {
+        const current = this.selectedContact();
+        if (current) {
+          (current as any).isFirstClick = false;
+          this.selectedContact.set({ ...current });
+        }
+      }, 100);
+    }
   }
 
   /**
@@ -82,7 +95,7 @@ export class ContactList implements OnInit {
    * @param {Contact[]} sorted - Array of sorted raw contacts.
    * @returns {ContactGroup[]} Array of grouped contacts containing the letter and matching UI contacts.
    */
-  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { // <--- Hier jetzt Contact
+  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { 
     const groups: { [key: string]: UIContact[] } = {};
 
     for (const contact of sorted) {
@@ -106,7 +119,8 @@ export class ContactList implements OnInit {
   private transformContactData(contact: Contact): UIContact {
     const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
     const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
-    const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
+    const contactId = typeof contact.id === 'number' ? contact.id : 0;
+    const colorIndex = Math.abs(contactId) % this.availableColors.length;
     return {
       ...contact,
       name: `${contact.firstname} ${contact.lastname}`,

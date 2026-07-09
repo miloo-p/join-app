@@ -1,5 +1,5 @@
-<div class="edit-contact" role="dialog" aria-modal="true" (click)="onCloseOverlay()">
-    <div class="edit-contact__panel" (click)="$event.stopPropagation()">
+<div class="edit-contact" role="dialog" aria-modal="true" (click)="onOverlayClick($event)">
+    <div class="edit-contact__panel">
         <div class="edit-contact__sidebar">
             <svg width="54" height="67" viewBox="0 0 101 122" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_301_1264)">
@@ -50,7 +50,7 @@
                     {{ editingContact?.initials ?? 'TW' }}
                 </div>
 
-                <form novalidate class="edit-contact__form">
+                <form novalidate class="edit-contact__form" (ngSubmit)="onSaveContact()">
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
                             <input type="text" name="name" placeholder="Name" class="edit-contact__input"
@@ -120,8 +120,7 @@
                             Delete
                         </button>
 
-                        <button type="submit" class="edit-contact__btn edit-contact__btn--primary"
-                            (click)="$event.preventDefault(); onSaveContact()">
+                        <button type="submit" class="edit-contact__btn edit-contact__btn--primary">
                             Save
                             <span class="edit-contact__btn-check" aria-hidden="true">✓</span>
                         </button>
