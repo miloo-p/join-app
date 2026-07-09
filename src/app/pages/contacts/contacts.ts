@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { ContactsDetailComponent } from '../../sections/contacts-detail/contacts-detail';
-import { ContactList, UIContact } from '../../sections/contacts-list/contacts-list';
-import { EditContactComponent } from '../../sections/edit-contact/edit-contact';
+import { ContactsDetailComponent } from './components/contacts-detail/contacts-detail';
+import { ContactList, UIContact } from './components/contacts-list/contacts-list';
+import { EditContactComponent } from './components/edit-contact/edit-contact';
 import { Supabase } from '../../shared/services/supabase';
 
 @Component({
@@ -15,12 +15,12 @@ import { Supabase } from '../../shared/services/supabase';
 export class Contacts {
   private supabaseService = inject(Supabase);
 
-  /** 
+  /**
    * Central signal holding the currently active contact for the whole page.
    * Strictly typed to UIContact to ensure data integrity between list and detail views.
    */
   public activeContact = signal<UIContact | null>(null);
-  
+
   /** Signal controlling the visibility state of the edit contact component/overlay. */
   public isEditContactOpen = signal<boolean>(false);
 
@@ -87,7 +87,7 @@ export class Contacts {
     this.closeEditContact();
   }
 
-    /**
+  /**
    * Resets the active contact to null to return to the list view on mobile.
    */
   public handleBackToList(): void {
