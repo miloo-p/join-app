@@ -35,6 +35,13 @@ export class ContactsDetailComponent {
    */
   @Output() public close = new EventEmitter<void>();
 
+  public isMobileMenuOpen = false;
+
+  /** Toggles the visibility of the mobile edit/delete menu. */
+  public toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
   /**
    * Triggers the edit event for the currently viewed contact.
    * Fulfills User Story 4 (editing option).

@@ -218,13 +218,13 @@
         width: 56px;
         height: 56px; 
         border-radius: var(--radius-pill);
-        background-color: #2A3647; 
+        background-color: var(--clr-blue-muted); 
         color: var(--text-color-ultralight); 
-        border: 1px solid #2A3647;
+        border: 1px solid var(--clr-blue-muted);
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); 
 
         position: fixed;
-        bottom: 80px; 
+        bottom: 100px; 
         right: var(--space-md);
         z-index: 999;
         display: none;
@@ -282,9 +282,48 @@
         &--email { color: var(--clr-blue-light); }
         &--phone { color: var(--text-color-dark); }
     }
+
+        &__mobile-menu {
+        position: fixed;
+        bottom: 90px;            
+        right: var(--space-md);  
+        background-color: #ffffff;
+
+        border-radius: 20px 20px 0px 20px; 
+        padding: var(--space-xs) 0; 
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        z-index: 1000;           
+        
+        @include flexbox(column, flex-start, flex-start, 0);
+        animation: slideInMobileMenu 100ms ease-out forwards;
+    }
+
+    &__mobile-menu-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-family: var(--ff-body, 'Inter'), sans-serif;
+        font-size: var(--fs-body-large, 16px);
+        @include flexbox(row, flex-start, center, var(--space-md));
+        width: 100%;
+        padding: var(--space-sm) var(--space-xl); 
+        box-sizing: border-box;
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--bg-light, #f0f0f0);
+        }
+    }
+
 }
 
-@keyframes slideInRight {
+@media (min-width: 993px) { 
+    .slide-in-right {
+        animation: slideInRight 100ms ease-out forwards;
+    }
+}
+
+@keyframes slideInMobileMenu {
     from {
         transform: translateX(100%);
         opacity: 0;
@@ -295,6 +334,3 @@
     }
 }
 
-.slide-in-right {
-    animation: slideInRight 100ms ease-out forwards;
-}
