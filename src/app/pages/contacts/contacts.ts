@@ -4,12 +4,11 @@ import { ContactsDetailComponent } from '../../sections/contacts-detail/contacts
 import { ContactList, UIContact } from '../../sections/contacts-list/contacts-list';
 import { EditContactComponent } from '../../sections/edit-contact/edit-contact';
 import { Supabase } from '../../shared/services/supabase';
-import { ContactAddNewContactDialog } from '../../sections/contact-add-new-contact-dialog/contact-add-new-contact-dialog';
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule, ContactList, ContactsDetailComponent, EditContactComponent, ContactAddNewContactDialog],
+  imports: [CommonModule, ContactList, ContactsDetailComponent, EditContactComponent],
   templateUrl: './contacts.html',
   styleUrls: ['./contacts.scss'],
 })
