@@ -2,7 +2,8 @@
 
     <div class="contacts-main__header" role="banner">
         @if (contact) {
-        <button class="contacts-main__btn-back hidden-desktop" aria-label="Go back to list" (click)="contact = null">
+        <button class="contacts-main__btn-back hidden-desktop" aria-label="Go back to list" (click)="onCloseDetail()">
+
             <svg class="contacts-main__btn-back-svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
