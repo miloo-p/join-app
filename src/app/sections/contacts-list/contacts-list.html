@@ -1,7 +1,7 @@
 <section class="contacts-sidebar" aria-label="Contact list">
 
     <div class="contacts-sidebar__action-area">
-        <app-button text="Add new Contact" variant="primary" size="md" width="full">
+        <app-button (click)="openAddContactDialog()" text="Add new Contact" variant="primary" size="md" width="full">
             <svg class="contacts-sidebar__btn-svg" width="32" height="32" viewBox="0 0 30 21" fill="none"
                 xmlns="http://w3.org">
                 <path
@@ -43,3 +43,7 @@
         }
     </div>
 </section>
+
+<app-contact-add-new-contact-dialog>
+
+</app-contact-add-new-contact-dialog>
