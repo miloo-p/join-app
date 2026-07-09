@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UIContact } from '../../sections/contacts-list/contacts-list';
+import { UIContact } from '../contacts-list/contacts-list';
 
 @Component({
   selector: 'app-edit-contact',
@@ -10,7 +10,6 @@ import { UIContact } from '../../sections/contacts-list/contacts-list';
   styleUrls: ['./edit-contact.scss'],
 })
 export class EditContactComponent {
-  
   /**
    * Local copy of the contact being edited.
    * Keeps track of unsaved changes before saving.
@@ -36,17 +35,17 @@ export class EditContactComponent {
     return this._contact;
   }
 
-  /** 
+  /**
    * Emits an event to notify the parent component to close the edit overlay.
    */
   @Output() public closeOverlay = new EventEmitter<void>();
 
-  /** 
+  /**
    * Emits the updated contact object back to the parent component for saving.
    */
   @Output() public saveContact = new EventEmitter<UIContact>();
 
-  /** 
+  /**
    * Emits when the user requests to delete the current contact.
    */
   @Output() public deleteContact = new EventEmitter<UIContact>();

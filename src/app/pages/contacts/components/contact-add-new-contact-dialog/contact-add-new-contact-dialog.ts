@@ -1,7 +1,7 @@
 import { Component, inject, ElementRef, ViewChild } from '@angular/core';
-import { Supabase } from '../../shared/services/supabase';
-import { LogoWhite } from '../../shared/components/logo-white/logo-white';
-import { ButtonComponent } from '../../shared/components/button/button.component';
+import { Supabase } from '../../../../shared/services/supabase';
+import { LogoWhite } from '../../../../shared/components/logo-white/logo-white';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import {
   FormsModule,
   ReactiveFormsModule,
