@@ -11,7 +11,7 @@
     width: 3rem;
     display: none;
 
-    @include respond-to(sm) {
+    @include respond-to(md) {
       display: block;
     }
   }
@@ -25,8 +25,8 @@
   &__title {
     font-weight: var(--fw-regular);
     margin-bottom: 0;
-
-    @include respond-to(sm) {
+    @include respond-to(md) {
+      font-size: var(--fs-h5);
       display: none;
     }
   }
@@ -42,7 +42,7 @@
       transform: scale(1);
       transition: all 80ms ease;
 
-      @include respond-to(sm) {
+      @include respond-to(md) {
         display: none;
       }
       &:hover {

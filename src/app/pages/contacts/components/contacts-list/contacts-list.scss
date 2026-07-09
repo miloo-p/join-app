@@ -2,7 +2,8 @@
 @use '../../../../../styles/abstracts/variables' as *;
 
 .contacts-sidebar {
-  width: 424px;
+  max-width: 424px;
+  width: 100%;
   height: 100%;
   background-color: var(--bg-ultralight);
   border-right: 1px solid var(--border-clr-light);
@@ -14,10 +15,6 @@
   scrollbar-color: var(--border-clr-light) transparent;
   overflow-y: auto;
 
-  @include respond-to(xl) {
-    width: 320px;
-  }
-
   @include respond-to(lg) {
     width: 100%;
     max-width: 100vw;
@@ -27,7 +24,6 @@
 
   @media (max-width: 610px) {
     width: 100%;
-    max-width: 100vw;
     display: flex;
     flex-direction: column;
 
