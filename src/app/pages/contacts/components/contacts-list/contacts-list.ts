@@ -1,8 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, computed, inject, signal, ViewChild } from '@angular/core';
-import { ButtonComponent } from '../../shared/components/button/button.component';
-import { Contact } from '../../shared/interfaces/contact';
-import { Supabase } from '../../shared/services/supabase';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  computed,
+  inject,
+  signal,
+  ViewChild,
+} from '@angular/core';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { Contact } from '../../../../shared/interfaces/contact';
+import { Supabase } from '../../../../shared/services/supabase';
 import { ContactAddNewContactDialog } from '../contact-add-new-contact-dialog/contact-add-new-contact-dialog';
 
 export interface UIContact extends Contact {
@@ -37,11 +46,21 @@ export class ContactList implements OnInit {
   @Output() public contactSelected = new EventEmitter<UIContact>();
 
   public availableColors: string[] = [
-    'var(--clr-user-tangerine)', 'var(--clr-user-flamingo)', 'var(--clr-user-iris)',
-    'var(--clr-user-amethyst)', 'var(--clr-user-sky)', 'var(--clr-user-mint)',
-    'var(--clr-user-salmon)', 'var(--clr-user-apricot)', 'var(--clr-user-fuchsia)',
-    'var(--clr-user-sunflower)', 'var(--clr-user-cobalt)', 'var(--clr-user-lime)',
-    'var(--clr-user-lemon)', 'var(--clr-user-cherry)', 'var(--clr-user-marigold)'
+    'var(--clr-user-tangerine)',
+    'var(--clr-user-flamingo)',
+    'var(--clr-user-iris)',
+    'var(--clr-user-amethyst)',
+    'var(--clr-user-sky)',
+    'var(--clr-user-mint)',
+    'var(--clr-user-salmon)',
+    'var(--clr-user-apricot)',
+    'var(--clr-user-fuchsia)',
+    'var(--clr-user-sunflower)',
+    'var(--clr-user-cobalt)',
+    'var(--clr-user-lime)',
+    'var(--clr-user-lemon)',
+    'var(--clr-user-cherry)',
+    'var(--clr-user-marigold)',
   ];
 
   /**
@@ -71,7 +90,7 @@ export class ContactList implements OnInit {
    * @param {Contact} contact - The contact object received from Supabase.
    * @returns {void}
    */
-  public selectContact(contact: Contact): void { 
+  public selectContact(contact: Contact): void {
     const isFirstTime = this.selectedContact() === null;
     const transformed = this.transformContactData(contact);
     (transformed as any).isFirstClick = isFirstTime;
@@ -95,7 +114,7 @@ export class ContactList implements OnInit {
    * @param {Contact[]} sorted - Array of sorted raw contacts.
    * @returns {ContactGroup[]} Array of grouped contacts containing the letter and matching UI contacts.
    */
-  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { 
+  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] {
     const groups: { [key: string]: UIContact[] } = {};
 
     for (const contact of sorted) {
@@ -108,7 +127,7 @@ export class ContactList implements OnInit {
 
     return Object.keys(groups)
       .sort((a, b) => a.localeCompare(b))
-      .map(letter => ({ letter, contacts: groups[letter] }));
+      .map((letter) => ({ letter, contacts: groups[letter] }));
   }
 
   /**
@@ -125,7 +144,7 @@ export class ContactList implements OnInit {
       ...contact,
       name: `${contact.firstname} ${contact.lastname}`,
       initials: `${firstLetter}${lastLetter}`,
-      avatarColor: this.availableColors[colorIndex]
+      avatarColor: this.availableColors[colorIndex],
     };
   }
 }
