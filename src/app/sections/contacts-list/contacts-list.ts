@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, inject, OnInit, Output, signal, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, computed, inject, signal, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Contact } from '../../shared/interfaces/contact';
 import { Supabase } from '../../shared/services/supabase';
@@ -51,7 +51,7 @@ export class ContactList implements OnInit {
   public groupedContacts = computed<ContactGroup[]>(() => {
     const rawContacts = this.supabaseService.contacts();
     if (!rawContacts || rawContacts.length === 0) return [];
-    
+
     const sorted = [...rawContacts].sort((a, b) => a.firstname.localeCompare(b.firstname));
     return this.buildAlphabeticalGroups(sorted);
   });
@@ -97,7 +97,7 @@ export class ContactList implements OnInit {
    */
   private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { 
     const groups: { [key: string]: UIContact[] } = {};
-    
+
     for (const contact of sorted) {
       const firstLetter = contact.firstname?.charAt(0).toUpperCase() || 'A';
       if (!groups[firstLetter]) {
@@ -105,7 +105,7 @@ export class ContactList implements OnInit {
       }
       groups[firstLetter].push(this.transformContactData(contact));
     }
-    
+
     return Object.keys(groups)
       .sort((a, b) => a.localeCompare(b))
       .map(letter => ({ letter, contacts: groups[letter] }));

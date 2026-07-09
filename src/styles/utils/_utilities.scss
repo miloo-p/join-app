@@ -18,6 +18,12 @@
   }
 }
 
+.hidden-lg {
+  @media (max-width: $breakpoint-lg) {
+    display: none !important;
+  }
+}
+
 .hidden-desktop {
   @media (min-width: $breakpoint-sm) {
     display: none !important;
