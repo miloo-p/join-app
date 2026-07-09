@@ -64,20 +64,13 @@ export class ContactList implements OnInit {
    * @returns {void}
    */
   public selectContact(contact: Contact): void { 
-    // 1. Prüfen, ob vorher gar kein Kontakt ausgewählt war (allererster Klick)
     const isFirstTime = this.selectedContact() === null;
-
-    // 2. Daten wie gewohnt umwandeln
     const transformed = this.transformContactData(contact);
-    
-    // 3. Dem Objekt temporär merken, ob es der erste Klick war
     (transformed as any).isFirstClick = isFirstTime;
 
-    // 4. Signal setzen und Event an die Detailkarte feuern
     this.selectedContact.set(transformed);
     this.contactSelected.emit(transformed);
 
-    // 5. Nach exakt 100ms das Flag löschen, damit Folgemarkierungen nicht mehr fliegen
     if (isFirstTime) {
       setTimeout(() => {
         const current = this.selectedContact();
@@ -89,13 +82,12 @@ export class ContactList implements OnInit {
     }
   }
 
-
   /**
    * Groups a sorted list of contacts into alphabetical sections based on the first letter.
    * @param {Contact[]} sorted - Array of sorted raw contacts.
    * @returns {ContactGroup[]} Array of grouped contacts containing the letter and matching UI contacts.
    */
-  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { // <--- Hier jetzt Contact
+  private buildAlphabeticalGroups(sorted: Contact[]): ContactGroup[] { 
     const groups: { [key: string]: UIContact[] } = {};
     
     for (const contact of sorted) {
