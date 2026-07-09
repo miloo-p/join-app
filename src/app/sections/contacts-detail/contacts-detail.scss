@@ -283,3 +283,18 @@
         &--phone { color: var(--text-color-dark); }
     }
 }
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 100ms ease-out forwards;
+}
