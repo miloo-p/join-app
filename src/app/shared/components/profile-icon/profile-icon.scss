@@ -1,7 +1,8 @@
 /*von Jerome css bei contact list*/
+/*include später wieder rein sosnt kann ich nicht arbeiten*/
 
 .profile-icon {
-        @include flexbox(row, center, center, 0);
+       
         width: 42px;
         height: 42px;
         border-radius: var(--radius-pill);

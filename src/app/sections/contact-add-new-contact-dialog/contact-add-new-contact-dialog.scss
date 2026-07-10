@@ -136,7 +136,7 @@
   }
 
   &__form {
-    @include flexbox(column, center, center, 2rem);
+    @include flexbox(column, center, stretch, 2rem);
     width: 100%;
   }
 
@@ -183,7 +183,7 @@
     line-height: 0.9rem;
     margin-top: -1.75rem;
     margin-bottom: -1rem;
-    margin-left: -3rem;
+    margin-left: 0rem;
   }
 
   &__actions {
