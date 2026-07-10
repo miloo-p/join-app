@@ -6,7 +6,7 @@ import { Contact } from '../interfaces/contact';
 @Injectable({
   providedIn: 'root',
 })
-export class Supabase {
+export class contactsService {
   
   supabase = createClient(environment.apiUrl, environment.apiKey)
 
@@ -22,7 +22,7 @@ export class Supabase {
       .select();
 
     if (error) {
-      console.error('Supabase insert error', error);
+      console.error('Contacts insert error', error);
       return;
     }
     return data;
@@ -44,7 +44,7 @@ export class Supabase {
       .eq('id', id)
       .single();
     if (error) {
-      console.error('Supabase get single contact error', error);
+      console.error('Contacts get single contact error', error);
       return;
     }
     return contact;
@@ -57,7 +57,7 @@ export class Supabase {
       .update(contact)
       .eq('id', contact.id);
     if (error) {
-      console.error('Supabase update contact error', error);
+      console.error('Contacts update contact error', error);
     }
   }
 
