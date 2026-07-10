@@ -1,0 +1,199 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.dialog {
+  border: unset;
+  border-radius: var(--radius-lg);
+  position: relative;
+  padding: 0;
+  &__wrapper {
+    display: flex;
+    max-width: 75rem;
+    height: 37.5rem;
+
+    @include respond-to(lg) {
+      width: 100%;
+    }
+    @include respond-to(md) {
+      @include flexbox(column, space-around, center, 0rem);
+      height: unset;
+      padding-bottom: 2rem;
+    }
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &__close {
+    max-height: 35px;
+    height: 100%;
+    max-width: 35px;
+    width: 100%;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    border: unset;
+    background-color: transparent;
+
+    color: var(--text-color-dark);
+
+    @include respond-to(md) {
+      color: var(--text-color-ultralight);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--clr-feedback-disabled);
+      border-radius: var(--radius-pill);
+    }
+  }
+  &__sidebar {
+    @include flexbox(column, center, flex-start, 0);
+    max-width: 30rem;
+    height: 100%;
+    background-color: var(--bg-muted);
+    padding-inline: 3rem;
+
+    @include respond-to(md) {
+      height: 22rem;
+    }
+    @include respond-to(xsm) {
+      height: 25rem;
+      padding-inline: 1rem;
+    }
+  }
+
+  &__sidebar-content {
+    @include flexbox(column, center, flex-start, 0);
+    color: var(--text-color-ultralight);
+
+    @include respond-to(md) {
+      @include flexbox(column, center, center, 1rem);
+      text-align: center;
+    }
+  }
+
+  &__logo {
+    width: 3.5rem;
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  &__title {
+    line-height: 1;
+    @include respond-to(md) {
+      font-size: calc(var(--fs-h4) * 2);
+    }
+  }
+
+  &__subtitle {
+    font-weight: var(--fw-regular);
+  }
+
+  &__divider {
+    width: 5.625rem;
+    height: 3px;
+    border-radius: 3px;
+    background-color: var(--clr-blue-light);
+    @include respond-to(xsm) {
+      display: none;
+    }
+  }
+
+  &__main {
+    @include flexbox(row, space-between, center, 2rem);
+    padding-inline: 2rem;
+
+    @include respond-to(lg) {
+      @include flexbox(column, space-around, center, 0rem);
+    }
+    @include respond-to(xsm) {
+      padding-inline: 1rem;
+    }
+  }
+
+  &__profile-badge {
+    @include flexbox(row, center, center, 0);
+    min-width: 8rem;
+    aspect-ratio: 1/1;
+    background-color: var(--clr-feedback-disabled);
+    border-radius: var(--radius-pill);
+    color: var(--clr-white);
+    border: 4px solid var(--clr-white);
+    box-shadow: var(--shadow-allaround);
+
+    @include respond-to(md) {
+      margin-top: -4rem;
+      margin-bottom: 4rem;
+    }
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  &__form {
+    @include flexbox(column, center, center, 2rem);
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    height: 3.5rem;
+    border: 2px solid var(--border-clr-light);
+    padding-inline: var(--space-md);
+    border-radius: var(--radius-md);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    outline: none;
+    transition: border-color 100ms ease-in-out;
+
+    &:focus {
+      border-color: var(--border-clr-active);
+    }
+
+    &.ng-invalid.ng-touched {
+      border-color: var(--clr-feedback-error);
+
+      &:focus {
+        border-color: var(--border-clr-active);
+      }
+    }
+
+    &--name {
+      background-image: url(/assets/icons/person/person.svg);
+    }
+
+    &--mail {
+      background-image: url(/assets/icons/mail.svg);
+    }
+
+    &--phone {
+      background-image: url(/assets/icons/call.svg);
+    }
+  }
+
+  &__error {
+    color: var(--clr-feedback-error);
+    font-size: 0.75rem;
+    height: 0.75rem;
+    line-height: 0.75rem;
+    margin-top: -1.75rem;
+    margin-bottom: -1rem;
+    margin-left: 1rem;
+  }
+
+  &__actions {
+    @include flexbox(row, center, flex-start, 2rem);
+    @include respond-to(lg) {
+      @include flexbox(column-reverse, space-around, center, 1rem);
+    }
+
+    svg {
+      min-width: 24px;
+    }
+  }
+}

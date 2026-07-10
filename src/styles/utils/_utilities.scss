@@ -13,13 +13,19 @@
 }
 
 .hidden-mobile {
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-sm) {
+    display: none !important;
+  }
+}
+
+.hidden-lg {
+  @media (max-width: $breakpoint-lg) {
     display: none !important;
   }
 }
 
 .hidden-desktop {
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: $breakpoint-sm) {
     display: none !important;
   }
 }

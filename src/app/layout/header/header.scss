@@ -1,0 +1,109 @@
+@use '../../../styles/abstracts/mixins' as *;
+
+.header {
+  width: 100%;
+  background-color: var(--bg-ultralight);
+  height: 6rem;
+
+  box-shadow: var(--shadow-bottom);
+
+  &_logo {
+    width: 3rem;
+    display: none;
+
+    @include respond-to(md) {
+      display: block;
+    }
+  }
+  &__container {
+    @include global_content_wrapper();
+    @include flexbox(row, space-between, center, 0);
+    height: 6rem;
+    width: 100%;
+  }
+
+  &__title {
+    font-weight: var(--fw-regular);
+    margin-bottom: 0;
+    @include respond-to(md) {
+      font-size: var(--fs-h5);
+      display: none;
+    }
+  }
+
+  &__usermenu {
+    @include flexbox(row, center, center, 1rem);
+    position: relative;
+    color: var(--text-color-light);
+
+    &__help {
+      min-height: 1.3rem;
+      min-width: 1.3rem;
+      transform: scale(1);
+      transition: all 80ms ease;
+
+      @include respond-to(md) {
+        display: none;
+      }
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+
+    a {
+      padding: var(--space-sm) var(--space-md);
+      color: var(--text-color-light);
+      text-decoration: none;
+    }
+
+    &__profile {
+      anchor-name: --profile;
+      min-height: 3rem;
+      min-width: 3rem;
+      background-color: bisque;
+      border-radius: var(--radius-pill);
+
+      border: none;
+      cursor: pointer;
+    }
+
+    &__menu {
+      position: absolute;
+      position-anchor: --profile;
+      right: anchor(--profile right);
+      top: anchor(--profile bottom);
+      left: auto;
+      background-color: var(--bg-muted);
+      color: var(--text-color-ultralight);
+
+      width: 12rem;
+
+      padding: var(--space-sm) var(--space-md);
+
+      border: none;
+      border-radius: var(--radius-lg) 0 var(--radius-lg) var(--radius-lg);
+
+      min-height: 200px;
+
+      &__links {
+        width: 100%;
+        padding-block: var(--space-md);
+
+        &:hover {
+          background-color: var(--bg-dark);
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: var(--bg-special);
+          color: var(--text-color-ultralight);
+        }
+      }
+
+      &:popover-open {
+        @include flexbox(column, space-evenly, flex-start, 0);
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
-<div class="contacts-layout">
+<div class="contacts-layout" [class.contacts-layout--has-contact]="!!activeContact()">
     <app-contacts-list (contactSelected)="handleContactSelection($event)"></app-contacts-list>
     <app-contacts-detail [contact]="activeContact()" (edit)="openEditContact($event)"
-        (delete)="handleDeleteContact($event)">
+        (delete)="handleDeleteContact($event)" (close)="handleBackToList()">
     </app-contacts-detail>
 </div>
 

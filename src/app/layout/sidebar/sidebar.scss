@@ -10,7 +10,7 @@
   padding-bottom: var(--space-xl);
   z-index: 999;
 
-  @include respond-to(sm) {
+  @include respond-to(md) {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -22,7 +22,7 @@
   &__logo-container {
     margin-bottom: var(--space-4xl);
 
-    @include respond-to(sm) {
+    @include respond-to(md) {
       display: none;
     }
   }
@@ -36,7 +36,7 @@
     width: 100%;
     flex-grow: 1;
 
-    @include respond-to(sm) {
+    @include respond-to(md) {
       @include flexbox(row, space-around, center, 0);
       flex-grow: unset;
     }
@@ -48,7 +48,7 @@
     color: var(--text-color-light);
     text-decoration: none;
 
-    @include respond-to(sm) {
+    @include respond-to(md) {
       @include flexbox(column, center, center, var(--space-xs));
       padding: var(--space-xs) 5px;
 
@@ -76,7 +76,7 @@
     @include flexbox(column, center, center, var(--space-sm));
     width: 100%;
 
-    @include respond-to(sm) {
+    @include respond-to(md) {
       display: none;
     }
   }

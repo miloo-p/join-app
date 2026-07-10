@@ -29,6 +29,19 @@ export class ContactsDetailComponent {
    */
   @Output() public delete = new EventEmitter<UIContact>();
 
+  /** 
+   * Emits when the mobile back button is pressed to close the details.
+   * @type {EventEmitter<void>} 
+   */
+  @Output() public close = new EventEmitter<void>();
+
+  public isMobileMenuOpen = false;
+
+  /** Toggles the visibility of the mobile edit/delete menu. */
+  public toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
   /**
    * Triggers the edit event for the currently viewed contact.
    * Fulfills User Story 4 (editing option).
@@ -49,5 +62,8 @@ export class ContactsDetailComponent {
     if (this.contact) {
       this.delete.emit(this.contact);
     }
+  }
+  public onCloseDetail(): void {
+    this.close.emit();
   }
 }
