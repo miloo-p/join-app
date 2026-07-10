@@ -1,5 +1,5 @@
 import { Component, inject, ElementRef, ViewChild } from '@angular/core';
-import { Supabase } from '../../../../shared/services/supabase';
+import { contactsService } from '../../../../shared/services/contacts-service';
 import { LogoWhite } from '../../../../shared/components/logo-white/logo-white';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import {
@@ -27,7 +27,7 @@ export class ContactAddNewContactDialog {
     telephone: new FormControl('', [Validators.required, Validators.pattern(/^\s*\+49[\d\s]+$/)]),
   });
 
-  private supabaseService = inject(Supabase);
+  private contactsService = inject(contactsService);
 
   @ViewChild('dialog_add_contact') dialog!: ElementRef<HTMLDialogElement>;
 
@@ -68,7 +68,7 @@ export class ContactAddNewContactDialog {
       telephone,
     };
 
-    await this.supabaseService.setContact([newContact]);
+    await this.contactsService.setContact([newContact]);
 
     this.closeDialog();
   }
