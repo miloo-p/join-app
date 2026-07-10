@@ -1,1 +1,71 @@
 @use '../../../../../styles/abstracts/mixins' as *;
+
+.formDetail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+
+    &__inputWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        input {
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-clr-light);
+            height: 40px;
+            width: 100%;
+            padding-inline: var(--space-md);
+        }
+
+        select {
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-clr-light);
+            height: 40px;
+            width: 100%;
+            padding-inline: var(--space-md);
+        }
+
+        &__prioButtons {
+            display: flex;
+            justify-content: space-between;
+
+            &__icon {
+                height: auto;
+                display: block;
+                flex-shrink: 0;
+
+                svg {
+                    min-width: 20px;
+                    max-width: 20px;
+                    min-height: 15px;
+                    max-height: 15px;
+                }
+
+            }
+
+        }
+    }
+}
+
+.urgent {
+    color: var(--clr-feedback-urgent)
+}
+
+.medium {
+    color: var(--clr-feedback-medium)
+}
+
+.low {
+    color: var(--clr-feedback-low)
+}
+
+.requiredInput {
+    color: var(--clr-feedback-error)
+}
+
+app-button {
+    max-width: 31%;
+    min-width: 31%;
+    font-weight: var(--fw-regular);
+}

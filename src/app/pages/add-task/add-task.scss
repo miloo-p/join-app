@@ -1,1 +1,62 @@
 @use '../../../styles/abstracts/mixins' as *;
+
+.addTaskLayout {
+    width: 100%;
+    max-width: var(--container-content-md);
+    height: calc(100% - 96px);
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--space-lg);
+        width: 100%;
+        height: 100%;
+        padding: var(--space-xl);
+        box-sizing: border-box;
+
+        h2 {
+            font-size: 52px;
+        }
+
+        &__formComponents {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__footer {
+            width: 100%;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+
+            &__buttons {
+                display: flex;
+                gap: var(--space-md);
+            }
+        }
+    }
+}
+
+app-add-task-basic-info {
+    width: 45%;
+}
+
+app-add-task-detail-info {
+    width: 45%;
+}
+
+.requiredInput {
+    color: var(--clr-feedback-error);
+    font-size: 1rem;
+    position: relative;
+    top: -0.35em;
+}
+
+.border {
+    height: 100%;
+    width: 1px;
+    background-color: #686868;
+}
