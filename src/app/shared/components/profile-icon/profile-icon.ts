@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-profile-icon',
-  imports: [],
+  standalone: true,
   templateUrl: './profile-icon.html',
-  styleUrl: './profile-icon.scss',
+  styleUrls: ['./profile-icon.scss']
 })
-export class ProfileIcon {}
+export class ProfileIcon {
+
+  @Input() initials = '';
+
+  @Input() avatarColor = '';
+}
