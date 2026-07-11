@@ -20,6 +20,7 @@ export class ButtonComponent {
   disabled = input<boolean>(false);
   loading = input<boolean>(false);
   fontWeight = input<'regular' | 'bold'>('bold');
+  gap = input<'sm' | 'regular'>('regular');
 
   isFullWidth = input<boolean>(false);
 

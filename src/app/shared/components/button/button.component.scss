@@ -136,3 +136,11 @@
 .font-bold {
   font-weight: var(--fw-bold);
 }
+
+.gap-sm {
+  gap: var(--space-xs)
+}
+
+.gap-regular {
+  gap: var(--space-md)
+}
