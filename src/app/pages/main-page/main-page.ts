@@ -23,12 +23,11 @@ export class MainPage {
     // this.dbTasks.setTask([{
     //   title: 'Test Task',
     //   desc: 'This is a test task',
-    //   due_date: '2024-06-30',
+    //   due_date: '2026-08-02 16:30:00',
     //   status: 1,
     //   priority: 1,
     //   collaborators: [3,4] ,
     //   subtasks: [{name: 'Subtask 1', status: 0}, {name: 'Subtask 2', status: 0}]
     // }]);
   }
-  
 }

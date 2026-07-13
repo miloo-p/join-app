@@ -79,7 +79,6 @@ export class tasksService {
   .channel('tasks-channel')
   .on('postgres_changes', { event: '*', schema: 'public', table: 'tasks' }, (payload) => {
     this.handlePayload(payload);
-    console.log('Tasks payload', payload);
   })
   .subscribe();
   }
