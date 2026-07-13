@@ -148,8 +148,39 @@
             color: var(--clr-white);
         }
     }
+}
 
+:host ::ng-deep .btn__urgent:hover .urgent,
+:host ::ng-deep .btn__urgent.urgent__selected .urgent,
+:host ::ng-deep .btn__medium:hover .medium,
+:host ::ng-deep .btn__medium.medium__selected .medium,
+:host ::ng-deep .btn__low:hover .low,
+:host ::ng-deep .btn__low.low__selected .low {
+    color: var(--clr-white);
+}
 
+.urgent__selected {
+    --btn-primary-color: var(--clr-white);
+    --btn-primary-bg: var(--clr-feedback-urgent);
+
+    --btn-primary-hover-bg: var(--clr-feedback-urgent);
+    --btn-primary-hover-border: var(--clr-feedback-urgent);
+}
+
+.medium__selected {
+    --btn-primary-color: var(--clr-white);
+    --btn-primary-bg: var(--clr-feedback-medium);
+
+    --btn-primary-hover-bg: var(--clr-feedback-medium);
+    --btn-primary-hover-border: var(--clr-feedback-medium);
+}
+
+.low__selected {
+    --btn-primary-color: var(--clr-white);
+    --btn-primary-bg: var(--clr-feedback-low);
+
+    --btn-primary-hover-bg: var(--clr-feedback-low);
+    --btn-primary-hover-border: var(--clr-feedback-low);
 }
 
 .requiredInput {
@@ -163,11 +194,11 @@ app-button {
 }
 
 app-contact-selection {
-  position: absolute;
-  top: calc(24px + 0.5rem + 40px - 14px);
-  left: 0;
-  right: 0;
-  z-index: 1000;
+    position: absolute;
+    top: calc(24px + 0.5rem + 40px - 14px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .contact_dropdown {

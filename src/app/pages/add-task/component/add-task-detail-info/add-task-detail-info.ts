@@ -13,8 +13,23 @@ import { ContactSelection } from '../contact-selection/contact-selection';
 export class AddTaskDetailInfo {
 
   isContactDropdownOpen = false;
+  isUrgentSelected = false;
+  isMediumSelected = false;
+  isLowSelected = false;
 
   toggleDropdown(): void {
     this.isContactDropdownOpen = !this.isContactDropdownOpen;
   }
+
+  toggleUrgentBtn(): void {
+    this.isUrgentSelected = !this.isUrgentSelected
+  };
+  
+  toggleMediumBtn(): void {
+    this.isMediumSelected = !this.isMediumSelected
+  };
+
+  toggleLowBtn(): void {
+    this.isLowSelected = !this.isLowSelected
+  };
 }

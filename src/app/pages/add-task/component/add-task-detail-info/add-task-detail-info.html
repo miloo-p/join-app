@@ -5,8 +5,10 @@
             Priority
         </label>
         <div class="formDetail__inputWrapper__prioButtons">
+
             <app-button size="md" text="Urgent" type="button" width="full" buttonType="button" fontWeight="regular"
-                gap="sm" class="btn btn__urgent">
+                gap="sm" class="btn btn__urgent" [class.urgent__selected]="isUrgentSelected"
+                (btnClick)="toggleUrgentBtn()">
                 <svg class="formDetail__inputWrapper__prioButtons__icon urgent" width="20" height="15"
                     viewBox="0 0 20 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -20,7 +22,8 @@
             </app-button>
 
             <app-button text="Medium" type="button" size="md" width="full" buttonType="button" fontWeight="regular"
-                gap="sm" class="btn btn__medium">
+                gap="sm" class="btn btn__medium" [class.medium__selected]="isMediumSelected"
+                (btnClick)="toggleMediumBtn()">
                 <svg class="formDetail__inputWrapper__prioButtons__icon medium" width="20" height="8" viewBox="0 0 20 8"
                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -33,7 +36,8 @@
             </app-button>
 
             <app-button text="Low" type="button" size="md" width="full" buttonType="button" fontWeight="regular"
-                gap="sm" class="btn btn__low">
+                gap="sm" class="btn btn__low" [class.low__selected]="isLowSelected"
+                (btnClick)="toggleLowBtn()">
                 <svg class="formDetail__inputWrapper__prioButtons__icon low" width="20" height="15" viewBox="0 0 20 15"
                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
