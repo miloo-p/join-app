@@ -1,4 +1,4 @@
-import { Component, inject, ElementRef, ViewChild } from '@angular/core';
+import { Component, inject, ElementRef, ViewChild, signal } from '@angular/core';/*signal rein wegen Verknüpfung!*/
 import { contactsService } from '../../../../shared/services/contacts-service';
 import { LogoWhite } from '../../../../shared/components/logo-white/logo-white';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
@@ -28,6 +28,9 @@ export class ContactAddNewContactDialog {
   });
 
   private contactsService = inject(contactsService);
+
+
+showSuccessMessage = signal(false);
 
   @ViewChild('dialog_add_contact') dialog!: ElementRef<HTMLDialogElement>;
 
