@@ -1,0 +1,10 @@
+
+
+<section class="contactList">
+    @for (contact of contactDatabase.contacts(); track contact.id) {
+            <div class="contactList__contact">
+
+                {{ contact.firstname }} {{ contact.lastname }}
+            </div>
+            }
+</section>

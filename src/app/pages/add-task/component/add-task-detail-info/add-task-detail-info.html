@@ -55,12 +55,6 @@
 
         <select id="assignedTo">
             <option value="" disabled selected>Select contacts to asign</option>
-
-            @for (contact of contactDatabase.contacts(); track contact.id) {
-            <option [value]="contact.id">
-                {{ contact.firstname }} {{ contact.lastname }}
-            </option>
-            }
         </select>
 
         <div class="formDetail__inputWrapper__iconOverlay">
@@ -73,6 +67,8 @@
             </div>
         </div>
         
+        <app-contact-selection></app-contact-selection>
+
     </div>
 
     <div class="formDetail__inputWrapper">

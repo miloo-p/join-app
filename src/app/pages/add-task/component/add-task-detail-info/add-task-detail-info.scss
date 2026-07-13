@@ -156,3 +156,11 @@ app-button {
     min-width: 31%;
     font-weight: var(--fw-regular);
 }
+
+app-contact-selection {
+  position: absolute;
+  top: calc(24px + 0.5rem + 40px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}

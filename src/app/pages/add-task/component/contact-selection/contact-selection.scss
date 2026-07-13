@@ -1,0 +1,13 @@
+.contactList {
+    background-color: var(--clr-white);
+    max-height: 240px;
+    overflow: scroll;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-allaroung);
+
+    &__contact {
+        display: flex;
+        align-items: center;
+        height: 40px;
+    }
+}
