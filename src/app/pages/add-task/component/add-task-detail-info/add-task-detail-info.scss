@@ -39,14 +39,6 @@
                 height: auto;
                 display: block;
                 flex-shrink: 0;
-
-                svg {
-                    min-width: 20px;
-                    max-width: 20px;
-                    min-height: 15px;
-                    max-height: 15px;
-                }
-
             }
 
         }
@@ -54,7 +46,7 @@
 }
 
 .urgent {
-    color: var(--clr-feedback-urgent)
+    color: var(--clr-feedback-urgent);
 }
 
 .medium {
@@ -63,6 +55,52 @@
 
 .low {
     color: var(--clr-feedback-low)
+}
+
+.btn {
+    --btn-primary-color: var(--clr-black);
+    --btn-primary-color-hover: var(--clr-white);
+
+    --btn-primary-bg: var(--clr-white);
+    --btn-primary-border: none;
+
+    --btn-font-size: 16px;
+    --btn-height: 40px;
+
+    &__urgent {
+        --btn-primary-hover-bg: var(--clr-feedback-urgent);
+        --btn-primary-hover-border: var(--clr-feedback-urgent);
+
+        --btn-primary-active-bg: var(--clr-feedback-urgent);
+
+        &:hover ::ng-deep .urgent {
+            color: var(--clr-white);
+        }
+    }
+
+    &__medium {
+        --btn-primary-hover-bg: var(--clr-feedback-medium);
+        --btn-primary-hover-border: var(--clr-feedback-medium);
+
+        --btn-primary-active-bg: var(--clr-feedback-medium);
+
+        &:hover ::ng-deep .medium {
+            color: var(--clr-white);
+        }
+    }
+
+    &__low {
+        --btn-primary-hover-bg: var(--clr-feedback-low);
+        --btn-primary-hover-border: var(--clr-feedback-low);
+
+        --btn-primary-active-bg: var(--clr-feedback-low);
+
+        &:hover ::ng-deep .low {
+            color: var(--clr-white);
+        }
+    }
+
+
 }
 
 .requiredInput {
