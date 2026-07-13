@@ -3,7 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ContactsDetailComponent } from './components/contacts-detail/contacts-detail';
 import { ContactList, UIContact } from './components/contacts-list/contacts-list';
 import { EditContactComponent } from './components/edit-contact/edit-contact';
-import { Supabase } from '../../shared/services/supabase';
+import { contactsService} from '../../shared/services/contacts-service';
 
 @Component({
   selector: 'app-contacts',
@@ -13,7 +13,7 @@ import { Supabase } from '../../shared/services/supabase';
   styleUrls: ['./contacts.scss'],
 })
 export class Contacts {
-  private supabaseService = inject(Supabase);
+  private contactsService = inject(contactsService);
 
   /**
    * Central signal holding the currently active contact for the whole page.
@@ -54,7 +54,7 @@ export class Contacts {
   }
 
   /**
-   * Deletes a contact from the database using the Supabase service and clears the active selection.
+   * Deletes a contact from the database using the Contacts service and clears the active selection.
    * Fulfills User Story 4 (The option 'Delete' removes the contact permanently).
    * @param {UIContact} contact - The contact object requested for deletion.
    * @returns {Promise<void>}
@@ -64,7 +64,7 @@ export class Contacts {
       return;
     }
 
-    await this.supabaseService.deleteContact(contact.id);
+    await this.contactsService.deleteContact(contact.id);
 
     this.activeContact.set(null);
     this.isEditContactOpen.set(false);
@@ -81,7 +81,7 @@ export class Contacts {
       return;
     }
 
-    await this.supabaseService.updateContact(updatedContact);
+    await this.contactsService.updateContact(updatedContact);
 
     this.activeContact.set(updatedContact);
     this.closeEditContact();

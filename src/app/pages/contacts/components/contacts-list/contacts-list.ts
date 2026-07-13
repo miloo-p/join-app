@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { Contact } from '../../../../shared/interfaces/contact';
-import { Supabase } from '../../../../shared/services/supabase';
+import { contactsService } from '../../../../shared/services/contacts-service';
 import { ContactAddNewContactDialog } from '../contact-add-new-contact-dialog/contact-add-new-contact-dialog';
 
 export interface UIContact extends Contact {
@@ -33,7 +33,7 @@ interface ContactGroup {
   styleUrls: ['./contacts-list.scss'],
 })
 export class ContactList implements OnInit {
-  public supabaseService = inject(Supabase);
+  public contactsService = inject(contactsService);
   public selectedContact = signal<UIContact | null>(null);
 
   @ViewChild(ContactAddNewContactDialog)
@@ -68,7 +68,7 @@ export class ContactList implements OnInit {
    * Fulfills User Story 1 (alphabetical sorting and section splitting).
    */
   public groupedContacts = computed<ContactGroup[]>(() => {
-    const rawContacts = this.supabaseService.contacts();
+    const rawContacts = this.contactsService.contacts();
     if (!rawContacts || rawContacts.length === 0) return [];
 
     const sorted = [...rawContacts].sort((a, b) => a.firstname.localeCompare(b.firstname));
@@ -80,14 +80,14 @@ export class ContactList implements OnInit {
    * @returns {void}
    */
   ngOnInit(): void {
-    this.supabaseService.getContacts();
-    this.supabaseService.subscribeToContacts();
+    this.contactsService.getContacts();
+    this.contactsService.subscribeToContacts();
   }
 
   /**
    * Selects a contact, transforms its data for the UI, and emits the selection event.
    * Fulfills User Story 2 (viewing contact details).
-   * @param {Contact} contact - The contact object received from Supabase.
+   * @param {Contact} contact - The contact object received from Contacts-Service.
    * @returns {void}
    */
   public selectContact(contact: Contact): void {
@@ -131,7 +131,7 @@ export class ContactList implements OnInit {
   }
 
   /**
-   * Transforms raw Supabase database fields into UI-ready fields like combined name, initials, and colors.
+   * Transforms raw Contacts-Service database fields into UI-ready fields like combined name, initials, and colors.
    * @param {Contact} contact - The raw database contact object.
    * @returns {UIContact} The enriched contact object including UI properties.
    */

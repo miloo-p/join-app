@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Supabase } from '../../shared/services/supabase';
+import { contactsService } from '../../shared/services/contacts-service';
 import { Contacts } from '../contacts/contacts';
 import { Board } from '../board/board';
 
@@ -10,10 +10,10 @@ import { Board } from '../board/board';
   styleUrl: './main-page.scss',
 })
 export class MainPage {
-  dbService = inject(Supabase);
+  dbContacts = inject(contactsService);
 
   ngOnInit() {
-    this.dbService.getContacts();
-    this.dbService.subscribeToContacts();
+    this.dbContacts.getContacts();
+    this.dbContacts.subscribeToContacts();
   }
 }
