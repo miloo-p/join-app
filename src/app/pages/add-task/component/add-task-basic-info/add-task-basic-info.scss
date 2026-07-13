@@ -37,6 +37,11 @@
 .dateInputWrapper {
     position: relative;
     width: 100%;
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     input {
         width: 100%;
@@ -47,12 +52,10 @@
         box-sizing: border-box;
         background-color: white;
         color: transparent;
+        caret-color: transparent;
+        cursor: inherit;
 
-
-        &:invalid {
-            color: transparent;
-        }
-
+        &:invalid,
         &:focus,
         &:valid {
             color: transparent;
@@ -61,8 +64,8 @@
 
     input::-webkit-calendar-picker-indicator {
         opacity: 1;
-        cursor: pointer;
         display: block;
+        cursor: inherit;
     }
 
     &__dateDisplay {
@@ -71,31 +74,30 @@
         right: var(--space-md);
         top: 50%;
         transform: translateY(-50%);
-
+        color: var(--text-color-dark);
         font-size: 1rem;
         pointer-events: none;
         z-index: 1;
 
-    }
-
-}
-
-.datePlaceholder {
-    position: absolute;
-    left: var(--space-md);
-    right: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #757575;
-    font-size: 1rem;
-    pointer-events: none;
-    z-index: 1;
-
-    &__hidden {
-        display: none;
+        &--placeholder {
+            color: #757575;
+        }
     }
 }
 
+#dueDate {
+    color: transparent;
+    caret-color: transparent;
+}
+
+#dueDate::-webkit-datetime-edit,
+#dueDate::-webkit-datetime-edit-fields-wrapper,
+#dueDate::-webkit-datetime-edit-text,
+#dueDate::-webkit-datetime-edit-day-field,
+#dueDate::-webkit-datetime-edit-month-field,
+#dueDate::-webkit-datetime-edit-year-field {
+    color: transparent;
+}
 
 .requiredInput {
     color: var(--clr-feedback-error)

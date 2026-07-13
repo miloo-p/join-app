@@ -17,18 +17,20 @@
         </label>
 
         <div class="dateInputWrapper">
-            <span class="dateInputWrapper__dateDisplay">
+            <span class="dateInputWrapper__dateDisplay" [class.dateInputWrapper__dateDisplay--placeholder]="!dueDate">
                 {{ dueDate ? formatDateForDisplay(dueDate) : 'dd/mm/yyyy' }}
             </span>
 
             <input 
+                #dueDateInput
                 id="dueDate" 
                 type="date" 
                 [min]="today" 
                 max="2027-12-31" 
                 [(ngModel)]="dueDate" 
                 name="dueDate"
-                required />
+                required 
+                (click)="openDatePicker(dueDateInput)" />
         </div>
     </div>
 
