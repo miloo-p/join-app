@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { Supabase } from '../../../../shared/services/supabase';
+
 import { ContactSelection } from '../contact-selection/contact-selection';
 
 @Component({
@@ -10,11 +10,11 @@ import { ContactSelection } from '../contact-selection/contact-selection';
   templateUrl: './add-task-detail-info.html',
   styleUrl: './add-task-detail-info.scss',
 })
-export class AddTaskDetailInfo implements OnInit{
-  contactDatabase = inject(Supabase);
+export class AddTaskDetailInfo {
 
-  async ngOnInit() {
-    await this.contactDatabase.getContacts();
-    await this.contactDatabase.subscribeToContacts();
+  isContactDropdownOpen = false;
+
+  toggleDropdown(): void {
+    this.isContactDropdownOpen = !this.isContactDropdownOpen;
   }
 }

@@ -50,6 +50,7 @@
             padding-right: var(--space-md);
             position: absolute;
             top: calc(0.5rem + 24px);
+            z-index: 1002;
 
             &:hover {
                 cursor: pointer;
@@ -87,6 +88,10 @@
 
         }
     }
+}
+
+#assignedTo {
+    z-index: 1001;
 }
 
 .urgent {
@@ -159,8 +164,16 @@ app-button {
 
 app-contact-selection {
   position: absolute;
-  top: calc(24px + 0.5rem + 40px);
+  top: calc(24px + 0.5rem + 40px - 14px);
   left: 0;
   right: 0;
   z-index: 1000;
+}
+
+.contact_dropdown {
+    display: none;
+
+    &.active {
+        display: block;
+    }
 }

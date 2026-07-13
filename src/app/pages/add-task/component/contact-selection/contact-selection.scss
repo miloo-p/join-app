@@ -3,11 +3,29 @@
     max-height: 240px;
     overflow: scroll;
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-allaroung);
+    box-shadow: var(--shadow-allaround);
+    padding-top: 14px;
 
     &__contact {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         height: 40px;
+        padding-inline: var(--space-sm);
+        border-radius: var(--radius-md);
+
+        &:hover {
+            background-color: var(--clr-tinted-grey);
+            cursor: pointer;
+        }
+
+        &--selected {
+            background-color: var(--clr-blue-dark);
+            color: var(--text-color-ultralight);
+
+            &:hover {
+                background-color: var(--clr-blue-muted);
+            }
+        }
     }
 }

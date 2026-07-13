@@ -57,7 +57,7 @@
             <option value="" disabled selected>Select contacts to asign</option>
         </select>
 
-        <div class="formDetail__inputWrapper__iconOverlay">
+        <div class="formDetail__inputWrapper__iconOverlay" (click)="toggleDropdown()">
             <div class="formDetail__inputWrapper__iconOverlay__icon">
                 <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -66,8 +66,10 @@
                 </svg>
             </div>
         </div>
-        
+
+        @if (isContactDropdownOpen) {
         <app-contact-selection></app-contact-selection>
+        }
 
     </div>
 
