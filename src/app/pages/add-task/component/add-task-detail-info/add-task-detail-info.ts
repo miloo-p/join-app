@@ -18,6 +18,9 @@ export class AddTaskDetailInfo {
   isMediumSelected = true;
   isLowSelected = false;
   categorySelected = '';
+  currentSubtaskId: number = 1; //reseten nach create Task
+  currentSubtastks: any[] = [];
+  editingSubtaskId: number | null = null;
 
   toggleDropdown(): void {
     this.isContactDropdownOpen = !this.isContactDropdownOpen;
@@ -50,7 +53,7 @@ export class AddTaskDetailInfo {
     };
     this.mediumBtnStandard();
   };
-  
+
   toggleMediumBtn(): void {
     this.isMediumSelected = !this.isMediumSelected;
     if (this.isMediumSelected === true) {
@@ -73,5 +76,49 @@ export class AddTaskDetailInfo {
     if (this.isUrgentSelected === false && this.isMediumSelected === false && this.isLowSelected === false) {
       this.isMediumSelected = true;
     }
+  }
+
+  addSubtask(inputElement: HTMLInputElement) {
+    const value = inputElement.value;
+    const subtask = {
+      id: this.currentSubtaskId,
+      name: value
+    };
+    this.currentSubtastks.push(subtask);
+    this.currentSubtaskId++;
+    inputElement.value = '';
+  }
+
+  deleteSelectedSubtask(id: number) {
+    const subtaskIndex = this.currentSubtastks.findIndex(subtask => subtask.id === id);
+
+    if (subtaskIndex !== -1) {
+      this.currentSubtastks.splice(subtaskIndex, 1)
+    }
+  }
+
+  editSelectedSubtask(id: number): void {
+    this.editingSubtaskId = id;
+  }
+
+  isEditingSubtask(id: number): boolean {
+    return this.editingSubtaskId === id;
+  }
+
+  saveSelectedSubtask(id: number, newValue: string): void {
+    const trimmedName = newValue.trim();
+    if (!trimmedName) {
+      return;
+    }
+    const subtask = this.currentSubtastks.find(subtask => subtask.id === id);
+    if (!subtask) {
+      return;
+    }
+    subtask.name = trimmedName;
+    this.editingSubtaskId = null;
+  }
+
+  createTask() {
+    // currentSubtaskId resetten
   }
 }
