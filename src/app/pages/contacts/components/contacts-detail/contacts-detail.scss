@@ -9,7 +9,7 @@
   padding: var(--space-2xl) var(--space-2xl);
   box-sizing: border-box;
 
-  @media (max-width: 1150px) {
+  @include respond-to(xl) {
     padding: var(--space-xl);
     max-width: 100%;
   }
@@ -26,7 +26,7 @@
     flex-shrink: 0;
     position: relative;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       gap: 20px;
     }
 
@@ -67,13 +67,7 @@
   }
 
   &__title {
-    font-size: 60px;
-    font-weight: var(--fw-bold);
-    color: var(--text-color-ultradark);
-    line-height: var(--lh-heading);
     margin: 0;
-
-
 
     @include respond-to(lg) {
       font-family: 'Inter', var(--ff-body);
@@ -110,14 +104,10 @@
     color: var(--text-color-dark);
     white-space: nowrap;
 
-    @media (max-width: 1150px) {
-      font-size: clamp(18px, 2vw, 22px);
-      white-space: normal; 
-    }
-
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       font-size: 20px;
       order: 1;
+      white-space: normal;
     }
 
     @include respond-to(lg) {
@@ -141,7 +131,7 @@
     color: var(--text-color-dark);
     display: none;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       display: flex !important;
       justify-content: center;
       align-items: center;
@@ -155,7 +145,7 @@
     margin-top: var(--space-sm);
     animation: slideInRight 100ms ease-in-out forwards;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       margin-top: var(--space-md);
       gap: var(--space-md);
     }
@@ -172,7 +162,7 @@
     min-height: 90px;
     box-sizing: border-box;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       @include flexbox(column, flex-start, flex-start, 20px);
       min-height: auto;
       width: 100%;
@@ -198,7 +188,7 @@
     flex-shrink: 0;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       width: 80px;
       height: 80px;
       font-size: 28px;
@@ -211,7 +201,7 @@
     min-width: 0;
     box-sizing: border-box;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       gap: 8px;
     }
 
@@ -235,7 +225,7 @@
     word-break: break-word;   
     overflow-wrap: anywhere; 
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       font-size: 30px;
     }
 
@@ -254,7 +244,7 @@
     box-sizing: border-box;
     margin-top: 4px;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       display: none;
     }
   }
@@ -295,7 +285,7 @@
     z-index: 999;
     display: none;
 
-    @media (max-width: 1150px) {
+    @include respond-to(xl) {
       display: flex !important;
       @include flexbox(row, center, center, 0);
     }
@@ -386,7 +376,7 @@
   }
 }
 
-@media (min-width: 1151px) {
+@media (min-width: 1201px) {
   @keyframes slideInRight {
     from {
       transform: translateX(100%);
