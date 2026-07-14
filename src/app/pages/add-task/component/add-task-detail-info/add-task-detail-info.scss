@@ -10,6 +10,15 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        z-index: 1;
+
+        &--open {
+            z-index: 50;
+        }
+
+        &--category {
+            z-index: 1;
+        }
 
         label {
             height: 24px;
@@ -23,13 +32,27 @@
             padding-inline: var(--space-md);
         }
 
+        &__selectWrapper {
+            position: relative;
+            width: 100%;
+
+            &__dropdown {
+                position: absolute;
+                top: -32px;
+                left: 0;
+                right: 0;
+                z-index: 10;
+            }
+        }
+
         select {
+            position: relative;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-clr-light);
             height: 40px;
             width: 100%;
             padding-inline: var(--space-md);
-            position: relative;
+            z-index: 20;
 
             appearance: none;
             -webkit-appearance: none;
@@ -49,8 +72,8 @@
             align-items: center;
             padding-right: var(--space-md);
             position: absolute;
-            top: calc(0.5rem + 24px);
-            z-index: 1002;
+            top: 0;
+            z-index: 21;
 
             &:hover {
                 cursor: pointer;
@@ -74,6 +97,8 @@
                 }
             }
 
+            
+
         }
 
         &__prioButtons {
@@ -87,11 +112,37 @@
             }
 
         }
+
+     
     }
 }
 
-#assignedTo {
-    z-index: 1001;
+.categoryList {
+    background-color: var(--clr-white);
+    max-height: 240px;
+    overflow: scroll;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-allaround);
+    padding-top: 14px;
+    position: absolute;
+    top: calc(100% - 14px);
+    left: 0;
+    right: 0;
+
+    &__category {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding-inline: var(--space-sm);
+        border-radius: var(--radius-md);
+
+        &:hover {
+            background-color: var(--clr-tinted-grey);
+            cursor: pointer;
+        }
+    }
 }
 
 .urgent {
@@ -191,14 +242,6 @@ app-button {
     max-width: 31%;
     min-width: 31%;
     font-weight: var(--fw-regular);
-}
-
-app-contact-selection {
-    position: absolute;
-    top: calc(24px + 0.5rem + 40px - 14px);
-    left: 0;
-    right: 0;
-    z-index: 1000;
 }
 
 .contact_dropdown {
