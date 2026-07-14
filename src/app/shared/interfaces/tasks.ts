@@ -6,5 +6,5 @@ export interface Task {
       status: number;
       priority: number;
       subtasks?: {name: string, status: number}[];
-      collaborators:number[];
+      collaborators?:number[];
 }
