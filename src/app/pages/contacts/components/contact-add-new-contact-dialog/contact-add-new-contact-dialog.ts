@@ -1,14 +1,14 @@
-import { Component, inject, ElementRef, ViewChild } from '@angular/core';
-import { contactsService } from '../../../../shared/services/contacts-service';
-import { LogoWhite } from '../../../../shared/components/logo-white/logo-white';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { Component, ElementRef, EventEmitter, inject, Output, ViewChild } from '@angular/core';
 import {
-  FormsModule,
-  ReactiveFormsModule,
-  FormControl,
-  FormGroup,
-  Validators,
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators,
 } from '@angular/forms';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { LogoWhite } from '../../../../shared/components/logo-white/logo-white';
+import { contactsService } from '../../../../shared/services/contacts-service';
 
 @Component({
   selector: 'app-contact-add-new-contact-dialog',
@@ -28,6 +28,8 @@ export class ContactAddNewContactDialog {
   });
 
   private contactsService = inject(contactsService);
+
+  @Output() contactCreated = new EventEmitter<any>();
 
   @ViewChild('dialog_add_contact') dialog!: ElementRef<HTMLDialogElement>;
 
@@ -68,8 +70,11 @@ export class ContactAddNewContactDialog {
       telephone,
     };
 
-    await this.contactsService.setContact([newContact]);
+    const savedData = await this.contactsService.setContact([newContact]);
 
+    if (savedData && savedData.length > 0) {
+      this.contactCreated.emit(savedData[0]);
+    }
     this.closeDialog();
   }
 
