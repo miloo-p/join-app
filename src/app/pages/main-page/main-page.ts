@@ -28,6 +28,7 @@ export class MainPage {
     //   priority: 1,
     //   collaborators: [3,4] ,
     //   subtasks: [{name: 'Subtask 1', status: 0}, {name: 'Subtask 2', status: 0}]
+    //   category: 1;
     // }]);
   }
 }
