@@ -24,7 +24,7 @@
     </div>
 
     @if (contact) {
-    <div class="contacts-main__details-view" [class.slide-in-right]="contact && ($any(contact).isFirstClick)">
+    <div class="contacts-main__details-view">
         <div class="contacts-main__profile-header">
             <div class="contacts-main__large-avatar" [style.background-color]="contact.avatarColor">
                 {{ contact.initials }}
