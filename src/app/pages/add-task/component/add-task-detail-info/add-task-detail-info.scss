@@ -97,7 +97,7 @@
                 }
             }
 
-            
+
 
         }
 
@@ -113,7 +113,41 @@
 
         }
 
-     
+        &__subtaskInput {
+            position: relative;
+        }
+
+        &__submitSubtaskOverlay {
+            position: absolute;
+            top: calc(24px + 0.5rem);
+            right: var(--space-md);
+            width: 10%;
+            height: 40px;
+
+            &__submitIcons {
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                &__border {
+                    height: 45%;
+                    width: 1px;
+                    background-color: lightgray;
+                }
+
+                &__icon {
+                    border-radius: var(--radius-pill);
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: lightgray;
+                    }
+
+                }
+            }
+        }
+
     }
 }
 
@@ -167,71 +201,80 @@
     --btn-font-size: 16px;
     --btn-height: 40px;
 
+    --btn-primary-shadow: var(--shadow-allaround);
+
     &__urgent {
-        --btn-primary-hover-bg: var(--clr-feedback-urgent);
-        --btn-primary-hover-border: var(--clr-feedback-urgent);
+        --btn-primary-hover-bg: var(--btn-primary-bg);
+        --btn-primary-hover-border: var(--btn-primary-border);
+        --btn-primary-color-hover: var(--btn-primary-color);
 
+        --btn-primary-active-color: var(--clr-white);
         --btn-primary-active-bg: var(--clr-feedback-urgent);
-
-        &:hover ::ng-deep .urgent {
-            color: var(--clr-white);
-        }
+        --btn-primary-active-border: var(--clr-feedback-urgent);
     }
 
     &__medium {
-        --btn-primary-hover-bg: var(--clr-feedback-medium);
-        --btn-primary-hover-border: var(--clr-feedback-medium);
+        --btn-primary-hover-bg: var(--btn-primary-bg);
+        --btn-primary-hover-border: var(--btn-primary-border);
+        --btn-primary-color-hover: var(--btn-primary-color);
 
+        --btn-primary-active-color: var(--clr-white);
         --btn-primary-active-bg: var(--clr-feedback-medium);
-
-        &:hover ::ng-deep .medium {
-            color: var(--clr-white);
-        }
+        --btn-primary-active-border: var(--clr-feedback-medium);
     }
 
     &__low {
-        --btn-primary-hover-bg: var(--clr-feedback-low);
-        --btn-primary-hover-border: var(--clr-feedback-low);
+        --btn-primary-hover-bg: var(--btn-primary-bg);
+        --btn-primary-hover-border: var(--btn-primary-border);
+        --btn-primary-color-hover: var(--btn-primary-color);
 
+        --btn-primary-active-color: var(--clr-white);
         --btn-primary-active-bg: var(--clr-feedback-low);
-
-        &:hover ::ng-deep .low {
-            color: var(--clr-white);
-        }
+        --btn-primary-active-border: var(--clr-feedback-low);
     }
 }
 
-:host ::ng-deep .btn__urgent:hover .urgent,
+
 :host ::ng-deep .btn__urgent.urgent__selected .urgent,
-:host ::ng-deep .btn__medium:hover .medium,
 :host ::ng-deep .btn__medium.medium__selected .medium,
-:host ::ng-deep .btn__low:hover .low,
 :host ::ng-deep .btn__low.low__selected .low {
+    color: var(--clr-white);
+}
+
+:host ::ng-deep .btn__urgent:active .urgent,
+:host ::ng-deep .btn__medium:active .medium,
+:host ::ng-deep .btn__low:active .low {
     color: var(--clr-white);
 }
 
 .urgent__selected {
     --btn-primary-color: var(--clr-white);
-    --btn-primary-bg: var(--clr-feedback-urgent);
+    --btn-primary-active-color: var(--clr-white);
+    --btn-primary-focus-color: var(--clr-white);
 
-    --btn-primary-hover-bg: var(--clr-feedback-urgent);
-    --btn-primary-hover-border: var(--clr-feedback-urgent);
+    --btn-primary-bg: var(--clr-feedback-urgent);
+    --btn-primary-active-bg: var(--clr-feedback-urgent);
+    --btn-primary-focus-bg: var(--clr-feedback-urgent);
 }
 
 .medium__selected {
     --btn-primary-color: var(--clr-white);
-    --btn-primary-bg: var(--clr-feedback-medium);
+    --btn-primary-active-color: var(--clr-white);
+    --btn-primary-focus-color: var(--clr-white);
 
-    --btn-primary-hover-bg: var(--clr-feedback-medium);
-    --btn-primary-hover-border: var(--clr-feedback-medium);
+    --btn-primary-bg: var(--clr-feedback-medium);
+    --btn-primary-active-bg: var(--clr-feedback-medium);
+    --btn-primary-focus-bg: var(--clr-feedback-medium);
 }
 
 .low__selected {
     --btn-primary-color: var(--clr-white);
-    --btn-primary-bg: var(--clr-feedback-low);
+    --btn-primary-active-color: var(--clr-white);
+    --btn-primary-focus-color: var(--clr-white);
 
-    --btn-primary-hover-bg: var(--clr-feedback-low);
-    --btn-primary-hover-border: var(--clr-feedback-low);
+    --btn-primary-bg: var(--clr-feedback-low);
+    --btn-primary-active-bg: var(--clr-feedback-low);
+    --btn-primary-focus-bg: var(--clr-feedback-low);
 }
 
 .requiredInput {
@@ -242,6 +285,8 @@ app-button {
     max-width: 31%;
     min-width: 31%;
     font-weight: var(--fw-regular);
+
+
 }
 
 .contact_dropdown {
