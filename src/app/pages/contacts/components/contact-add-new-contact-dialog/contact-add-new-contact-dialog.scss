@@ -208,8 +208,8 @@
   bottom: 2.2rem;
   z-index: 1000;
 
-  width: 326px;
-  height: 74px;
+  max-width: 326px;
+  max-height: 74px;
 
   display: flex;
   justify-content: center;
