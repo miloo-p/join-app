@@ -199,9 +199,9 @@
   }
 }
 
-/* Success Message:
+  /* Success Message:
    kommt von rechts, bleibt kurz sichtbar
-   und fliegt wieder nach rechts raus 800ms gesamt! */
+   und fliegt wieder nach rechts raus (800 ms gesamt) */
 .success-message {
   position: fixed;
   right: 31.5rem;
@@ -224,9 +224,34 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-allaround);
 
+  /* Desktop-Animation:
+     von rechts rein und wieder nach rechts raus */
   animation: success-message-animation 800ms ease-in-out forwards;
+
+  /* Responsive:
+    Animation von rechts nach links wechselt zu von unten nach oben bei md=768px
+     right deaktivieren
+     left: 50% = Success Message horizontal mittig ausrichten (X-Achse)
+     bottom: 12rem = Abstand zum unteren Bildschirmrand (ggf. noch testen)
+     width: calc(100% - 2rem) = fast volle Breite,
+     links und rechts bleibt jeweils ca. 1rem Abstand
+     Mobile-Animation: von unten rein und wieder nach unten raus
+     800ms auch bei Responsive! */
+  @include respond-to(md) {
+    right: auto;
+    left: 50%;
+    bottom: 12rem;
+
+    width: calc(100% - 2rem);
+
+    animation: success-message-animation-mobile 800ms ease-in-out forwards;
+  }
 }
 
+/* Desktop:
+   von rechts einblenden,
+   kurz stehen bleiben,
+   wieder nach rechts ausblenden */
 @keyframes success-message-animation {
   0% {
     transform: translateX(calc(100% + 2rem));
@@ -247,23 +272,39 @@
     transform: translateX(calc(100% + 2rem));
     opacity: 0;
   }
+}
 
-
-  /*Responsive für den button kommt von unten nach oben kleinste Größe von responsvie aus Variablen
-  left:50%= mittig botton 12rem? muss ich test in der höhe...*/
-    @include respond-to(xsm) {
-    right: auto;
-    left: 50%;
-    bottom: 12rem;
-
-    width: calc(100% - 2rem);
-
-    
-   
+/* Responsive:
+   von unten einblenden,
+   kurz stehen bleiben,
+   wieder nach unten ausblenden */
+@keyframes success-message-animation-mobile {
+  0% {
+    /* -50% = horizontal mittig halten
+       calc(100% + 2rem) = unterhalb der Endposition starten und dann danach reinfliegen! */
+    transform: translate(-50%, calc(100% + 2rem));
+    opacity: 0;
   }
 
-  
+  20% {
+    /* normale Position erreicht */
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  80% {
+    /* kurz sichtbar bleiben */
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  100% {
+    /* wieder nach unten verschwinden */
+    transform: translate(-50%, calc(100% + 2rem));
+    opacity: 0;
+  }
 }
+
 
 
 
