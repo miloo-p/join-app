@@ -3,27 +3,25 @@
 
 .contacts-layout {
     width: 100%;
-    max-width: var(--container-content-md);
     @include flexbox(row, flex-start, stretch, 0); 
-    min-height: calc(100vh - 96px); 
     box-sizing: border-box;
     background: var(--bg-main, #F6F7F9); 
 
-    @include respond-to(lg) {
+    @media (max-width: 1150px) {
         gap: 0; 
     }
 }
 
 app-contacts-list {
     flex-shrink: 0;
-    height: calc(100vh - 96px); 
+    height: 100%; 
     position: sticky; 
     top: 96px; 
     display: flex;
     flex-direction: column; 
     background-color: var(--bg-main, #F6F7F9); 
 
-    @include respond-to(lg) {
+    @media (max-width: 1150px) {
         width: 100%;
         flex-grow: 1;
         flex-shrink: 1;
@@ -40,7 +38,7 @@ app-contacts-detail {
     min-width: 0;
     background-color: var(--bg-main, #F6F7F9); 
 
-    @include respond-to(lg) {
+    @media (max-width: 1150px) {
         width: 100%;
         display: none; 
 
