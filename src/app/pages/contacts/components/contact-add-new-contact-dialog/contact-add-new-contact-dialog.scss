@@ -247,7 +247,25 @@
     transform: translateX(calc(100% + 2rem));
     opacity: 0;
   }
+
+
+  /*Responsive für den button kommt von unten nach oben kleinste Größe von responsvie aus Variablen
+  left:50%= mittig botton 12rem? muss ich test in der höhe...*/
+    @include respond-to(xsm) {
+    right: auto;
+    left: 50%;
+    bottom: 12rem;
+
+    width: calc(100% - 2rem);
+
+    
+   
+  }
+
+  
 }
+
+
 
 
   
