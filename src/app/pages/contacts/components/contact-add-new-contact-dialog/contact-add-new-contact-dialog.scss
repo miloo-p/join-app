@@ -208,8 +208,8 @@
   bottom: 2.2rem;
   z-index: 1000;
 
-  max-width: 326px;
-  max-height: 74px;
+  width: 326px;
+  height: 74px;
 
   display: flex;
   justify-content: center;
@@ -227,6 +227,15 @@
   /* Desktop-Animation:
      von rechts rein und wieder nach rechts raus */
   animation: success-message-animation 800ms ease-in-out forwards;
+
+
+    @include respond-to(xl) {
+    right: 29rem;
+  }
+
+    @include respond-to(lg) {
+    right: 16.7rem; // kleinerer Wert = weiter nach rechts
+  }
 
   /* Responsive:
     Animation von rechts nach links wechselt zu von unten nach oben bei md=768px
