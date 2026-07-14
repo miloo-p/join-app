@@ -74,6 +74,14 @@ showSuccessMessage = signal(false);
     await this.contactsService.setContact([newContact]);
 
     this.closeDialog();
+
+    /*Aufruf zeige mir das Fenster sucess Message*/
+
+    this.showSuccessMessage.set(true);
+
+setTimeout(() => {
+  this.showSuccessMessage.set(false);
+}, 800);
   }
 
   closeDialogBubbleProtection(event: Event) {

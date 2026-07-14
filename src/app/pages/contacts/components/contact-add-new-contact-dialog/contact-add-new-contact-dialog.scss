@@ -195,5 +195,59 @@
     svg {
       min-width: 24px;
     }
+  
   }
 }
+
+/* Success Message:
+   kommt von rechts, bleibt kurz sichtbar
+   und fliegt wieder nach rechts raus 800ms gesamt! */
+.success-message {
+  position: fixed;
+  right: 31.5rem;
+  bottom: 2.2rem;
+  z-index: 1000;
+
+  width: 326px;
+  height: 74px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--bg-muted);
+  color: var(--text-color-ultralight);
+
+  font-size: var(--fs-body-normal);
+  font-weight: var(--fw-regular);
+
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-allaround);
+
+  animation: success-message-animation 800ms ease-in-out forwards;
+}
+
+@keyframes success-message-animation {
+  0% {
+    transform: translateX(calc(100% + 2rem));
+    opacity: 0;
+  }
+
+  20% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(calc(100% + 2rem));
+    opacity: 0;
+  }
+}
+
+
+  
