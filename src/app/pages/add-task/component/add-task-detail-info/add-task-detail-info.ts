@@ -21,6 +21,16 @@ export class AddTaskDetailInfo {
   currentSubtaskId: number = 1; //reseten nach create Task
   currentSubtastks: any[] = [];
   editingSubtaskId: number | null = null;
+  isTextInSubtaskInput = false;
+
+  checkTextInSubtaskInput(inputElement: HTMLInputElement):void {
+    const subtaskInputValue = inputElement.value;
+    if(subtaskInputValue === '') {
+      this.isTextInSubtaskInput = false;
+    } else {
+      this.isTextInSubtaskInput = true; 
+    }
+  };
 
   toggleDropdown(): void {
     this.isContactDropdownOpen = !this.isContactDropdownOpen;
@@ -87,6 +97,7 @@ export class AddTaskDetailInfo {
     this.currentSubtastks.push(subtask);
     this.currentSubtaskId++;
     inputElement.value = '';
+    this.isTextInSubtaskInput = false
   }
 
   deleteSelectedSubtask(id: number) {

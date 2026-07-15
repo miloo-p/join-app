@@ -125,11 +125,11 @@
             Subtask
         </label>
         <div class="formDetail__inputWrapper__subtaskInput">
-            <input type="text" placeholder="Add new subtask" #subtaskValue>
+            <input type="text" placeholder="Add new subtask" #subtaskValue (input)="checkTextInSubtaskInput(subtaskValue)">
         </div>
 
 
-        <div class="formDetail__inputWrapper__submitSubtaskOverlay">
+        <div class="formDetail__inputWrapper__submitSubtaskOverlay" [class.subtaskBtnDisabled]="!isTextInSubtaskInput">
             <div class="formDetail__inputWrapper__submitSubtaskOverlay__submitIcons">
 
                 <div class="formDetail__inputWrapper__submitSubtaskOverlay__submitIcons__icon"

@@ -175,11 +175,16 @@
                     background-color: #E6E6E6;
                 }
 
+                &:hover &__btns {
+                    opacity: 1;
+                }
+
                 &__btns {
                     width: 15%;
                     min-width: 40px;
                     display: flex;
                     justify-content: space-between;
+                    opacity: 0;
 
                     &__btn {
                         width: 20px;
@@ -374,4 +379,8 @@ app-button {
     &.active {
         display: block;
     }
+}
+
+.subtaskBtnDisabled {
+    display: none;
 }
