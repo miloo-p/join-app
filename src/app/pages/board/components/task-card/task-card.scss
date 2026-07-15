@@ -5,7 +5,7 @@
   max-width: 16rem;
   width: 100%;
 
-  padding: var(--space-lg) var(--space-lg);
+  padding: var(--space-md) var(--space-md);
   border-radius: var(--radius-lg);
 
   background-color: var(--bg-ultralight);
@@ -13,11 +13,18 @@
   box-shadow: var(--shadow-allaround);
 
   &__category {
-    background-color: var(--bg-category-userstory);
     color: var(--text-color-ultralight);
 
     padding: var(--space-xs) var(--space-lg);
     border-radius: var(--radius-md);
+
+    &--story {
+      background-color: var(--bg-category-userstory);
+    }
+
+    &--technical {
+      background-color: var(--bg-category-technical);
+    }
   }
 
   &__progression {

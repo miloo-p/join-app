@@ -43,7 +43,7 @@
   }
 
   &__content {
-    @include flexbox(row, space-between, center, 2rem);
+    @include flexbox(row, space-between, stretch, 2rem);
   }
 
   &__column {
@@ -53,10 +53,10 @@
   }
 
   &__task-list {
-    @include flexbox(row, center, center, 2rem);
+    @include flexbox(column, flex-start, stretch, 1rem);
     list-style-type: none;
-
     padding: 0;
+    min-height: 150px;
   }
 
   &__task {

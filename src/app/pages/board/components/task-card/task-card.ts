@@ -1,5 +1,6 @@
 import { Component, Input, inject, OnInit } from '@angular/core';
-import {tasksService} from "../../../../shared/services/tasks-service";
+import { tasksService } from '../../../../shared/services/tasks-service';
+import { Task } from '../../../../shared/interfaces/tasks';
 
 @Component({
   selector: 'app-task-card',
@@ -9,13 +10,10 @@ import {tasksService} from "../../../../shared/services/tasks-service";
   styleUrl: './task-card.scss',
 })
 export class TaskCard {
-  @Input() task: any;
+  @Input() task?: Task;
 
   dbTasks = inject(tasksService);
 
-  constructor() {
-  }
-  
   async ngOnInit() {
     await this.dbTasks.getTasks();
     const tasks = this.dbTasks.tasks();
