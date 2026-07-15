@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './task-overlay.html',
   styleUrl: './task-overlay.scss',
 })
-export class TaskOverlay {}
+export class TaskOverlay {
+  currentTask: any;
+
+  openDialog(task: any) {
+    this.currentTask = task;
+  }
+}

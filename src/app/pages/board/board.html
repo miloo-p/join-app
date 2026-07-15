@@ -1,3 +1,63 @@
-<p>board works!</p>
-<app-task-card></app-task-card>
-<app-task-overlay></app-task-overlay>
+<section class="board">
+  <header class="board__header">
+    <h2 class="board__title">Board</h2>
+    <div class="board__interaction">
+      <input placeholder="Find Task" class="board__search" />
+      <app-button text="Add task"></app-button>
+    </div>
+  </header>
+
+  <div class="board__content">
+    @for (column of boardColumns; track column.id) {
+      <div class="board__column">
+        <div class="board__column-header">
+          <h4 class="board__column-title">{{ column.title }}</h4>
+
+          @if (column.hasAddBtn) {
+            <button class="board__add-btn" (click)="openAddTaskDialog(column.id)">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="1"
+                  y="1"
+                  width="22"
+                  height="22"
+                  rx="7"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path
+                  d="M16 12.0754L8 12.0754"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          }
+        </div>
+
+        <ul class="board__task-list">
+          @for (task of column.tasks; track task.id) {
+            <li class="board__task" (click)="openTaskDetails(task)">
+              <app-task-card [task]="task"></app-task-card>
+            </li>
+          } @empty {
+            <li class="board__empty-state">
+              {{ column.emptyText }}
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+
+<app-task-dialog #addTaskDialog></app-task-dialog>
+<app-task-overlay #taskOverlay></app-task-overlay>
