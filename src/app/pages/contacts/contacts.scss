@@ -3,6 +3,7 @@
 
 .contacts-layout {
     width: 100%;
+    min-width: 0;
     height: calc(100vh - 96px);
     @include flexbox(row, flex-start, stretch, 0); 
     box-sizing: border-box;
