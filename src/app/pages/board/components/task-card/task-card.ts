@@ -7,9 +7,10 @@ import { Task } from '../../../../shared/interfaces/tasks';
   standalone: true,
   imports: [],
   templateUrl: './task-card.html',
-  styleUrl: './task-card.scss',
+  styleUrls: ['./task-card.scss'],
 })
-export class TaskCard {
+
+export class TaskCard implements OnInit {
   @Input() task?: Task;
 
   dbTasks = inject(tasksService);
@@ -17,6 +18,18 @@ export class TaskCard {
   async ngOnInit() {
     await this.dbTasks.getTasks();
     const tasks = this.dbTasks.tasks();
-    console.log(tasks[0]?.category);
+
+    await this.dbTasks.setTask([
+      {
+      title: "Zimmer aufräumen",
+      desc: "Schön ordentlich",
+      due_date: "2023-12-31",
+      status: 1,
+      priority: 1,
+      subtasks:[{name: "Bett machen", status: 0}],
+      collaborators:[1,2],
+      category: 1,
+      }
+    ])
   }
 }
