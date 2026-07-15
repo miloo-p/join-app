@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { contactsService } from '../../shared/services/contacts-service';
 import { tasksService } from '../../shared/services/tasks-service';
 import { Contacts } from '../contacts/contacts';
+import { Board } from '../board/board';
 
 @Component({
   selector: 'app-main-page',
-  imports: [Contacts,],
+  imports: [Contacts, Board],
   templateUrl: './main-page.html',
   styleUrl: './main-page.scss',
 })
