@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'; // Input importieren!
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task-card',

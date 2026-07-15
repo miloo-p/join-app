@@ -1,0 +1,56 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.task-card {
+  @include flexbox(column, center, flex-start, 1rem);
+  max-width: 16rem;
+  width: 100%;
+
+  padding: var(--space-lg) var(--space-lg);
+  border-radius: var(--radius-lg);
+
+  background-color: var(--bg-ultralight);
+
+  box-shadow: var(--shadow-allaround);
+
+  &__category {
+    background-color: var(--bg-category-userstory);
+    color: var(--text-color-ultralight);
+
+    padding: var(--space-xs) var(--space-lg);
+    border-radius: var(--radius-md);
+  }
+
+  &__progression {
+    @include flexbox(row, space-between, center, 0);
+  }
+
+  &__progressionbar {
+    width: 50%;
+  }
+
+  &__progressiontext {
+    width: 50%;
+  }
+
+  &__footer {
+    @include flexbox(row, space-between, center, 0);
+
+    width: 100%;
+  }
+
+  &__contributors {
+    @include flexbox(row, center, center, 0);
+
+    background-color: aqua;
+
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--bg-ultralight);
+    color: var(--text-color-ultralight);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-h5);
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+}

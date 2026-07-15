@@ -50,7 +50,8 @@
             </li>
           } @empty {
             <li class="board__empty-state">
-              {{ column.emptyText }}
+              <span class="board__empty-long hidden-xl">{{ column.emptyText }}</span>
+              <span class="board__empty-short">No tasks</span>
             </li>
           }
         </ul>
@@ -61,3 +62,4 @@
 
 <app-task-dialog #addTaskDialog></app-task-dialog>
 <app-task-overlay #taskOverlay></app-task-overlay>
+<app-task-card></app-task-card>

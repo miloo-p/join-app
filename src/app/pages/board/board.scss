@@ -9,6 +9,12 @@
     padding-top: var(--space-2xl);
   }
 
+  &__column-title {
+    @include respond-to(xl) {
+      font-size: var(--fs-body-medium);
+    }
+  }
+
   &__interaction {
     @include flexbox(row, space-between, center, 2rem);
   }
@@ -41,7 +47,9 @@
   }
 
   &__column {
-    min-width: 16rem;
+    max-width: 16rem;
+    width: 100%;
+    min-width: 10rem;
   }
 
   &__task-list {
@@ -63,5 +71,13 @@
     width: 100%;
     border: 2px dashed var(--border-clr-dark);
     border-radius: var(--radius-md);
+  }
+
+  &__empty-short {
+    display: none;
+
+    @include respond-to(xl) {
+      display: inline;
+    }
   }
 }
