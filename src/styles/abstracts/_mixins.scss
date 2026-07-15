@@ -16,7 +16,6 @@
 
 @mixin global_content_wrapper() {
   max-width: var(--container-content-md);
-  margin: 0 auto;
   width: 100%;
   padding-inline: clamp(var(--space-lg), 5vw, var(--space-2xl));
   box-sizing: border-box;
