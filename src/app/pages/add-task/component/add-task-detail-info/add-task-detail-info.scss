@@ -297,6 +297,7 @@
         --btn-primary-active-color: var(--clr-white);
         --btn-primary-active-bg: var(--clr-feedback-urgent);
         --btn-primary-active-border: var(--clr-feedback-urgent);
+        --btn-primary-active-shadow: none;
     }
 
     &__medium {
@@ -341,6 +342,7 @@
     --btn-primary-bg: var(--clr-feedback-urgent);
     --btn-primary-active-bg: var(--clr-feedback-urgent);
     --btn-primary-focus-bg: var(--clr-feedback-urgent);
+    --btn-primary-shadow: none;
 }
 
 .medium__selected {
@@ -351,6 +353,7 @@
     --btn-primary-bg: var(--clr-feedback-medium);
     --btn-primary-active-bg: var(--clr-feedback-medium);
     --btn-primary-focus-bg: var(--clr-feedback-medium);
+    --btn-primary-shadow: none;
 }
 
 .low__selected {
@@ -361,6 +364,7 @@
     --btn-primary-bg: var(--clr-feedback-low);
     --btn-primary-active-bg: var(--clr-feedback-low);
     --btn-primary-focus-bg: var(--clr-feedback-low);
+    --btn-primary-shadow: none;
 }
 
 .requiredInput {

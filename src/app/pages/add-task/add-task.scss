@@ -16,14 +16,32 @@
         padding: var(--space-xl);
         box-sizing: border-box;
 
-        h2 {
-            font-size: 52px;
+        &__headline {
+            width: 100%;
+
+            @include respond-to(lg) {
+                top: 0;
+                padding-top: 32px;
+                position: sticky;
+                background-color: var(--clr-tinted-grey);
+            }
+
+            h2 {
+                font-size: 52px;
+            }
         }
+
+
 
         &__formComponents {
             width: 100%;
             display: flex;
             justify-content: space-between;
+
+            @include respond-to(lg) {
+                flex-direction: column;
+                gap: var(--space-xl);
+            }
         }
 
         &__footer {
@@ -32,9 +50,18 @@
             display: flex;
             justify-content: space-between;
 
+            @include respond-to(lg) {
+                flex-direction: column;
+                gap: var(--space-lg)
+            }
+
             &__buttons {
                 display: flex;
                 gap: var(--space-md);
+
+                @include respond-to(lg) {
+                    justify-content: flex-end;
+                }
             }
         }
     }
@@ -42,10 +69,18 @@
 
 app-add-task-basic-info {
     width: 45%;
+
+    @include respond-to(lg) {
+        width: 100%;
+    }
 }
 
 app-add-task-detail-info {
     width: 45%;
+
+    @include respond-to(lg) {
+        width: 100%;
+    }
 }
 
 .requiredInput {
@@ -59,4 +94,8 @@ app-add-task-detail-info {
     height: 100%;
     width: 1px;
     background-color: #686868;
+
+    @include respond-to(lg) {
+        display: none;
+    }
 }
