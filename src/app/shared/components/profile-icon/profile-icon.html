@@ -1,7 +1,9 @@
-<p>profile-icon works!</p>
+*/von contact-list Zeile:33-34 AvATAR von contact mit
+Hintergrundfarbe und Initialen aus contact list werden übergeben*/
 
-*/von contact-list Zeile:33-34 AvATAR von contact mit*/
+<div
+  class="profile-icon"
+  [style.background-color]="avatarColor">
 
-  <div class="contacts-sidebar__avatar" [style.background-color]="avatarColor">
-                    {{ initials }}
-                </div>
+  {{ initials }}
+</div>
