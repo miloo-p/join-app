@@ -4,12 +4,12 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-contact-success-message',
+  selector: 'app-success-message',
   imports: [],
-  templateUrl: './contact-success-message.html',
-  styleUrl: './contact-success-message.scss',
+  templateUrl: './success-message.html',
+  styleUrl: './success-message.scss',
 })
-export class ContactSuccessMessage {
+export class SuccessMessage {
 
   @Input() message = '';
 
