@@ -1,17 +1,10 @@
-
-/*unten von contact-add-new-contact-dialog-html*/
-
-/* Success Message:
+  /* Success Message:
    kommt von rechts, bleibt kurz sichtbar
    und fliegt wieder nach rechts raus (800 ms gesamt) */
-/*import von mixins*/
-
-
-   @use '../../../../styles/abstracts/mixins' as *;
 .success-message {
   position: fixed;
-  right: 31.5rem;
-  bottom: 2.2rem;
+  right: 33%;
+  bottom: 5%;
   z-index: 1000;
 
   width: 326px;
@@ -36,11 +29,11 @@
 
 
     @include respond-to(xl) {
-    right: 29rem;
+    right: 29%;
   }
 
     @include respond-to(lg) {
-    right: 16.7rem; // kleinerer Wert = weiter nach rechts
+    right: 18%; // kleinerer Wert = weiter nach rechts
   }
 
   /* Responsive:
@@ -55,9 +48,8 @@
   @include respond-to(md) {
     right: auto;
     left: 50%;
-    bottom: 13.1rem;
-
-    width: calc(100% - 2rem);
+    bottom: 20%;
+    width: calc(100% - 3%);
 
     animation: success-message-animation-mobile 800ms ease-in-out forwards;
   }
@@ -69,7 +61,7 @@
    wieder nach rechts ausblenden */
 @keyframes success-message-animation {
   0% {
-    transform: translateX(calc(100% + 2rem));
+    transform: translateX(calc(100% + 3%));
     opacity: 0;
   }
 
@@ -84,7 +76,7 @@
   }
 
   100% {
-    transform: translateX(calc(100% + 2rem));
+    transform: translateX(calc(100% + 3%));
     opacity: 0;
   }
 }
@@ -97,7 +89,7 @@
   0% {
     /* -50% = horizontal mittig halten
        calc(100% + 2rem) = unterhalb der Endposition starten und dann danach reinfliegen! */
-    transform: translate(-50%, calc(100% + 2rem));
+    transform: translate(-50%, calc(100% + 3%));
     opacity: 0;
   }
 
@@ -115,7 +107,7 @@
 
   100% {
     /* wieder nach unten verschwinden */
-    transform: translate(-50%, calc(100% + 2rem));
+    transform: translate(-50%, calc(100% + 3%));
     opacity: 0;
   }
 }
