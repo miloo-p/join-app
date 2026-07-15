@@ -10,7 +10,7 @@ export class tasksService {
   
   supabase = createClient(environment.apiUrl, environment.apiKey)
 
-  tasks = signal <{id:number,created_at: string, title:string, desc:string, due_date:string, status:number, priority:number, subtasks?:{}, collaborators?:{}}[]>([])
+  tasks = signal <{id:number,created_at: string, title:string, desc:string, due_date:string, status:number, priority:number, subtasks?:{}, collaborators?:{}, category:number}[]>([])
 
   channels: RealtimeChannel | undefined;
 

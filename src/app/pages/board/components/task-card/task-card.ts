@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, OnInit } from '@angular/core';
 import {tasksService} from "../../../../shared/services/tasks-service";
 
 @Component({
@@ -14,7 +14,11 @@ export class TaskCard {
   dbTasks = inject(tasksService);
 
   constructor() {
-    const tasks = this.dbTasks.getTasks();
-    console.log(tasks);
+  }
+  
+  async ngOnInit() {
+    await this.dbTasks.getTasks();
+    const tasks = this.dbTasks.tasks();
+    console.log(tasks[0]?.category);
   }
 }
