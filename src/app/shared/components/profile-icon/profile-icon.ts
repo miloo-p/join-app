@@ -1,7 +1,10 @@
 
 /*Import kommt von der contacts-list ts, dann standalone: 
-Input von intials und der color, unten auch ein Array mit den Farben*/
+Input von intials und der color, unten auch ein Array mit den Farben
+
+überall Concact ersetzen durch User: wir wollen mit den Initialen des eingeloggten Users Arbeiten!*/
 import { Component, Input } from '@angular/core';
+import { Contact } from '../../interfaces/contact';
 
 @Component({
   selector: 'app-profile-icon',
@@ -9,6 +12,8 @@ import { Component, Input } from '@angular/core';
   templateUrl: './profile-icon.html',
   styleUrls: ['./profile-icon.scss']
 })
+
+
 export class ProfileIcon {
 
   @Input() initials = '';
@@ -36,16 +41,16 @@ export class ProfileIcon {
 
     /**
      * Transforms raw Supabase database fields into UI-ready fields like combined name, initials, and colors.
-     * @param {Contact} contact - The raw database contact object.
-     * @returns {UIContact} The enriched contact object including UI properties.
+     * @param {User} contact - The raw database contact object.
+     * @returns {UIUser} The enriched contact object including UI properties.
      */
-    private transformContactData(contact: Contact): UIContact {
-      const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
-      const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
-      const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
+    private transformContactData(user: User): UIUser {
+      const firstLetter = user.firstname?.charAt(0).toUpperCase() || '';
+      const lastLetter = user.lastname?.charAt(0).toUpperCase() || '';
+      const colorIndex = (user.firstname.length + user.lastname.length) % this.availableColors.length;
       return {
-        ...contact,
-        name: `${contact.firstname} ${contact.lastname}`,
+        ...user,
+        name: `${user.firstname} ${user.lastname}`,
         initials: `${firstLetter}${lastLetter}`,
         avatarColor: this.availableColors[colorIndex]
       };
