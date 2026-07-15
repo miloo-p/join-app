@@ -4,6 +4,7 @@
 .contacts-sidebar {
   width: 100%;
   max-width: 424px;
+  min-width: 0;
   height: 100%;
   background-color: var(--bg-ultralight);
   border-right: 1px solid var(--border-clr-light);
@@ -15,7 +16,7 @@
   overflow-y: auto;
 
   @include respond-to(xl) {
-    max-width: 100vw;
+    max-width: 100%;
     border-right: none;
     box-shadow: none;
   }
@@ -117,6 +118,7 @@
 
   &__card {
     width: 100%;
+    min-width: 0;
     padding: var(--space-md);
     border-radius: var(--radius-lg);
     background-color: var(--bg-ultralight);
@@ -159,16 +161,27 @@
   }
 
   &__info {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
     overflow: hidden;
+
     @include flexbox(column, flex-start, flex-start, var(--space-xs));
-  }
+}
 
   &__name {
+    display: block;
+    max-width: 100%;
+    min-width: 0;
+
+    font-family: var(--ff-body);
     font-size: var(--fs-body-large);
     font-weight: var(--fw-regular);
     color: var(--text-color-dark);
-  }
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
 
   &__email {
     width: 100%;
