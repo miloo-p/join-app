@@ -26,6 +26,10 @@
     flex-shrink: 0;
     position: relative;
 
+    @media (max-width: 1350px) {
+      gap: 16px;
+    }
+
     @include respond-to(xl) {
       gap: 20px;
     }
@@ -37,11 +41,13 @@
 
   &__header-text {
     @include flexbox(row, flex-start, center, 30px);
-    width: 100%;
+    min-width: 0;
     height: auto;
+    flex: 1;
 
-    @media (max-width: 1300px) {
-      @include flexbox(column, flex-start, flex-start, 12px);
+    @media (max-width: 1350px) {
+      @include flexbox(column, flex-start, flex-start, 8px);
+      gap: 8px;
     }
 
     @include respond-to(lg) {
@@ -54,7 +60,7 @@
     height: auto;
     min-width: 0;
 
-    @media (max-width: 1300px) {
+    @media (max-width: 1350px) {
       gap: 20px;
       @include flexbox(column, flex-start, flex-start, 12px);
       width: 100%;
@@ -68,6 +74,8 @@
 
   &__title {
     margin: 0;
+
+    
 
     @include respond-to(lg) {
       font-family: 'Inter', var(--ff-body);
@@ -83,10 +91,10 @@
     box-sizing: border-box;
     flex-shrink: 0;
 
-    @media (max-width: 1300px) {
+    @media (max-width: 1350px) {
       width: 90px;
       height: 3px;
-      order: 2;
+      order: 3;
     }
 
     @include respond-to(lg) {
