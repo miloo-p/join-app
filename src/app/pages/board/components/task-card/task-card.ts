@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {tasksService} from "../../../../shared/services/tasks-service";
 
 @Component({
@@ -11,7 +11,7 @@ import {tasksService} from "../../../../shared/services/tasks-service";
 export class TaskCard {
   @Input() task: any;
 
-  dbTasks = Inject(tasksService);
+  dbTasks = inject(tasksService);
 
   constructor() {
     const tasks = this.dbTasks.getTasks();
