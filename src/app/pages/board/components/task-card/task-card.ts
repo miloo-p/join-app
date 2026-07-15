@@ -19,17 +19,18 @@ export class TaskCard implements OnInit {
     await this.dbTasks.getTasks();
     const tasks = this.dbTasks.tasks();
 
-    await this.dbTasks.setTask([
-      {
-      title: "Zimmer aufräumen",
-      desc: "Schön ordentlich",
-      due_date: "2023-12-31",
-      status: 1,
-      priority: 1,
-      subtasks:[{name: "Bett machen", status: 0}],
-      collaborators:[1,2],
-      category: 1,
-      }
-    ])
+    
+    // await this.dbTasks.setTask([
+    //   {
+    //   title: "Zimmer aufräumen",
+    //   desc: "Schön ordentlich",
+    //   due_date: "2023-12-31",
+    //   status: 1,
+    //   priority: 1,
+    //   subtasks:[{name: "Bett machen", status: 0}],
+    //   collaborators:[1,2],
+    //   category: 1,
+    //   }
+    // ])
   }
 }

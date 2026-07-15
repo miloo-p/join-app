@@ -5,7 +5,7 @@ export interface Task {
       due_date: string;
       status: number;
       priority: number;
-      subtasks?: {name: string, status: number}[];
+      subtasks?: {"name": string, "status": number}[];
       collaborators?:number[];
       category: number;
 }
