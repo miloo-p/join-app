@@ -375,6 +375,19 @@ app-button {
     max-width: 31%;
     min-width: 31%;
     font-weight: var(--fw-regular);
+    --btn-gap: 8px;
+
+    @include respond-to(xsm) {
+        svg {
+            width: 15px;
+        }
+    }
+}
+
+.btn {
+    @include respond-to(xsm) {
+        --btn-font-size: 15px;
+    }
 }
 
 .contact_dropdown {

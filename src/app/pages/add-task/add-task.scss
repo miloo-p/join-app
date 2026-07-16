@@ -23,6 +23,12 @@
         box-sizing: border-box;
 
         @include respond-to(lg) {
+            padding: var(--space-lg);
+            padding-top: 140px;
+        }
+
+        @include respond-to(xsm) {
+            padding: var(--space-sm);
             padding-top: 140px;
         }
 
@@ -34,7 +40,7 @@
                 top: 96px;
                 left: calc(232px);
                 padding-top: 32px;
-                padding-left: var(--space-xl);
+                padding-left: var(--space-lg);
                 position: fixed;
                 background-color: var(--clr-tinted-grey);
                 z-index: 100;
@@ -46,10 +52,14 @@
                 top: 96px;
                 left: 0;
                 padding-top: 32px;
-                padding-left: var(--space-xl);
+                padding-left: var(--space-lg);
                 position: fixed;
                 background-color: var(--clr-tinted-grey);
                 z-index: 100;
+            }
+
+            @include respond-to(xsm) {
+                padding-left: var(--space-sm);
             }
 
             h2 {
@@ -76,13 +86,13 @@
 
             @include respond-to(lg) {
                 flex-direction: column;
-                gap: var(--space-lg);
+                gap: var(--space-xl);
                 padding-bottom: 240px;
             }
 
             &__buttons {
                 display: flex;
-                gap: var(--space-md);
+                gap: var(--space-lg);
 
                 @include respond-to(lg) {
                     width: calc(100% - 232px);
@@ -92,7 +102,7 @@
                     right: 0;
                     padding-top: var(--space-xl);
                     padding-bottom: var(--space-xl);
-                    padding-right: var(--space-xl);
+                    padding-right: var(--space-lg);
                     z-index: 100;
                     background-color: var(--clr-tinted-grey);
                     pointer-events: none;
@@ -101,6 +111,7 @@
                 @include respond-to(md) {
                     bottom: 88px;
                     width: 100%;
+                    gap: var(--space-md)
                 }
             }
         }
@@ -109,6 +120,11 @@
 
 app-button {
     pointer-events: auto;
+
+    @include respond-to(sm) {
+        --btn-font-size: 16px;
+        --btn-gap: 4px
+    }
 }
 
 app-add-task-basic-info {
