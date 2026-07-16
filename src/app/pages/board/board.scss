@@ -1,0 +1,85 @@
+@use '../../../styles/abstracts/mixins' as *;
+
+.board {
+  @include global_content_wrapper();
+  background-color: var(--bg-light);
+
+  &__header {
+    @include flexbox(row, space-between, center, 1rem);
+    padding-top: var(--space-2xl);
+  }
+
+  &__column-title {
+    @include respond-to(xl) {
+      font-size: var(--fs-body-medium);
+    }
+  }
+
+  &__interaction {
+    @include flexbox(row, space-between, center, 2rem);
+  }
+
+  &__search {
+    height: 3.5rem;
+    border-radius: var(--radius-md);
+    padding-inline: var(--space-md);
+    font-size: var(--fs-body-large);
+  }
+
+  &__column-header {
+    @include flexbox(row, space-between, center, 1rem);
+    padding-block: var(--space-md);
+  }
+
+  &__column-title {
+    line-height: 28px;
+    margin: 0;
+    color: var(--text-color-dark);
+  }
+
+  &__add-btn {
+    @include flexbox(row, center, center, 0);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+  }
+
+  &__content {
+    @include flexbox(row, space-between, stretch, 2rem);
+  }
+
+  &__column {
+    max-width: 16rem;
+    width: 100%;
+    min-width: 10rem;
+  }
+
+  &__task-list {
+    @include flexbox(column, flex-start, stretch, 1rem);
+    list-style-type: none;
+    padding: 0;
+    min-height: 150px;
+  }
+
+  &__task {
+    text-align: left;
+  }
+
+  &__empty-state {
+    @include flexbox(row, center, center, 0);
+    color: var(--text-color-dark);
+    background-color: var(--clr-feedback-disabled);
+    height: 3.5rem;
+    width: 100%;
+    border: 2px dashed var(--border-clr-dark);
+    border-radius: var(--radius-md);
+  }
+
+  &__empty-short {
+    display: none;
+
+    @include respond-to(xl) {
+      display: inline;
+    }
+  }
+}
