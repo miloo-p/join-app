@@ -1,0 +1,37 @@
+<form class="formBasic">
+    <div class="formBasic__inputWrapper">
+        <label>
+            Title<span class="requiredInput">*</span>
+        </label>
+        <input type="text" placeholder="Enter a title">
+    </div>
+    <div class="formBasic__inputWrapper">
+        <label>
+            Description
+        </label>
+        <textarea placeholder="Enter a description"></textarea>
+    </div>
+    <div class="formBasic__inputWrapper">
+        <label for="dueDate">
+            Due date<span class="requiredInput">*</span>
+        </label>
+
+        <div class="dateInputWrapper">
+            <span class="dateInputWrapper__dateDisplay" [class.dateInputWrapper__dateDisplay--placeholder]="!dueDate">
+                {{ dueDate ? formatDateForDisplay(dueDate) : 'dd/mm/yyyy' }}
+            </span>
+
+            <input 
+                #dueDateInput
+                id="dueDate" 
+                type="date" 
+                [min]="today" 
+                max="2027-12-31" 
+                [(ngModel)]="dueDate" 
+                name="dueDate"
+                required 
+                (click)="openDatePicker(dueDateInput)" />
+        </div>
+    </div>
+
+</form>

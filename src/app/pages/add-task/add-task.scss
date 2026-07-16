@@ -1,0 +1,165 @@
+@use '../../../styles/abstracts/mixins' as *;
+
+.addTaskLayout {
+    width: 100%;
+    max-width: var(--container-content-md);
+    height: calc(100% - 96px);
+
+    @include respond-to(lg) {
+        height: calc(100dvh - 96px);
+        overflow-y: scroll;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--space-lg);
+        width: 100%;
+        height: 100%;
+        padding: var(--space-xl);
+
+        box-sizing: border-box;
+
+        @include respond-to(lg) {
+            padding: var(--space-lg);
+            padding-top: 140px;
+        }
+
+        @include respond-to(xsm) {
+            padding: var(--space-sm);
+            padding-top: 140px;
+        }
+
+        &__headline {
+            width: 100%;
+
+            @include respond-to(lg) {
+                width: calc(100% - 232px);
+                top: 96px;
+                left: calc(232px);
+                padding-top: 32px;
+                padding-left: var(--space-lg);
+                position: fixed;
+                background-color: var(--clr-tinted-grey);
+                z-index: 100;
+                pointer-events: none;
+            }
+
+            @include respond-to(md) {
+                width: 100%;
+                top: 96px;
+                left: 0;
+                padding-top: 32px;
+                padding-left: var(--space-lg);
+                position: fixed;
+                background-color: var(--clr-tinted-grey);
+                z-index: 100;
+            }
+
+            @include respond-to(xsm) {
+                padding-left: var(--space-sm);
+            }
+
+            h2 {
+                font-size: 52px;
+            }
+        }
+
+        &__formComponents {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            @include respond-to(lg) {
+                flex-direction: column;
+                gap: var(--space-xl);
+            }
+        }
+
+        &__footer {
+            width: 100%;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: space-between;
+
+            @include respond-to(lg) {
+                flex-direction: column;
+                gap: var(--space-xl);
+                padding-bottom: 160px;
+            }
+
+            @include respond-to(md) {
+                padding-bottom: 240px
+            }
+
+            &__buttons {
+                display: flex;
+                gap: var(--space-lg);
+
+                @include respond-to(lg) {
+                    width: calc(100% - 232px);
+                    justify-content: flex-end;
+                    position: fixed;
+                    bottom: 0;
+                    right: 0;
+                    padding-top: var(--space-xl);
+                    padding-bottom: var(--space-xl);
+                    padding-right: var(--space-lg);
+                    z-index: 100;
+                    background-color: var(--clr-tinted-grey);
+                    pointer-events: none;
+                }
+
+                @include respond-to(md) {
+                    bottom: 88px;
+                    width: 100%;
+                    gap: var(--space-md)
+                }
+            }
+        }
+    }
+}
+
+app-button {
+    pointer-events: auto;
+
+    @include respond-to(sm) {
+        --btn-font-size: 16px;
+        --btn-gap: 4px
+    }
+}
+
+app-add-task-basic-info {
+    width: 45%;
+
+    @include respond-to(lg) {
+        width: 100%;
+    }
+}
+
+app-add-task-detail-info {
+    width: 45%;
+
+    @include respond-to(lg) {
+        width: 100%;
+    }
+}
+
+.requiredInput {
+    color: var(--clr-feedback-error);
+    font-size: 1rem;
+    position: relative;
+    top: -0.35em;
+}
+
+.border {
+    height: 100%;
+    width: 1px;
+    background-color: #686868;
+
+    @include respond-to(lg) {
+        display: none;
+    }
+}

@@ -19,6 +19,7 @@ export class ButtonComponent {
   buttonType = input<'button' | 'submit' | 'reset'>('button');
   disabled = input<boolean>(false);
   loading = input<boolean>(false);
+  fontWeight = input<'regular' | 'bold'>('bold');
 
   isFullWidth = input<boolean>(false);
 
