@@ -11,7 +11,7 @@ There is also an array containing the available avatar colors.
 Replace Contact with User everywhere,
 because we want to work with the initials of the logged-in user.
 
-Import the User model and set the correct file path.
+Import the Contact model and set the correct file path.
 */
 
 import { Component, Input } from '@angular/core';
@@ -78,27 +78,19 @@ export class ProfileIcon {
      * @param {Contact} contact - The raw database user object.
      * @returns {UIContact} The enriched user object including UI properties.
      */
-    private transformContactData(contact: Contact): UIContact {
-      const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
-      const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
-      const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
-      return {
-        ...contact,
-        name: `${contact.firstname} ${contact.lastname}`,
-        initials: `${firstLetter}${lastLetter}`,
-        avatarColor: this.availableColors[colorIndex]
-      };
-    }
-
-
-    /*only for testing in console!!!!*/
-
-constructor() {
-  console.log(this.transformContactData(this.testContact));
-}
-
-public get profileData(): UIContact {
-  return this.transformContactData(this.testContact);
-}
+private transformContactData(contact: Contact): UIContact {
+    const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
+    const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
+    const contactId = typeof contact.id === 'number' ? contact.id : 0;
+    const colorIndex = Math.abs(contactId) % this.availableColors.length;
+    return {
+      ...contact,
+      name: `${contact.firstname} ${contact.lastname}`,
+      initials: `${firstLetter}${lastLetter}`,
+      avatarColor: this.availableColors[colorIndex],
+    };
   }
+}
+
+
   
