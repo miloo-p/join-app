@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  computed,
-  inject,
-  signal,
-  ViewChild,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    OnInit,
+    Output,
+    ViewChild,
+    computed,
+    effect,
+    inject,
+    signal,
 } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { Contact } from '../../../../shared/interfaces/contact';
@@ -34,10 +36,29 @@ interface ContactGroup {
 })
 export class ContactList implements OnInit {
   public contactsService = inject(contactsService);
+  private cdr = inject(ChangeDetectorRef);
   public selectedContact = signal<UIContact | null>(null);
+
+  private pendingCreatedContactId: number | null = null;
 
   @ViewChild(ContactAddNewContactDialog)
   public addContactDialog!: ContactAddNewContactDialog;
+
+    constructor() {
+    effect(() => {
+      const rawContacts = this.contactsService.contacts();
+      
+      if (this.pendingCreatedContactId !== null && rawContacts && rawContacts.length > 0) {
+        const found = rawContacts.find(c => c.id === this.pendingCreatedContactId);
+        if (found) {
+          setTimeout(() => {
+            this.selectContact(found);
+            this.pendingCreatedContactId = null;
+          }, 0);
+        }
+      }
+    });
+  }
 
   public openAddContactDialog(): void {
     this.addContactDialog.openDialog();
@@ -62,6 +83,12 @@ export class ContactList implements OnInit {
     'var(--clr-user-cherry)',
     'var(--clr-user-marigold)',
   ];
+
+  public handleNewContactCreated(contact: any): void {
+    if (contact && typeof contact.id === 'number') {
+      this.pendingCreatedContactId = contact.id;
+    }
+  }
 
   /**
    * Computed signal that automatically groups and sorts contacts alphabetically.
@@ -90,22 +117,29 @@ export class ContactList implements OnInit {
    * @param {Contact} contact - The contact object received from Contacts-Service.
    * @returns {void}
    */
-  public selectContact(contact: Contact): void {
+    public selectContact(contact: Contact): void {
     const isFirstTime = this.selectedContact() === null;
     const transformed = this.transformContactData(contact);
-    (transformed as any).isFirstClick = isFirstTime;
-
-    this.selectedContact.set(transformed);
-    this.contactSelected.emit(transformed);
 
     if (isFirstTime) {
+      (transformed as any).isFirstClick = true;
+      this.selectedContact.set(transformed);
+      this.contactSelected.emit(transformed);
+      this.cdr.detectChanges();
+
       setTimeout(() => {
         const current = this.selectedContact();
-        if (current) {
+        if (current && (current as any).isFirstClick === true) {
           (current as any).isFirstClick = false;
           this.selectedContact.set({ ...current });
+          this.cdr.detectChanges();
         }
-      }, 100);
+      }, 150);
+
+    } else {
+      (transformed as any).isFirstClick = false;
+      this.selectedContact.set(transformed);
+      this.contactSelected.emit(transformed);
     }
   }
 

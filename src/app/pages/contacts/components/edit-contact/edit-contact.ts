@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UIContact } from '../contacts-list/contacts-list';
 
 @Component({
   selector: 'app-edit-contact',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule], 
   templateUrl: './edit-contact.html',
   styleUrls: ['./edit-contact.scss'],
 })
@@ -19,16 +19,44 @@ export class EditContactComponent {
   private _contact: UIContact | null = null;
 
   /**
+   * Reactive Form definition matching the HTML formControlNames and patterns from Magdalena/addNewContact.
+   */
+  public editContactForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-ZäöüÄÖÜß]{2,}\s[a-zA-ZäöüÄÖÜß]{2,}.*$/)
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|de)$/)
+    ]),
+    telephone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^\+49\d+$/)
+    ])
+  });
+
+  /**
    * The contact object currently selected for editing.
    * Fulfills User Story 4 (opens form with pre-filled data).
    * Uses setter to create a local copy when the input changes.
    */
-  @Input()
+    @Input()
   set contact(value: UIContact | null) {
     this._contact = value;
-    // Create a copy to allow editing without affecting parent.
-    // Note: Use structuredClone(value) if UIContact has nested objects!
     this.editingContact = value ? { ...value } : null;
+
+    if (this.editingContact) {
+      this.editContactForm.patchValue({
+        name: this.editingContact.name || '',
+        email: this.editingContact.email || '',
+        telephone: this.editingContact.telephone || ''
+      });
+      this.editContactForm.markAsPristine();
+      this.editContactForm.markAsUntouched();
+    } else {
+      this.editContactForm.reset();
+    }
   }
 
   get contact(): UIContact | null {
@@ -71,8 +99,16 @@ export class EditContactComponent {
    * Fulfills User Story 4 (submitting modified values).
    */
   public onSaveContact(): void {
-    if (this.editingContact) {
+    if (this.editContactForm.valid && this.editingContact) {
+      const formValues = this.editContactForm.value;
+
+      this.editingContact.name = formValues.name!;
+      this.editingContact.email = formValues.email!;
+      this.editingContact.telephone = formValues.telephone!;
+
       this.saveContact.emit(this.editingContact);
+    } else {
+      this.editContactForm.markAllAsTouched();
     }
   }
 
