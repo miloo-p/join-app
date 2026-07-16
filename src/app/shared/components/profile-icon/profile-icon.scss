@@ -1,0 +1,15 @@
+/*von Jerome css bei contact list*/
+
+
+.profile-icon {
+       
+        width: 42px;
+        height: 42px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var(--bg-ultralight);
+        color: var(--text-color-ultralight);
+        font-weight: var(--fw-semibold);
+        font-size: var(--fs-h5);
+        box-sizing: border-box;
+        flex-shrink: 0;
+    }

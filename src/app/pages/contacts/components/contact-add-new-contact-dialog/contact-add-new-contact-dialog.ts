@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, inject, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Output, signal, ViewChild } from '@angular/core'; /*signal rein wegen Verknüpfung!*/
 import {
     FormControl,
     FormGroup,
@@ -30,6 +30,9 @@ export class ContactAddNewContactDialog {
   private contactsService = inject(contactsService);
 
   @Output() contactCreated = new EventEmitter<any>();
+
+
+showSuccessMessage = signal(false);
 
   @ViewChild('dialog_add_contact') dialog!: ElementRef<HTMLDialogElement>;
 
@@ -76,6 +79,14 @@ export class ContactAddNewContactDialog {
       this.contactCreated.emit(savedData[0]);
     }
     this.closeDialog();
+
+    /*Aufruf zeige mir das Fenster sucess Message*/
+
+    this.showSuccessMessage.set(true);
+
+setTimeout(() => {
+  this.showSuccessMessage.set(false);
+}, 800);
   }
 
   closeDialogBubbleProtection(event: Event) {
