@@ -44,7 +44,7 @@ export class ProfileIcon {
 
   @Input() avatarColor = '';
 
-  @Input() contact!: Contact;
+  @Input() contact!: UIContact;
 
 /*testing user*/
     public testContact: Contact = {
