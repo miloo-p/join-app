@@ -178,7 +178,7 @@
   }
 
   &__form {
-    @include flexbox(column, flex-start, stretch, 32px);
+    @include flexbox(column, flex-start, stretch, 16px);
     width: 100%; 
     max-width: 422px; 
 
@@ -205,6 +205,10 @@
 
     &:focus-within {
       border-color: var(--clr-blue-light);
+    }
+
+    &:has(.ng-invalid.ng-touched) {
+      border-color: var(--clr-feedback-error);
     }
   }
 
@@ -234,7 +238,7 @@
 
   &__actions {
     @include flexbox(row, flex-start, center, 25px);
-    margin-top: 48px;
+    margin-top: 32px;
     width: 100%; 
 
     @include respond-to(lg) {
@@ -316,4 +320,31 @@
     font-size: var(--fs-body-large);
     line-height: 1;
   }
+}
+
+.dialog__error {
+  color: var(--clr-feedback-error);
+  font-family: var(--ff-body);
+  font-size: var(--fs-h5);     
+  font-weight: 500;       
+  line-height: 1.2;
+  margin-top: 6px;          
+  margin-bottom: 2px;      
+  margin-left: 2px;        
+  text-align: left;
+  display: block;
+  width: calc(100% - 21px);
+}
+
+.edit-contact__field {
+  &:has(.ng-invalid.ng-touched) {
+    border-color: var(--clr-feedback-error);
+  }
+}
+
+.edit-contact__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #aeaeae !important; 
+  box-shadow: none !important;
 }
