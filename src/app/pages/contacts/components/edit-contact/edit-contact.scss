@@ -29,10 +29,10 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch; 
-      min-height: unset;
+      min-height: unset !important; 
       height: auto;
       max-height: calc(100vh - 32px);
-      overflow-y: auto;
+      overflow-y: auto; 
     }
   }
 
@@ -110,7 +110,7 @@
     position: absolute;
     top: 24px;
     right: 24px;
-    z-index: 10;
+    z-index: 1010;
 
     width: 32px;
     height: 32px;
@@ -128,7 +128,7 @@
     @include respond-to(md) {
       top: 2rem;
       right: 2rem;
-      color: var(--text-color-ultralight);
+      color: var(--text-color-ultralight); 
     }
 
     &:hover {
