@@ -12,23 +12,27 @@
   box-sizing: border-box;
 
   &__panel {
+    position: relative;
     display: flex;
     width: min(1212px, calc(100vw - 16px));
     min-height: 594px;
     background: var(--bg-ultralight);
     border-radius: 30px;
-    overflow: hidden;
+    overflow-y: auto;
     box-shadow: var(--shadow-allaround);
 
     @include respond-to(lg) {
       width: 100%;
     }
+
     @include respond-to(md) {
-      @include flexbox(column, space-around, center, 0rem);
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch; 
       min-height: unset;
       height: auto;
-      padding-bottom: 2rem;
-      border-radius: var(--radius-lg);
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
     }
   }
 
@@ -39,6 +43,7 @@
     background: var(--clr-blue-muted);
     color: var(--text-color-ultralight);
     box-sizing: border-box;
+    flex-shrink: 1; 
 
     @include respond-to(md) {
       width: 100%;
@@ -98,6 +103,7 @@
     padding: 48px 52px;
     box-sizing: border-box;
     width: 100%;
+    min-width: 0; 
 
     @include respond-to(xsm) {
       padding: 2rem 1rem;
@@ -106,24 +112,22 @@
 
   &__close-button {
     position: absolute;
-    top: 42px;
-    right: 48px;
+    top: 24px;
+    right: 24px;
+    z-index: 10;
+
     width: 32px;
     height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     border: 0;
     padding: 0;
     background: transparent;
     color: var(--text-color-dark);
     cursor: pointer;
     border-radius: 50%;
-    appearance: none;
-    -webkit-appearance: none;
-    transition:
-      background-color 100ms ease-in-out,
-      color 100ms ease-in-out;
 
     @include respond-to(md) {
       top: 2rem;
@@ -143,11 +147,13 @@
     @include flexbox(row, flex-start, center, 76px);
     margin-top: 80px;
     margin-left: 20px;
+    width: calc(100% - 20px); 
 
     @include respond-to(lg) {
       @include flexbox(column, space-around, center, 2rem);
       margin-left: 0;
       margin-top: 20px;
+      width: 100%;
     }
   }
 
@@ -173,7 +179,8 @@
 
   &__form {
     @include flexbox(column, flex-start, stretch, 32px);
-    width: 422px;
+    width: 100%; 
+    max-width: 422px; 
 
     @include respond-to(xsm) {
       width: 100%;
@@ -182,11 +189,13 @@
 
   &__field-group {
     margin-bottom: 0px;
+    width: 100%;
   }
 
   &__field {
     @include flexbox(row, flex-start, center, var(--space-sm));
     width: 100%;
+    min-width: 0;
     height: 50px;
     padding: 13px 21px;
     border: 1px solid #d1d1d1;
@@ -201,6 +210,7 @@
 
   &__input {
     flex: 1;
+    width: 0;
     min-width: 0;
     border: 0;
     outline: none;
@@ -225,10 +235,16 @@
   &__actions {
     @include flexbox(row, flex-start, center, 25px);
     margin-top: 48px;
+    width: 100%; 
 
     @include respond-to(lg) {
       @include flexbox(row, center, center, 16px);
-      width: 100%;
+    }
+
+    @include respond-to(xsm) {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 12px;
     }
   }
 
@@ -246,7 +262,7 @@
       color 100ms ease-in-out;
 
     @include respond-to(lg) {
-      width: auto !important;
+      width: 100% !important; 
     }
   }
 
@@ -265,6 +281,10 @@
       border: 2px solid #124658;
       color: #124658;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    @include respond-to(lg) {
+      width: 100%;
     }
   }
 
@@ -285,6 +305,10 @@
       background: #124658;
       border-color: #124658;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    @include respond-to(lg) {
+      width: 100%;
     }
   }
 
