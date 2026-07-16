@@ -82,7 +82,7 @@
     width: fit-content;
 
     @include respond-to(md) {
-      @include flexbox(column, center, center, 1rem);
+      @include flexbox(column, flex-start, flex-start, 1rem);
     }
   }
 
@@ -91,10 +91,6 @@
     height: 3px;
     border-radius: var(--radius-pill);
     background: var(--clr-blue-light);
-
-    @include respond-to(xsm) {
-      display: none;
-    }
   }
 
   &__content {
