@@ -87,7 +87,11 @@
             @include respond-to(lg) {
                 flex-direction: column;
                 gap: var(--space-xl);
-                padding-bottom: 240px;
+                padding-bottom: 160px;
+            }
+
+            @include respond-to(md) {
+                padding-bottom: 240px
             }
 
             &__buttons {
