@@ -5,8 +5,20 @@ Input von intials und der color, unten auch ein Array mit den Farben
 überall Concact ersetzen durch User: wir wollen mit den Initialen des eingeloggten Users Arbeiten!
 User noch holen und Dateipfad richtig setzen!*/
 import { Component, Input } from '@angular/core';
-import { User } from ;
 
+
+/*nur für Test User und UI User anlegen!!nachher über Datenbank holen*/
+interface User {
+  id: number;
+  firstname: string;
+  lastname: string;
+}
+
+interface UIUser extends User {
+  name: string;
+  initials: string;
+  avatarColor: string;
+}
 
 @Component({
   selector: 'app-profile-icon',
@@ -23,6 +35,13 @@ export class ProfileIcon {
   @Input() avatarColor = '';
 
   @Input() user!: User;
+
+/*testing user*/
+    public testUser: User = {
+    id: 1,
+    firstname: 'Magdalena',
+    lastname: 'Laurisch'
+  };
 
 
     public availableColors: string[] = [
@@ -60,5 +79,12 @@ export class ProfileIcon {
         avatarColor: this.availableColors[colorIndex]
       };
     }
+
+
+    /*only for testing in console!!!!*/
+
+constructor() {
+  console.log(this.transformUserData(this.testUser));
+}
   }
   
