@@ -181,6 +181,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
 }
 
   &__email {
@@ -194,6 +195,7 @@
     color: var(--text-color-special);
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
   }
 }
 
