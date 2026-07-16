@@ -1,0 +1,105 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.task-detail-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  @include flexbox(row, center, center, 0);
+}
+
+.task-detail {
+  background-color: var(--bg-ultralight);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: var(--shadow-allaround);
+  border-radius: var(--radius-lg);
+
+  @include flexbox(column, flex-start, stretch, 1.5rem);
+
+  &__header {
+    @include flexbox(row, space-between, center, 0);
+  }
+
+  &__category {
+    color: var(--text-color-ultralight);
+    padding: var(--space-xs) var(--space-lg);
+    border-radius: var(--radius-md);
+
+    &--story {
+      background-color: var(--bg-category-userstory);
+    }
+
+    &--technical {
+      background-color: var(--bg-category-technical);
+    }
+  }
+
+  &__close-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--text-color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--bg-light);
+      border-radius: var(--radius-pill);
+    }
+  }
+
+  &__title {
+    font-size: var(--fs-h2);
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: var(--fs-body-large);
+    color: var(--text-color-dark);
+    margin: 0;
+  }
+
+  &__row {
+    @include flexbox(row, flex-start, center, 2rem);
+    font-size: var(--fs-body-large);
+
+    &--column {
+      @include flexbox(column, flex-start, flex-start, 2rem);
+    }
+  }
+
+  &__label {
+    color: var(--text-color-dark);
+    min-width: 100px;
+  }
+
+  &__value {
+    @include flexbox(row, flex-start, center, 1rem);
+  }
+
+  &__assignees-list {
+    list-style: none;
+  }
+
+  &__assignee-item {
+    @include flexbox(row, flex-start, center, 1rem);
+    padding-bottom: 1rem;
+  }
+
+  &__avatar {
+    padding: var(--space-sm);
+    border-radius: var(--radius-pill);
+    color: var(--text-color-ultralight);
+  }
+
+  &__footer {
+    @include flexbox(row, flex-end, center, 1rem);
+    margin-top: 1rem;
+  }
+}
