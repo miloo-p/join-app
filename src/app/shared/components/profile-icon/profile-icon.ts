@@ -17,14 +17,14 @@ Import the User model and set the correct file path.
 import { Component, Input } from '@angular/core';
 
 
-/*only fpr testing User User ID*/
-interface User {
+/*only fpr testing Contact Contact ID*/
+interface Contact {
   id: number;
   firstname: string;
   lastname: string;
 }
 
-interface UIUser extends User {
+interface UIContact extends Contact {
   name: string;
   initials: string;
   avatarColor: string;
@@ -37,17 +37,17 @@ interface UIUser extends User {
   styleUrls: ['./profile-icon.scss']
 })
 
-/*Import initials, avatar color, & user! and avaible colors */
+/*Import initials, avatar color, & Contact! and avaible colors */
 export class ProfileIcon {
 
   @Input() initials = '';
 
   @Input() avatarColor = '';
 
-  @Input() user!: User;
+  @Input() contact!: Contact;
 
 /*testing user*/
-    public testUser: User = {
+    public testContact: Contact = {
     id: 1,
     firstname: 'Magdalena',
     lastname: 'Laurisch'
@@ -75,16 +75,16 @@ export class ProfileIcon {
 /*from Jérôme Data: contact-list: changing: contact to user! */
     /**
      * Transforms raw Supabase database fields into UI-ready fields like combined name, initials, and colors.
-     * @param {User} user - The raw database user object.
-     * @returns {UIUser} The enriched user object including UI properties.
+     * @param {Contact} contact - The raw database user object.
+     * @returns {UIContact} The enriched user object including UI properties.
      */
-    private transformUserData(user: User): UIUser {
-      const firstLetter = user.firstname?.charAt(0).toUpperCase() || '';
-      const lastLetter = user.lastname?.charAt(0).toUpperCase() || '';
-      const colorIndex = (user.firstname.length + user.lastname.length) % this.availableColors.length;
+    private transformContactData(contact: Contact): UIContact {
+      const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
+      const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
+      const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
       return {
-        ...user,
-        name: `${user.firstname} ${user.lastname}`,
+        ...contact,
+        name: `${contact.firstname} ${contact.lastname}`,
         initials: `${firstLetter}${lastLetter}`,
         avatarColor: this.availableColors[colorIndex]
       };
@@ -94,11 +94,11 @@ export class ProfileIcon {
     /*only for testing in console!!!!*/
 
 constructor() {
-  console.log(this.transformUserData(this.testUser));
+  console.log(this.transformContactData(this.testContact));
 }
 
-public get profileData(): UIUser {
-  return this.transformUserData(this.testUser);
+public get profileData(): UIContact {
+  return this.transformContactData(this.testContact);
 }
   }
   
