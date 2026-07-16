@@ -1,0 +1,120 @@
+
+@use '../../../../styles/abstracts/mixins' as *;
+
+
+.profile-icon {
+       
+        width: 56px;
+        height: 56px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var(--bg-ultralight);
+        color: var(--text-color-ultralight);
+        font-weight: var(--fw-semibold);
+        font-size: var(--fs-h3);
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+  Contact small
+.profile-icon {
+       
+        width: 42px;
+        height: 42px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var(--bg-ultralight);
+        color: var(--text-color-ultralight);
+        font-weight: var(--fw-regular);
+        font-size: var(--fs-h5);
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+      Contact big
+.profile-icon {
+       
+        width: 120px;
+        height: 120px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var(--bg-ultralight);
+        color: var(--text-color-ultralight);
+        font-weight: var(--fw-semibold);
+        font-size: 3.08rem;
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    responsive stays like normal and 
+    .profile-icon {
+       
+        width: 80px;
+        height: 80px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var(--bg-ultralight);
+        color: var(--text-color-ultralight);
+        font-weight: var(--fw-semibold);
+        font-size: 3.08rem;
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+/* User Header without color inside! */
+    .profile-icon {
+       
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-pill);
+        border: 2px solid var( --clr-blue-muted);
+        color: #124658;
+        font-weight: var(--fw-semibold);
+        font-size: var(--fs-h3);
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      
+
+         &:hover {
+        background-color: #0C2E62 12%;
+       
+  }
+    }
+
+responsive
+
+ .profile-icon2 {
+       
+        width: 40px;
+        height: 40x;
+        border-radius: var(--radius-pill);
+        border: 2px solid var( --clr-blue-muted);
+        color: #124658;
+        font-weight: var(--fw-semibold);
+        font-size: var(--fs-h5);
+        box-sizing: border-box;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      
+
+         &:hover {
+        background-color: #0C2E62 12%;
+       
+  }}

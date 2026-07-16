@@ -46,4 +46,5 @@
     </div>
 </section>
 
-<app-contact-add-new-contact-dialog></app-contact-add-new-contact-dialog>
+<app-contact-add-new-contact-dialog (contactCreated)="handleNewContactCreated($event)">
+</app-contact-add-new-contact-dialog>
