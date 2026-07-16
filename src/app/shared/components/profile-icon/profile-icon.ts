@@ -1,13 +1,23 @@
 
-/*Import kommt von der contacts-list ts, dann standalone: 
-Input von intials und der color, unten auch ein Array mit den Farben
+/*
+The imports come from contacts-list.ts.
 
-überall Concact ersetzen durch User: wir wollen mit den Initialen des eingeloggten Users Arbeiten!
-User noch holen und Dateipfad richtig setzen!*/
+Since this is a standalone component,
+the required imports are added directly to the component.
+
+The initials and the avatar color are passed via @Input().
+There is also an array containing the available avatar colors.
+
+Replace Contact with User everywhere,
+because we want to work with the initials of the logged-in user.
+
+Import the User model and set the correct file path.
+*/
+
 import { Component, Input } from '@angular/core';
 
 
-/*nur für Test User und UI User anlegen!!nachher über Datenbank holen*/
+/*only fpr testing User User ID*/
 interface User {
   id: number;
   firstname: string;
