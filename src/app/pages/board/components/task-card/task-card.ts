@@ -7,10 +7,9 @@ import { Task } from '../../../../shared/interfaces/tasks';
   standalone: true,
   imports: [],
   templateUrl: './task-card.html',
-  styleUrls: ['./task-card.scss'],
+  styleUrl: './task-card.scss',
 })
-
-export class TaskCard implements OnInit {
+export class TaskCard {
   @Input() task?: Task;
 
   dbTasks = inject(tasksService);
@@ -19,7 +18,6 @@ export class TaskCard implements OnInit {
     await this.dbTasks.getTasks();
     const tasks = this.dbTasks.tasks();
 
-    
     // await this.dbTasks.setTask([
     //   {
     //   title: "Zimmer aufräumen",

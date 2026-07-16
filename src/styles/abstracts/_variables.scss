@@ -8,6 +8,7 @@
   --clr-black: #000000;
   --clr-white: #ffffff;
   --clr-tinted-grey: #f6f7f8;
+  --clr-darker-grey: #686868;
 
   // --- FEEDBACK COLORS ---
   --clr-feedback-error: #e60026;
@@ -103,6 +104,7 @@
   --text-color-light: var(--clr-feedback-disabled);
   --text-color-ultralight: var(--clr-white);
   --text-color-special: var(--clr-blue-light);
+  --text-color-grey: var(--clr-darker-grey);
 
   --bg-ultralight: var(--clr-white);
   --bg-light: var(--clr-tinted-grey);

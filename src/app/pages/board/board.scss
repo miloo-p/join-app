@@ -32,11 +32,13 @@
   }
 
   &__column-title {
-    margin: auto 0;
+    line-height: 28px;
+    margin: 0;
     color: var(--text-color-dark);
   }
 
   &__add-btn {
+    @include flexbox(row, center, center, 0);
     text-decoration: none;
     cursor: pointer;
     border: none;

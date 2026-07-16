@@ -15,10 +15,10 @@ import { tasksService } from '../../shared/services/tasks-service'; // Pfad ggf.
 export class Board implements OnInit {
   dbTasks = inject(tasksService);
 
-  todoTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 1));
-  progressTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 2));
-  feedbackTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 3));
-  doneTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 4));
+  todoTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 0));
+  progressTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 1));
+  feedbackTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 2));
+  doneTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 3));
 
   @ViewChild('taskOverlay') taskOverlay!: TaskOverlay;
 

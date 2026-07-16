@@ -12,6 +12,14 @@
 
   box-shadow: var(--shadow-allaround);
 
+  &__title {
+    color: var(--text-color-dark);
+  }
+
+  &__description {
+    color: var(--text-color-grey);
+  }
+
   &__category {
     color: var(--text-color-ultralight);
 
