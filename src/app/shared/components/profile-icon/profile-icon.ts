@@ -86,5 +86,9 @@ export class ProfileIcon {
 constructor() {
   console.log(this.transformUserData(this.testUser));
 }
+
+public get profileData(): UIUser {
+  return this.transformUserData(this.testUser);
+}
   }
   
