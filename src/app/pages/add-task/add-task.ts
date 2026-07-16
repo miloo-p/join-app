@@ -78,7 +78,7 @@ export class AddTask {
   }
 
   private mapCategoryToNumber(category: string): number {
-    return category === 'user_story' ? 1 : 0;
+    return category === 'User Story' ? 1 : 0;
   }
 
   private mapPriorityToNumber(priority: 'urgent' | 'medium' | 'low'): number {
