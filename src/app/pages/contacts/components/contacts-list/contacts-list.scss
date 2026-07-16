@@ -180,10 +180,12 @@
 
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;
+    white-space: nowrap;
 }
 
   &__email {
+    display: block;
+    max-width: 100%;
     width: 100%;
     font-family: var(--ff-body);
     font-size: var(--fs-body-normal);
@@ -192,7 +194,6 @@
     color: var(--text-color-special);
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
   }
 }
 
