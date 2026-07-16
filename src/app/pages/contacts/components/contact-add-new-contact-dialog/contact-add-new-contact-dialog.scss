@@ -229,10 +229,6 @@
   animation: success-message-animation 800ms ease-in-out forwards;
 
 
-    @include respond-to(xl) {
-    right: 29%;
-  }
-
     @include respond-to(lg) {
     right: 18%; // kleinerer Wert = weiter nach rechts
   }
