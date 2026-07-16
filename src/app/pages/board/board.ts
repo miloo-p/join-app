@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ViewChild, computed } from '@angular/core'; // 'computed' und 'inject' importieren!
 import { TaskCard } from './components/task-card/task-card';
-import { TaskOverlay } from './components/task-overlay/task-overlay';
+import { TaskDetail } from './components/task-detail/task-detail';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { TaskDialog } from './components/task-dialog/task-dialog';
 import { tasksService } from '../../shared/services/tasks-service'; // Pfad ggf. anpassen
@@ -8,7 +8,7 @@ import { tasksService } from '../../shared/services/tasks-service'; // Pfad ggf.
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [TaskCard, TaskOverlay, TaskDialog, ButtonComponent],
+  imports: [TaskCard, TaskDetail, TaskDialog, ButtonComponent, TaskDetail],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
@@ -20,7 +20,7 @@ export class Board implements OnInit {
   feedbackTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 2));
   doneTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 3));
 
-  @ViewChild('taskOverlay') taskOverlay!: TaskOverlay;
+  @ViewChild('taskDetail') TaskDetail!: TaskDetail;
 
   async ngOnInit() {
     await this.dbTasks.getTasks();
@@ -66,6 +66,6 @@ export class Board implements OnInit {
 
   openTaskDetails(task: any) {
     console.log('Folgender Task wurde geklickt:', task);
-    this.taskOverlay.openDialog(task);
+    this.TaskDetail.openDialog(task);
   }
 }

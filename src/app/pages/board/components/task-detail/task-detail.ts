@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-task-overlay',
+  selector: 'app-task-detail',
   imports: [],
-  templateUrl: './task-overlay.html',
-  styleUrl: './task-overlay.scss',
+  templateUrl: './task-detail.html',
+  styleUrl: './task-detail.scss',
 })
-export class TaskOverlay {
+export class TaskDetail {
   currentTask: any;
 
   openDialog(task: any) {
