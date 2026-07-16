@@ -1,4 +1,4 @@
-<form class="formDetail">
+<form class="formDetail" [formGroup]="form">
 
     <div class="formDetail__inputWrapper">
         <label>
@@ -6,9 +6,10 @@
         </label>
         <div class="formDetail__inputWrapper__prioButtons">
 
-            <app-button size="md" text="Urgent" type="button" width="full" buttonType="button"
-                [fontWeight]="isUrgentSelected ? 'bold' : 'regular'" gap="sm" class="btn btn__urgent"
-                [class.urgent__selected]="isUrgentSelected" (btnClick)="toggleUrgentBtn()">
+            <app-button (btnClick)="selectPriority('urgent')" size="md" text="Urgent" type="button" width="full"
+                buttonType="button" [fontWeight]="isPrioritySelected('urgent') ? 'bold' : 'regular'" gap="sm"
+                class="btn btn__urgent" [class.urgent__selected]="isPrioritySelected('urgent')"
+                (btnClick)="selectPriority('urgent')">
                 <svg class="formDetail__inputWrapper__prioButtons__icon urgent" width="20" height="15"
                     viewBox="0 0 20 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -21,9 +22,10 @@
 
             </app-button>
 
-            <app-button text="Medium" type="button" size="md" width="full" buttonType="button"
-                [fontWeight]="isMediumSelected ? 'bold' : 'regular'" gap="sm" class="btn btn__medium"
-                [class.medium__selected]="isMediumSelected" (btnClick)="toggleMediumBtn()">
+            <app-button (btnClick)="selectPriority('medium')" text="Medium" type="button" size="md" width="full"
+                buttonType="button" [fontWeight]="isPrioritySelected('medium') ? 'bold' : 'regular'" gap="sm"
+                class="btn btn__medium" [class.medium__selected]="isPrioritySelected('medium')"
+                (btnClick)="selectPriority('medium')">
                 <svg class="formDetail__inputWrapper__prioButtons__icon medium" width="20" height="8" viewBox="0 0 20 8"
                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -35,9 +37,10 @@
                 </svg>
             </app-button>
 
-            <app-button text="Low" type="button" size="md" width="full" buttonType="button"
-                [fontWeight]="isLowSelected ? 'bold' : 'regular'" gap="sm" class="btn btn__low"
-                [class.low__selected]="isLowSelected" (btnClick)="toggleLowBtn()">
+            <app-button (btnClick)="selectPriority('low')" text="Low" type="button" size="md" width="full"
+                buttonType="button" [fontWeight]="isPrioritySelected('low') ? 'bold' : 'regular'" gap="sm"
+                class="btn btn__low" [class.low__selected]="isPrioritySelected('low')"
+                (btnClick)="selectPriority('low')">
                 <svg class="formDetail__inputWrapper__prioButtons__icon low" width="20" height="15" viewBox="0 0 20 15"
                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -86,12 +89,10 @@
         </label>
 
         <div class="formDetail__inputWrapper__selectWrapper">
-            <select class="formDetail__inputWrapper__selectCategory">
-                @if (categorySelected === '') {
-                <option disabled selected hidden>Select task category</option>
-                } @else {
-                <option disabled selected hidden>{{categorySelected}}</option>
-                }
+            <select class="formDetail__inputWrapper__selectCategory" formControlName="category">
+                <option value="" disabled hidden>Select task category</option>
+                <option value="Technical Task">Technical Task</option>
+                <option value="User Story">User Story</option>
 
             </select>
 
@@ -125,7 +126,8 @@
             Subtask
         </label>
         <div class="formDetail__inputWrapper__subtaskInput">
-            <input type="text" placeholder="Add new subtask" #subtaskValue (input)="checkTextInSubtaskInput(subtaskValue)">
+            <input type="text" placeholder="Add new subtask" #subtaskValue
+                (input)="checkTextInSubtaskInput(subtaskValue)">
         </div>
 
 
