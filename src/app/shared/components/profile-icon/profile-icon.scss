@@ -13,4 +13,7 @@
         font-size: var(--fs-h5);
         box-sizing: border-box;
         flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
