@@ -82,12 +82,15 @@
                 (selectedContactsChange)="setAssignedCollaborators($event)">
             </app-contact-selection>
             }
-        </div>
-        <div class="assignedContactIcons">
-            @for (contact of getSelectedContacts(); track contact.id) {
-            <app-profile-icon [initials]="getProfileData(contact).initials"
-                [avatarColor]="getProfileData(contact).avatarColor">
-            </app-profile-icon>
+
+            @if (getSelectedContacts().length > 0) {
+            <div class="assignedContactIcons">
+                @for (contact of getSelectedContacts(); track contact.id) {
+                <app-profile-icon [initials]="getProfileData(contact).initials"
+                    [avatarColor]="getProfileData(contact).avatarColor">
+                </app-profile-icon>
+                }
+            </div>
             }
         </div>
     </div>

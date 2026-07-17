@@ -412,3 +412,9 @@ app-button {
 .subtaskBtnDisabled {
     display: none;
 }
+
+.assignedContactIcons {
+    padding-top: var(--space-md);
+    display: flex;
+    gap: var(--space-sm);
+}
