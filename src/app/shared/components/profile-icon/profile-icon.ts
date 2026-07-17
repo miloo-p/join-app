@@ -1,4 +1,3 @@
-
 /*
 The imports come from contacts-list.ts.
 
@@ -47,12 +46,15 @@ export class ProfileIcon {
   @Input() contact!: UIContact;
 
 /*testing user*/
-    public testContact: Contact = {
+public testContact!: UIContact;
+
+constructor() {
+  this.testContact = this.transformContactData({
     id: 1,
     firstname: 'Magdalena',
     lastname: 'Laurisch'
-  };
-
+  });
+}
 
     public availableColors: string[] = [
     'var(--clr-user-tangerine)',
