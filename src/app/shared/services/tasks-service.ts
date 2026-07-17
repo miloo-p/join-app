@@ -29,7 +29,6 @@ export class tasksService {
     const { data: tasks, error } = await this.supabase.from('tasks').select('*');
     if (!tasks) return;
     this.tasks.set(tasks);
-    console.log('Tasks:', tasks);
   }
 
   async getSingleTask(id: number) {
