@@ -77,11 +77,17 @@
             </div>
 
             @if (isContactDropdownOpen) {
-            <app-contact-selection 
-                class="formDetail__inputWrapper__selectWrapper__dropdown"
+            <app-contact-selection class="formDetail__inputWrapper__selectWrapper__dropdown"
                 [selectedContacts]="form.get('assignedTo')?.value || []"
                 (selectedContactsChange)="setAssignedCollaborators($event)">
             </app-contact-selection>
+            }
+        </div>
+        <div class="assignedContactIcons">
+            @for (contact of getSelectedContacts(); track contact.id) {
+            <app-profile-icon [initials]="getProfileData(contact).initials"
+                [avatarColor]="getProfileData(contact).avatarColor">
+            </app-profile-icon>
             }
         </div>
     </div>

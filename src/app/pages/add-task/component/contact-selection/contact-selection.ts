@@ -6,6 +6,13 @@ type AssignedCollaborator = {
   name: string;
 };
 
+type AssignedCollaboratorIcon = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  name: string;
+};
+
 
 @Component({
   selector: 'app-contact-selection',
@@ -39,6 +46,8 @@ export class ContactSelection {
       .filter(contact => selectedContactIds.has(contact.id))
       .map(contact => ({
         id: contact.id,
+        firstname: contact.firstname,
+        lastname: contact.lastname,
         name: `${contact.firstname} ${contact.lastname}`,
       }));
 
