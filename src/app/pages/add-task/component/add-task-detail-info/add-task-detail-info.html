@@ -77,7 +77,11 @@
             </div>
 
             @if (isContactDropdownOpen) {
-            <app-contact-selection class="formDetail__inputWrapper__selectWrapper__dropdown"></app-contact-selection>
+            <app-contact-selection 
+                class="formDetail__inputWrapper__selectWrapper__dropdown"
+                [selectedContacts]="form.get('assignedTo')?.value || []"
+                (selectedContactsChange)="setAssignedCollaborators($event)">
+            </app-contact-selection>
             }
         </div>
     </div>

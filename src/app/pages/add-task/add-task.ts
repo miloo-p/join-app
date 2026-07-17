@@ -31,9 +31,10 @@ export class AddTask {
       validators: [Validators.required],
     }),
 
-    assignedTo: new FormControl<number[]>([], {
+    assignedTo: new FormControl<{ id: number; name: string }[]>([], {
       nonNullable: true,
     }),
+
     category: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
@@ -68,7 +69,7 @@ export class AddTask {
       due_date: formValue.dueDate,
       status: 0,
       priority: this.mapPriorityToNumber(formValue.priority),
-      collaborators: [0, 1],
+      collaborators: formValue.assignedTo.map((contact) => contact.id),
       subtasks: formValue.subtasks.map((subtask) => ({
         name: subtask.name,
         status: 0,

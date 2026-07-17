@@ -21,6 +21,12 @@ export class AddTaskDetailInfo {
   editingSubtaskId: number | null = null;
   isTextInSubtaskInput = false;
 
+  setAssignedCollaborators(collaborators: { id: number; name: string }[]): void {
+  this.form.patchValue({
+    assignedTo: collaborators,
+  });
+}
+
   checkTextInSubtaskInput(inputElement: HTMLInputElement): void {
     const subtaskInputValue = inputElement.value;
     if (subtaskInputValue === '') {
