@@ -47,6 +47,7 @@ export class AddTask {
     }),
   });
 
+  /** Resets the task form and clears local child component state. */
   clearTaskForm(): void {
     this.addTaskForm.reset({
       title: '',
@@ -60,6 +61,7 @@ export class AddTask {
     this.detailInfo.clearDetailInfo();
   }
 
+  /** Maps form values to the task payload expected by the database. */
   private mapFormToTaskPayload() {
     const formValue = this.addTaskForm.getRawValue();
 
@@ -78,10 +80,12 @@ export class AddTask {
     };
   }
 
+  /** Converts the selected category label to its database value. */
   private mapCategoryToNumber(category: string): number {
     return category === 'User Story' ? 1 : 0;
   }
 
+  /** Converts the selected priority label to its database value. */
   private mapPriorityToNumber(priority: 'urgent' | 'medium' | 'low'): number {
     if (priority === 'urgent') {
       return 2;
@@ -94,6 +98,7 @@ export class AddTask {
     return 0;
   }
 
+  /** Validates, saves, and clears the task form. */
   async createTask(): Promise<void> {
     if (this.addTaskForm.invalid) {
       this.addTaskForm.markAllAsTouched();
