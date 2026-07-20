@@ -27,37 +27,6 @@ export class AddTaskDetailInfo {
   isContactDropdownOpen = false;
   isCategoryDropwDownOpen = false;
 
-  setAssignedCollaborators(collaborators: { id: number; name: string }[]): void {
-    this.form.patchValue({
-      assignedTo: collaborators,
-    });
-  }
-
-  toggleDropdown(): void {
-    this.isContactDropdownOpen = !this.isContactDropdownOpen;
-    if (this.isCategoryDropwDownOpen === true) {
-      this.isCategoryDropwDownOpen = false;
-    }
-  }
-
-  toggleDropdownCategory(): void {
-    this.isCategoryDropwDownOpen = !this.isCategoryDropwDownOpen;
-    if (this.isContactDropdownOpen === true) {
-      this.isContactDropdownOpen = false;
-    }
-  }
-
-  getCategory(text: string): void {
-    this.form.patchValue({ category: text });
-    this.isCategoryDropwDownOpen = false;
-  }
-
-  clearDetailInfo(): void {
-    this.isContactDropdownOpen = false;
-    this.isCategoryDropwDownOpen = false;
-    this.subtaskInfo?.clearSubtasks();
-  }
-
   availableColors: string[] = [
     'var(--clr-user-tangerine)',
     'var(--clr-user-flamingo)',
@@ -76,10 +45,48 @@ export class AddTaskDetailInfo {
     'var(--clr-user-marigold)'
   ];
 
+  /** Stores the selected contacts in the task form. */
+  setAssignedCollaborators(collaborators: { id: number; name: string }[]): void {
+    this.form.patchValue({
+      assignedTo: collaborators,
+    });
+  }
+
+  /** Toggles the contact dropdown and closes the category dropdown. */
+  toggleDropdown(): void {
+    this.isContactDropdownOpen = !this.isContactDropdownOpen;
+    if (this.isCategoryDropwDownOpen === true) {
+      this.isCategoryDropwDownOpen = false;
+    }
+  }
+
+  /** Toggles the category dropdown and closes the contact dropdown. */
+  toggleDropdownCategory(): void {
+    this.isCategoryDropwDownOpen = !this.isCategoryDropwDownOpen;
+    if (this.isContactDropdownOpen === true) {
+      this.isContactDropdownOpen = false;
+    }
+  }
+
+  /** Stores the selected category in the task form. */
+  getCategory(text: string): void {
+    this.form.patchValue({ category: text });
+    this.isCategoryDropwDownOpen = false;
+  }
+
+  /** Resets local dropdown and subtask state. */
+  clearDetailInfo(): void {
+    this.isContactDropdownOpen = false;
+    this.isCategoryDropwDownOpen = false;
+    this.subtaskInfo?.clearSubtasks();
+  }
+
+  /** Returns the currently selected contacts from the task form. */
   getSelectedContacts(): AssignedCollaboratorIcon[] {
     return this.form.get('assignedTo')?.value || [];
   }
 
+  /** Builds initials and avatar color data for a selected contact. */
   getProfileData(contact: AssignedCollaboratorIcon) {
     const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
     const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
