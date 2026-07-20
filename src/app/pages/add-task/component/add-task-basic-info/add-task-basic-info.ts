@@ -14,11 +14,13 @@ export class AddTaskBasicInfo {
 
   today = new Date().toISOString().split('T')[0];
 
+  /** Formats an ISO date string from yyyy-mm-dd to dd/mm/yyyy for display. */
   formatDateForDisplay(date: string): string {
     const [year, month, day] = date.split('-');
     return `${day}/${month}/${year}`;
   }
 
+  /** Opens the native browser date picker for the due date input. */
   openDatePicker(input: HTMLInputElement): void {
     input.showPicker();
   }
