@@ -4,7 +4,9 @@
         (click)="toggleContact(contact.id)">
 
         <span class="contactList__contact__profileIcon">
-
+            <app-profile-icon [initials]="getProfileData(contact).initials"
+                [avatarColor]="getProfileData(contact).avatarColor">
+            </app-profile-icon>
         </span>
 
         <span class="contactList__contact__name">
