@@ -1,20 +1,29 @@
+/*
+The imports come from contacts-list.ts.
 
-/*Import kommt von der contacts-list ts, dann standalone: 
-Input von intials und der color, unten auch ein Array mit den Farben
+Since this is a standalone component,
+the required imports are added directly to the component.
 
-überall Concact ersetzen durch User: wir wollen mit den Initialen des eingeloggten Users Arbeiten!
-User noch holen und Dateipfad richtig setzen!*/
+The initials and the avatar color are passed via @Input().
+There is also an array containing the available avatar colors.
+
+Replace Contact with User everywhere,
+because we want to work with the initials of the logged-in user.
+
+Import the Contact model and set the correct file path.
+*/
+
 import { Component, Input } from '@angular/core';
 
 
-/*nur für Test User und UI User anlegen!!nachher über Datenbank holen*/
-interface User {
+/*only fpr testing Contact Contact ID*/
+interface Contact {
   id: number;
   firstname: string;
   lastname: string;
 }
 
-interface UIUser extends User {
+interface UIContact extends Contact {
   name: string;
   initials: string;
   avatarColor: string;
@@ -27,22 +36,25 @@ interface UIUser extends User {
   styleUrls: ['./profile-icon.scss']
 })
 
-/*Import initials, avatar color, & user! and avaible colors */
+/*Import initials, avatar color, & Contact! and avaible colors */
 export class ProfileIcon {
 
   @Input() initials = '';
 
   @Input() avatarColor = '';
 
-  @Input() user!: User;
+  @Input() contact!: UIContact;
 
 /*testing user*/
-    public testUser: User = {
+public testContact!: UIContact;
+
+constructor() {
+  this.testContact = this.transformContactData({
     id: 1,
     firstname: 'Magdalena',
     lastname: 'Laurisch'
-  };
-
+  });
+}
 
     public availableColors: string[] = [
     'var(--clr-user-tangerine)',
@@ -65,30 +77,22 @@ export class ProfileIcon {
 /*from Jérôme Data: contact-list: changing: contact to user! */
     /**
      * Transforms raw Supabase database fields into UI-ready fields like combined name, initials, and colors.
-     * @param {User} user - The raw database user object.
-     * @returns {UIUser} The enriched user object including UI properties.
+     * @param {Contact} contact - The raw database user object.
+     * @returns {UIContact} The enriched user object including UI properties.
      */
-    private transformUserData(user: User): UIUser {
-      const firstLetter = user.firstname?.charAt(0).toUpperCase() || '';
-      const lastLetter = user.lastname?.charAt(0).toUpperCase() || '';
-      const colorIndex = (user.firstname.length + user.lastname.length) % this.availableColors.length;
-      return {
-        ...user,
-        name: `${user.firstname} ${user.lastname}`,
-        initials: `${firstLetter}${lastLetter}`,
-        avatarColor: this.availableColors[colorIndex]
-      };
-    }
-
-
-    /*only for testing in console!!!!*/
-
-constructor() {
-  console.log(this.transformUserData(this.testUser));
-}
-
-public get profileData(): UIUser {
-  return this.transformUserData(this.testUser);
-}
+private transformContactData(contact: Contact): UIContact {
+    const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
+    const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
+    const contactId = typeof contact.id === 'number' ? contact.id : 0;
+    const colorIndex = Math.abs(contactId) % this.availableColors.length;
+    return {
+      ...contact,
+      name: `${contact.firstname} ${contact.lastname}`,
+      initials: `${firstLetter}${lastLetter}`,
+      avatarColor: this.availableColors[colorIndex],
+    };
   }
+}
+
+
   
