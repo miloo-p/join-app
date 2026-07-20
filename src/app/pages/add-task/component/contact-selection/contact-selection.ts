@@ -17,7 +17,8 @@ export class ContactSelection {
 
   selectedContactIds = new Set<number>();
 
-  toggleContact(contactId: number): void {
+  toggleContact(contactId: number | undefined): void {
+    if (contactId === undefined) return;
     if (this.selectedContactIds.has(contactId)) {
       this.selectedContactIds.delete(contactId);
     } else {
@@ -25,7 +26,8 @@ export class ContactSelection {
     }
   }
 
-  isSelected(contactId: number): boolean {
-    return this.selectedContactIds.has(contactId);
+  isSelected(id: number | undefined): boolean {
+    if (id === undefined) return false;
+    return this.selectedContactIds.has(id);
   }
 }

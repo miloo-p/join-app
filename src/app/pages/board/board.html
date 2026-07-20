@@ -3,7 +3,13 @@
     <h2 class="board__title">Board</h2>
     <div class="board__interaction">
       <input placeholder="Find Task" class="board__search" />
-      <app-button text="Add task" variant="primary" size="md" width="full">
+      <app-button
+        text="Add task"
+        variant="primary"
+        size="md"
+        width="full"
+        (click)="openAddTaskDialog('todo')"
+      >
         <svg
           width="24"
           height="24"
@@ -87,4 +93,4 @@
 </section>
 
 <app-task-dialog #addTaskDialog></app-task-dialog>
-<app-task-detail #taskDetail></app-task-detail>
+<app-task-detail #taskDetail (editTask)="openEditTaskDialog($event)"></app-task-detail>

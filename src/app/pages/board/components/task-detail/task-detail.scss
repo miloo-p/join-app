@@ -85,11 +85,17 @@
 
   &__assignees-list {
     list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   &__assignee-item {
     @include flexbox(row, flex-start, center, 1rem);
     padding-bottom: 1rem;
+  }
+
+  &__assignee-name {
+    color: var(--text-color-ultradark);
   }
 
   &__avatar {
@@ -98,8 +104,63 @@
     color: var(--text-color-ultralight);
   }
 
+  &__subtasks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    @include flexbox(column, flex-start, stretch, 0.5rem);
+  }
+
+  &__subtask-item {
+    @include flexbox(row, flex-start, center, 1rem);
+    padding: 0rem 1rem;
+    border-radius: var(--radius-md);
+    color: var(--text-color-dark);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--bg-light);
+    }
+  }
+
+  &__subtask-name {
+    font-size: var(--fs-body-large);
+    color: var(--text-color-ultradark);
+  }
+  &__subtask-empty {
+    font-size: var(--fs-body-large);
+    padding: 0;
+    border-radius: var(--radius-md);
+    color: var(--text-color-dark);
+  }
+
+  &__assignee-empty {
+    font-size: var(--fs-body-large);
+    padding: 0rem 1rem;
+    border-radius: var(--radius-md);
+    color: var(--text-color-ultradark);
+  }
+
   &__footer {
     @include flexbox(row, flex-end, center, 1rem);
     margin-top: 1rem;
+  }
+
+  &__action-btn {
+    @include flexbox(row, flex-end, center, 0.5rem);
+    background: none;
+    border: none;
+
+    color: var(--text-color-dark);
+
+    cursor: pointer;
+  }
+
+  &__seperator {
+    border-left: 2px solid var(--text-color-light);
+
+    height: 1.25rem;
   }
 }

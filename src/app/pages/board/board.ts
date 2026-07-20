@@ -21,6 +21,7 @@ export class Board implements OnInit {
   doneTasks = computed(() => this.dbTasks.tasks().filter((t) => t.status === 3));
 
   @ViewChild('taskDetail') TaskDetail!: TaskDetail;
+  @ViewChild('addTaskDialog') addTaskDialog!: TaskDialog;
 
   async ngOnInit() {
     await this.dbTasks.getTasks();
@@ -61,11 +62,15 @@ export class Board implements OnInit {
   }
 
   openAddTaskDialog(status: string) {
-    console.log('Spalte:', status);
+    this.addTaskDialog.openDialog({ columnId: status });
   }
 
   openTaskDetails(task: any) {
     console.log('Folgender Task wurde geklickt:', task);
     this.TaskDetail.openDialog(task);
+  }
+
+  openEditTaskDialog(taskToEdit: any) {
+    this.addTaskDialog.openDialog({ task: taskToEdit });
   }
 }
