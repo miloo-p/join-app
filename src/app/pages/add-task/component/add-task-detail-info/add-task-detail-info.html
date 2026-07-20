@@ -34,9 +34,15 @@
 
             @if (getSelectedContacts().length > 0) {
             <div class="assignedContactIcons">
-                @for (contact of getSelectedContacts(); track contact.id) {
+                @for (contact of getVisibleContacts(); track contact.id) {
                 <app-profile-icon size="small" [initials]="getProfileData(contact).initials"
                     [avatarColor]="getProfileData(contact).avatarColor">
+                </app-profile-icon>
+                }
+
+                @if (getHiddenContactsCount() > 0) {
+                <app-profile-icon size="small" [initials]="'+' + getHiddenContactsCount()"
+                    avatarColor="var(--clr-feedback-disabled)">
                 </app-profile-icon>
                 }
             </div>

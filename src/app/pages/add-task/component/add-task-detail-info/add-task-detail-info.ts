@@ -44,7 +44,8 @@ export class AddTaskDetailInfo {
     'var(--clr-user-lime)',
     'var(--clr-user-lemon)',
     'var(--clr-user-cherry)',
-    'var(--clr-user-marigold)'
+    'var(--clr-user-marigold)',
+    'var(--clr-feedback-disabled)'
   ];
 
   /** Stores the selected contacts in the task form. */
@@ -98,5 +99,15 @@ export class AddTaskDetailInfo {
       initials: `${firstLetter}${lastLetter}`,
       avatarColor: this.availableColors[colorIndex],
     };
+  }
+
+  /** Returns the first three selected contacts for the visible avatar icons. */
+  getVisibleContacts(): AssignedCollaboratorIcon[] {
+    return this.getSelectedContacts().slice(0, 3);
+  }
+
+  /** Returns the number of selected contacts hidden behind the counter icon. */
+  getHiddenContactsCount(): number {
+    return Math.max(this.getSelectedContacts().length - 3, 0);
   }
 }
