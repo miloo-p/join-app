@@ -3,7 +3,11 @@ Hintergrundfarbe und Initialen aus contact list werden übergeben, bkeibt auch b
 
 <div
   class="profile-icon"
-  [style.background-color]="contact.avatarColor">
+  [class.profile-iconsmall]="size === 'small'"
+  [class.profile-iconbig]="size === 'big'"
+  [class.profile-iconeighty]="size === 'eighty'"
+  [class.profile-iconheader]="size === 'header'"
+  [style.background-color]="contact?.avatarColor || avatarColor">
 
-  {{ contact.initials }}
+  {{ contact?.initials || initials }}
 </div>
