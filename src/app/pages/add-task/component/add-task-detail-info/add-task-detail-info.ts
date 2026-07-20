@@ -5,6 +5,7 @@ import { ProfileIcon } from '../../../../shared/components/profile-icon/profile-
 import { PrioSelection } from '../prio-selection/prio-selection';
 import { AddTaskSubtasks } from '../add-task-subtasks/add-task-subtasks';
 
+/** Contact data used to render selected collaborator profile icons. */
 type AssignedCollaboratorIcon = {
   id: number;
   firstname: string;
@@ -27,6 +28,7 @@ export class AddTaskDetailInfo {
   isContactDropdownOpen = false;
   isCategoryDropwDownOpen = false;
 
+  /** Available avatar background colors for selected contact icons. */
   availableColors: string[] = [
     'var(--clr-user-tangerine)',
     'var(--clr-user-flamingo)',
