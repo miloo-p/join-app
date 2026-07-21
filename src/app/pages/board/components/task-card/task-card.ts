@@ -1,6 +1,6 @@
-import { Component, Input, inject, OnInit } from '@angular/core';
-import { tasksService } from '../../../../shared/services/tasks-service';
+import { Component, inject, Input } from '@angular/core';
 import { Task } from '../../../../shared/interfaces/tasks';
+import { tasksService } from '../../../../shared/services/tasks-service';
 
 @Component({
   selector: 'app-task-card',
@@ -30,5 +30,24 @@ export class TaskCard {
     //   category: 1,
     //   }
     // ])
+  }
+
+  /**
+   * Counts how many subtasks have a status of 1 (completed).
+   * @returns {number} The total number of completed subtasks.
+   */
+  getCompletedSubtasksCount(): number {
+    if (!this.task?.subtasks) return 0;
+    return this.task.subtasks.filter(subtask => subtask.status === 1).length;
+  }
+
+  /**
+   * Calculates the percentage of completed subtasks for the progress bar width.
+   * @returns {number} The completion percentage between 0 and 100.
+   */
+  getCompletionPercentage(): number {
+    if (!this.task?.subtasks || this.task.subtasks.length === 0) return 0;
+    const completed = this.getCompletedSubtasksCount();
+    return (completed / this.task.subtasks.length) * 100;
   }
 }
