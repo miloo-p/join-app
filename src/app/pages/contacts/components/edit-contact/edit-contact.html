@@ -1,5 +1,18 @@
 <div class="edit-contact" role="dialog" aria-modal="true" (click)="onOverlayClick($event)">
     <div class="edit-contact__panel">
+        <button type="button" class="edit-contact__close-button" aria-label="Close overlay" (click)="onCloseOverlay()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
+                <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32"
+                    height="32">
+                    <rect width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_71720_5473)">
+                    <path
+                        d="M11.9998 13.4L7.0998 18.3C6.91647 18.4834 6.68314 18.575 6.3998 18.575C6.11647 18.575 5.88314 18.4834 5.6998 18.3C5.51647 18.1167 5.4248 17.8834 5.4248 17.6C5.4248 17.3167 5.51647 17.0834 5.6998 16.9L10.5998 12L5.6998 7.10005C5.51647 6.91672 5.4248 6.68338 5.4248 6.40005C5.4248 6.11672 5.51647 5.88338 5.6998 5.70005C5.88314 5.51672 6.11647 5.42505 6.3998 5.42505C6.68314 5.42505 6.91647 5.51672 7.0998 5.70005L11.9998 10.6L16.8998 5.70005C17.0831 5.51672 17.3165 5.42505 17.5998 5.42505C17.8831 5.42505 18.1165 5.51672 18.2998 5.70005C18.4831 5.88338 18.5748 6.11672 18.5748 6.40005C18.5748 6.68338 18.4831 6.91672 18.2998 7.10005L13.3998 12L18.2998 16.9C18.4831 17.0834 18.5748 17.3167 18.5748 17.6C18.5748 17.8834 18.4831 18.1167 18.2998 18.3C18.1165 18.4834 17.8831 18.575 17.5998 18.575C17.3165 18.575 17.0831 18.4834 16.8998 18.3L11.9998 13.4Z"
+                        fill="currentColor" />
+                </g>
+            </svg>
+        </button>
         <div class="edit-contact__sidebar">
             <svg width="54" height="67" viewBox="0 0 101 122" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_301_1264)">
@@ -29,32 +42,16 @@
         </div>
 
         <div class="edit-contact__content">
-            <button type="button" class="edit-contact__close-button" aria-label="Close overlay"
-                (click)="onCloseOverlay()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
-                    <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                        width="32" height="32">
-                        <rect width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_71720_5473)">
-                        <path
-                            d="M11.9998 13.4L7.0998 18.3C6.91647 18.4834 6.68314 18.575 6.3998 18.575C6.11647 18.575 5.88314 18.4834 5.6998 18.3C5.51647 18.1167 5.4248 17.8834 5.4248 17.6C5.4248 17.3167 5.51647 17.0834 5.6998 16.9L10.5998 12L5.6998 7.10005C5.51647 6.91672 5.4248 6.68338 5.4248 6.40005C5.4248 6.11672 5.51647 5.88338 5.6998 5.70005C5.88314 5.51672 6.11647 5.42505 6.3998 5.42505C6.68314 5.42505 6.91647 5.51672 7.0998 5.70005L11.9998 10.6L16.8998 5.70005C17.0831 5.51672 17.3165 5.42505 17.5998 5.42505C17.8831 5.42505 18.1165 5.51672 18.2998 5.70005C18.4831 5.88338 18.5748 6.11672 18.5748 6.40005C18.5748 6.68338 18.4831 6.91672 18.2998 7.10005L13.3998 12L18.2998 16.9C18.4831 17.0834 18.5748 17.3167 18.5748 17.6C18.5748 17.8834 18.4831 18.1167 18.2998 18.3C18.1165 18.4834 17.8831 18.575 17.5998 18.575C17.3165 18.575 17.0831 18.4834 16.8998 18.3L11.9998 13.4Z"
-                            fill="currentColor" />
-                    </g>
-                </svg>
-            </button>
-
             <div class="edit-contact__body">
                 <div class="edit-contact__avatar"
                     [style.background-color]="editingContact?.avatarColor ?? 'var(--clr-user-sunflower)'">
                     {{ editingContact?.initials ?? 'TW' }}
                 </div>
 
-                <form novalidate class="edit-contact__form" (ngSubmit)="onSaveContact()">
+                <form novalidate class="edit-contact__form" [formGroup]="editContactForm" (ngSubmit)="onSaveContact()">
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
-                            <input type="text" name="name" placeholder="Name" class="edit-contact__input"
-                                [(ngModel)]="editingContact!.name">
+                            <input type="text" placeholder="Name" class="edit-contact__input" formControlName="name">
                             <span class="edit-contact__icon edit-contact__icon--user">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -70,12 +67,19 @@
                                 </svg>
                             </span>
                         </div>
+                        @if (editContactForm.controls.name.invalid && editContactForm.controls.name.touched) {
+                        @if (editContactForm.controls.name.errors?.['required']) {
+                        <p class="dialog__error">Bitte gib einen Namen ein.</p>
+                        }
+                        @if (editContactForm.controls.name.errors?.['pattern']) {
+                        <p class="dialog__error">Bitte gib mindestens Vor- und Nachnamen mit jeweils 2 Zeichen ein.</p>
+                        }
+                        }
                     </div>
 
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
-                            <input type="email" name="email" placeholder="Email" class="edit-contact__input"
-                                [(ngModel)]="editingContact!.email">
+                            <input type="email" placeholder="Email" class="edit-contact__input" formControlName="email">
                             <span class="edit-contact__icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -91,12 +95,20 @@
                                 </svg>
                             </span>
                         </div>
+                        @if (editContactForm.controls.email.invalid && editContactForm.controls.email.touched) {
+                        @if (editContactForm.controls.email.errors?.['required']) {
+                        <p class="dialog__error">Bitte gib eine E-Mail-Adresse ein.</p>
+                        }
+                        @if (editContactForm.controls.email.errors?.['pattern']) {
+                        <p class="dialog__error">Bitte gib eine E-Mail mit @ und der Endung .com oder .de ein.</p>
+                        }
+                        }
                     </div>
 
                     <div class="edit-contact__field-group">
                         <div class="edit-contact__field">
-                            <input type="tel" name="phone" placeholder="Phone" class="edit-contact__input"
-                                [(ngModel)]="editingContact!.telephone">
+                            <input type="tel" placeholder="Phone" class="edit-contact__input"
+                                formControlName="telephone">
                             <span class="edit-contact__icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -112,6 +124,14 @@
                                 </svg>
                             </span>
                         </div>
+                        @if (editContactForm.controls.telephone.invalid && editContactForm.controls.telephone.touched) {
+                        @if (editContactForm.controls.telephone.errors?.['required']) {
+                        <p class="dialog__error">Bitte gib eine Telefonnummer ein.</p>
+                        }
+                        @if (editContactForm.controls.telephone.errors?.['pattern']) {
+                        <p class="dialog__error">Bitte gib eine Telefonnummer ein, die mit +49 beginnt.</p>
+                        }
+                        }
                     </div>
 
                     <div class="edit-contact__actions">
@@ -120,7 +140,8 @@
                             Delete
                         </button>
 
-                        <button type="submit" class="edit-contact__btn edit-contact__btn--primary">
+                        <button type="submit" class="edit-contact__btn edit-contact__btn--primary"
+                            [disabled]="editContactForm.invalid">
                             Save
                             <span class="edit-contact__btn-check" aria-hidden="true">✓</span>
                         </button>

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
+import { contactsService } from '../../shared/services/contacts-service';
 import { ContactsDetailComponent } from './components/contacts-detail/contacts-detail';
 import { ContactList, UIContact } from './components/contacts-list/contacts-list';
 import { EditContactComponent } from './components/edit-contact/edit-contact';
-import { contactsService} from '../../shared/services/contacts-service';
 
 @Component({
   selector: 'app-contacts',
@@ -87,10 +87,14 @@ export class Contacts {
     this.closeEditContact();
   }
 
-  /**
+    /**
    * Resets the active contact to null to return to the list view on mobile.
    */
-  public handleBackToList(): void {
+  public handleBackToList(listComponent: ContactList): void {
     this.activeContact.set(null);
+    
+    if (listComponent) {
+      listComponent.selectedContact.set(null); 
+    }
   }
 }

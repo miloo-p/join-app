@@ -1,138 +1,140 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
-
+import { Component, Input, ViewChild, HostListener, ElementRef, inject } from '@angular/core';
 import { ContactSelection } from '../contact-selection/contact-selection';
+import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { ProfileIcon } from '../../../../shared/components/profile-icon/profile-icon';
+import { PrioSelection } from '../prio-selection/prio-selection';
+import { AddTaskSubtasks } from '../add-task-subtasks/add-task-subtasks';
+
+/** Contact data used to render selected collaborator profile icons. */
+type AssignedCollaboratorIcon = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  name: string;
+};
 
 @Component({
   selector: 'app-add-task-detail-info',
   standalone: true,
-  imports: [ButtonComponent, ContactSelection],
+  imports: [ContactSelection, ReactiveFormsModule, ProfileIcon, PrioSelection, AddTaskSubtasks],
   templateUrl: './add-task-detail-info.html',
   styleUrl: './add-task-detail-info.scss',
 })
 export class AddTaskDetailInfo {
+  @Input({ required: true }) form!: FormGroup;
+
+  @ViewChild(AddTaskSubtasks) subtaskInfo!: AddTaskSubtasks;
+  @ViewChild('assignedDropdown') assignedDropdown!: ElementRef<HTMLElement>;
+  @ViewChild('categoryDropdown') categoryDropdown!: ElementRef<HTMLElement>;
+
+  private elementRef = inject(ElementRef);
+
   isContactDropdownOpen = false;
   isCategoryDropwDownOpen = false;
-  isUrgentSelected = false;
-  isMediumSelected = true;
-  isLowSelected = false;
-  categorySelected = '';
-  currentSubtaskId: number = 1; //reseten nach create Task
-  currentSubtastks: any[] = [];
-  editingSubtaskId: number | null = null;
-  isTextInSubtaskInput = false;
 
-  checkTextInSubtaskInput(inputElement: HTMLInputElement): void {
-    const subtaskInputValue = inputElement.value;
-    if (subtaskInputValue === '') {
-      this.isTextInSubtaskInput = false;
-    } else {
-      this.isTextInSubtaskInput = true;
-    }
+  /** Available avatar background colors for selected contact icons. */
+  availableColors: string[] = [
+    'var(--clr-user-tangerine)',
+    'var(--clr-user-flamingo)',
+    'var(--clr-user-iris)',
+    'var(--clr-user-amethyst)',
+    'var(--clr-user-sky)',
+    'var(--clr-user-mint)',
+    'var(--clr-user-salmon)',
+    'var(--clr-user-apricot)',
+    'var(--clr-user-fuchsia)',
+    'var(--clr-user-sunflower)',
+    'var(--clr-user-cobalt)',
+    'var(--clr-user-lime)',
+    'var(--clr-user-lemon)',
+    'var(--clr-user-cherry)',
+    'var(--clr-user-marigold)',
+    'var(--clr-feedback-disabled)',
+  ];
+
+  /** Stores the selected contacts in the task form. */
+  setAssignedCollaborators(collaborators: { id: number; name: string }[]): void {
+    this.form.patchValue({
+      assignedTo: collaborators,
+    });
   }
 
+  /** Toggles the contact dropdown and closes the category dropdown. */
   toggleDropdown(): void {
     this.isContactDropdownOpen = !this.isContactDropdownOpen;
     if (this.isCategoryDropwDownOpen === true) {
       this.isCategoryDropwDownOpen = false;
-    } else {
-      return;
     }
   }
 
+  /** Toggles the category dropdown and closes the contact dropdown. */
   toggleDropdownCategory(): void {
     this.isCategoryDropwDownOpen = !this.isCategoryDropwDownOpen;
+
+    if (!this.isCategoryDropwDownOpen) {
+      this.form.get('category')?.markAsTouched();
+    }
     if (this.isContactDropdownOpen === true) {
       this.isContactDropdownOpen = false;
-    } else {
-      return;
     }
   }
 
+  /** Stores the selected category in the task form. */
   getCategory(text: string): void {
-    this.categorySelected = text;
+    this.form.patchValue({ category: text });
     this.isCategoryDropwDownOpen = false;
   }
 
-  toggleUrgentBtn(): void {
-    this.isUrgentSelected = !this.isUrgentSelected;
-    if (this.isUrgentSelected === true) {
-      this.isMediumSelected = false;
-      this.isLowSelected = false;
-    }
-    this.mediumBtnStandard();
+  /** Resets local dropdown and subtask state. */
+  clearDetailInfo(): void {
+    this.isContactDropdownOpen = false;
+    this.isCategoryDropwDownOpen = false;
+    this.subtaskInfo?.clearSubtasks();
   }
 
-  toggleMediumBtn(): void {
-    this.isMediumSelected = !this.isMediumSelected;
-    if (this.isMediumSelected === true) {
-      this.isUrgentSelected = false;
-      this.isLowSelected = false;
-    }
-    this.mediumBtnStandard();
+  /** Returns the currently selected contacts from the task form. */
+  getSelectedContacts(): AssignedCollaboratorIcon[] {
+    return this.form.get('assignedTo')?.value || [];
   }
 
-  toggleLowBtn(): void {
-    this.isLowSelected = !this.isLowSelected;
-    if (this.isLowSelected === true) {
-      this.isUrgentSelected = false;
-      this.isMediumSelected = false;
-    }
-    this.mediumBtnStandard();
-  }
+  /** Builds initials and avatar color data for a selected contact. */
+  getProfileData(contact: AssignedCollaboratorIcon) {
+    const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
+    const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
+    const colorIndex =
+      (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
 
-  mediumBtnStandard(): void {
-    if (
-      this.isUrgentSelected === false &&
-      this.isMediumSelected === false &&
-      this.isLowSelected === false
-    ) {
-      this.isMediumSelected = true;
-    }
-  }
-
-  addSubtask(inputElement: HTMLInputElement) {
-    const value = inputElement.value;
-    const subtask = {
-      id: this.currentSubtaskId,
-      name: value,
+    return {
+      initials: `${firstLetter}${lastLetter}`,
+      avatarColor: this.availableColors[colorIndex],
     };
-    this.currentSubtastks.push(subtask);
-    this.currentSubtaskId++;
-    inputElement.value = '';
-    this.isTextInSubtaskInput = false;
   }
 
-  deleteSelectedSubtask(id: number) {
-    const subtaskIndex = this.currentSubtastks.findIndex((subtask) => subtask.id === id);
+  /** Returns the first three selected contacts for the visible avatar icons. */
+  getVisibleContacts(): AssignedCollaboratorIcon[] {
+    return this.getSelectedContacts().slice(0, 3);
+  }
 
-    if (subtaskIndex !== -1) {
-      this.currentSubtastks.splice(subtaskIndex, 1);
+  /** Returns the number of selected contacts hidden behind the counter icon. */
+  getHiddenContactsCount(): number {
+    return Math.max(this.getSelectedContacts().length - 3, 0);
+  }
+
+  /** Closes open dropdowns when the user clicks outside this component. */
+  @HostListener('document:click', ['$event'])
+  closeDropdownsOnOutsideClick(event: MouseEvent): void {
+    const target = event.target as Node;
+    const clickedInsideAssigned = this.assignedDropdown?.nativeElement.contains(target);
+    const clickedInsideCategory = this.categoryDropdown?.nativeElement.contains(target);
+
+    if (!clickedInsideAssigned) {
+      this.isContactDropdownOpen = false;
     }
-  }
-
-  editSelectedSubtask(id: number): void {
-    this.editingSubtaskId = id;
-  }
-
-  isEditingSubtask(id: number): boolean {
-    return this.editingSubtaskId === id;
-  }
-
-  saveSelectedSubtask(id: number, newValue: string): void {
-    const trimmedName = newValue.trim();
-    if (!trimmedName) {
-      return;
+    if (!clickedInsideCategory) {
+      if (this.isCategoryDropwDownOpen) {
+        this.form.get('category')?.markAsTouched();
+      }
+      this.isCategoryDropwDownOpen = false;
     }
-    const subtask = this.currentSubtastks.find((subtask) => subtask.id === id);
-    if (!subtask) {
-      return;
-    }
-    subtask.name = trimmedName;
-    this.editingSubtaskId = null;
-  }
-
-  createTask() {
-    // currentSubtaskId resetten
   }
 }
