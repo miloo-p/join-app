@@ -7,6 +7,7 @@ import {
   ViewChild,
   inject,
   output,
+  signal
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -44,6 +45,8 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
   private contactDatabase = inject(contactsService);
   private viewInitialized = false;
 
+  isSuccessMsgVisible = signal(false);
+
   addTaskForm = new FormGroup({
     title: new FormControl('', {
       nonNullable: true,
@@ -70,6 +73,16 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
       nonNullable: true,
     }),
   });
+
+  /** Shows the task success message for a short time. */
+  /** Shows the task success message for a short time. */
+  showSuccessMessage(): void {
+    this.isSuccessMsgVisible.set(true);
+
+    setTimeout(() => {
+      this.isSuccessMsgVisible.set(false);
+    }, 2000);
+  }
 
   /** Loads contacts and patches edit task data once contacts are available. */
   async ngOnInit(): Promise<void> {
@@ -133,6 +146,7 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
     }
 
     this.clearTaskForm();
+    this.showSuccessMessage();
     this.taskSaved.emit();
   }
 
