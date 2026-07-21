@@ -10,6 +10,7 @@ import {
   signal
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AddTaskBasicInfo } from './component/add-task-basic-info/add-task-basic-info';
 import { AddTaskDetailInfo } from './component/add-task-detail-info/add-task-detail-info';
@@ -44,6 +45,7 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
   private tasksService = inject(tasksService);
   private contactDatabase = inject(contactsService);
   private viewInitialized = false;
+  private router = inject(Router);
 
   isSuccessMsgVisible = signal(false);
 
@@ -76,11 +78,13 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
 
   /** Shows the task success message for a short time. */
   /** Shows the task success message for a short time. */
+  /** Shows the task success message and navigates back to the board. */
   showSuccessMessage(): void {
     this.isSuccessMsgVisible.set(true);
 
     setTimeout(() => {
       this.isSuccessMsgVisible.set(false);
+      this.router.navigate(['/board']);
     }, 2000);
   }
 
