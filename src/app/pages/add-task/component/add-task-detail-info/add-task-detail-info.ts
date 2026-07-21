@@ -137,4 +137,8 @@ export class AddTaskDetailInfo {
       this.isCategoryDropwDownOpen = false;
     }
   }
+
+  loadSubtasks(subtasks: { name: string }[]): void {
+    this.subtaskInfo?.loadSubtasks(subtasks);
+  }
 }

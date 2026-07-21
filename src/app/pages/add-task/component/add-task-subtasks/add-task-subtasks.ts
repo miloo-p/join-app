@@ -107,4 +107,16 @@ export class AddTaskSubtasks {
   cancelEditSubtask(): void {
     this.editingSubtaskId = null;
   }
+
+  loadSubtasks(subtasks: { name: string }[]): void {
+    this.currentSubtasks = subtasks.map((subtask, index) => ({
+      id: index + 1,
+      name: subtask.name,
+    }));
+
+    this.currentSubtaskId = this.currentSubtasks.length + 1;
+    this.editingSubtaskId = null;
+    this.isTextInSubtaskInput = false;
+    this.updateSubtasksForm();
+  }
 }
