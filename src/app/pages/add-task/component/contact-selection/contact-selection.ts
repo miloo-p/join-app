@@ -14,7 +14,6 @@ type AssignedCollaboratorIcon = {
   name: string;
 };
 
-
 @Component({
   selector: 'app-contact-selection',
   standalone: true,
@@ -37,9 +36,7 @@ export class ContactSelection {
       return;
     }
 
-    const selectedContactIds = new Set(
-      this.selectedContacts().map(contact => contact.id)
-    );
+    const selectedContactIds = new Set(this.selectedContacts().map((contact) => contact.id));
 
     if (selectedContactIds.has(contactId)) {
       selectedContactIds.delete(contactId);
@@ -47,9 +44,10 @@ export class ContactSelection {
       selectedContactIds.add(contactId);
     }
 
-    const selectedContacts = this.contactDatabase.contacts()
-      .filter(contact => contact.id !== undefined && selectedContactIds.has(contact.id))
-      .map(contact => ({
+    const selectedContacts = this.contactDatabase
+      .contacts()
+      .filter((contact) => contact.id !== undefined && selectedContactIds.has(contact.id))
+      .map((contact) => ({
         id: contact.id as number,
         firstname: contact.firstname,
         lastname: contact.lastname,
@@ -64,7 +62,7 @@ export class ContactSelection {
       return false;
     }
 
-    return this.selectedContacts().some(contact => contact.id === contactId);
+    return this.selectedContacts().some((contact) => contact.id === contactId);
   }
 
   availableColors: string[] = [
@@ -82,7 +80,7 @@ export class ContactSelection {
     'var(--clr-user-lime)',
     'var(--clr-user-lemon)',
     'var(--clr-user-cherry)',
-    'var(--clr-user-marigold)'
+    'var(--clr-user-marigold)',
   ];
 
   getProfileData(contact: { firstname: string; lastname: string }) {

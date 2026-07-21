@@ -3,7 +3,13 @@
     <h2 class="board__title">Board</h2>
     <div class="board__interaction">
       <input placeholder="Find Task" class="board__search" />
-      <app-button text="Add task" variant="primary" size="md" width="full">
+      <app-button
+        text="Add task"
+        variant="primary"
+        size="md"
+        width="full"
+        (click)="openAddTaskDialog('todo')"
+      >
         <svg
           width="24"
           height="24"
@@ -33,7 +39,7 @@
     </div>
   </header>
 
-  <div class="board__content">
+  <div class="board__content" cdkDropListGroup>
     @for (column of boardColumns; track column.id) {
       <div class="board__column">
         <div class="board__column-header">
@@ -69,9 +75,14 @@
           }
         </div>
 
-        <ul class="board__task-list">
+        <ul
+          class="board__task-list"
+          cdkDropList
+          [cdkDropListData]="column.tasks"
+          (cdkDropListDropped)="drop($event, column.id)"
+        >
           @for (task of column.tasks; track task.id) {
-            <li class="board__task" (click)="openTaskDetails(task)">
+            <li class="board__task" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
               <app-task-card [task]="task"></app-task-card>
             </li>
           } @empty {
@@ -87,4 +98,4 @@
 </section>
 
 <app-task-dialog #addTaskDialog></app-task-dialog>
-<app-task-overlay #taskOverlay></app-task-overlay>
+<app-task-detail #taskDetail (editTask)="openEditTaskDialog($event)"></app-task-detail>

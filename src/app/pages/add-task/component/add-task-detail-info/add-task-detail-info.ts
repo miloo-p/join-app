@@ -49,7 +49,7 @@ export class AddTaskDetailInfo {
     'var(--clr-user-lemon)',
     'var(--clr-user-cherry)',
     'var(--clr-user-marigold)',
-    'var(--clr-feedback-disabled)'
+    'var(--clr-feedback-disabled)',
   ];
 
   /** Stores the selected contacts in the task form. */
@@ -101,7 +101,8 @@ export class AddTaskDetailInfo {
   getProfileData(contact: AssignedCollaboratorIcon) {
     const firstLetter = contact.firstname?.charAt(0).toUpperCase() || '';
     const lastLetter = contact.lastname?.charAt(0).toUpperCase() || '';
-    const colorIndex = (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
+    const colorIndex =
+      (contact.firstname.length + contact.lastname.length) % this.availableColors.length;
 
     return {
       initials: `${firstLetter}${lastLetter}`,

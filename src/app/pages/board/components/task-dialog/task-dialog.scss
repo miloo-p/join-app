@@ -1,0 +1,46 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.add-task-dialog {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &__content {
+    position: relative;
+
+    background-color: var(--bg-ultralight);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-allaround);
+
+    width: 100vw;
+    max-width: 900px;
+
+    @include flexbox(column, flex-start, stretch, 2rem);
+  }
+
+  &__close-btn {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    z-index: 10;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--text-color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--bg-light);
+      border-radius: var(--radius-pill);
+    }
+  }
+}
