@@ -66,6 +66,10 @@ export class AddTaskDetailInfo {
   /** Toggles the category dropdown and closes the contact dropdown. */
   toggleDropdownCategory(): void {
     this.isCategoryDropwDownOpen = !this.isCategoryDropwDownOpen;
+
+    if (!this.isCategoryDropwDownOpen) {
+      this.form.get('category')?.markAsTouched();
+    }
     if (this.isContactDropdownOpen === true) {
       this.isContactDropdownOpen = false;
     }

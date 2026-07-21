@@ -27,6 +27,7 @@
         &__selectWrapper {
             position: relative;
             width: 100%;
+            position: relative;
 
             &__dropdown {
                 position: absolute;
@@ -34,6 +35,17 @@
                 left: 0;
                 right: 0;
                 z-index: 10;
+            }
+
+            &__requiredText {
+                height: 40px;
+                position: absolute;
+                top: 42px;
+
+                p {
+                    font-size: 14px;
+                    color: var(--clr-feedback-error)
+                }
             }
         }
 

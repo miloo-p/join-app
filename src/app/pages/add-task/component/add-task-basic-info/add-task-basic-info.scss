@@ -31,6 +31,22 @@
             line-height: 1.2;
             resize: vertical;
         }
+
+        &__input {
+            position: relative;
+
+            &__requiredText {
+                height: 40px;
+                position: absolute;
+                top: 42px;
+
+                p {
+                    font-size: 14px;
+                    color: var(--clr-feedback-error)
+                }
+            }
+        }
+
     }
 }
 

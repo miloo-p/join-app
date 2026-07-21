@@ -61,8 +61,13 @@
                 <option value="" disabled hidden>Select task category</option>
                 <option value="Technical Task">Technical Task</option>
                 <option value="User Story">User Story</option>
-
             </select>
+
+            <div class="formDetail__inputWrapper__selectWrapper__requiredText">
+                @if (form.get('category')?.hasError('required') && form.get('category')?.touched) {
+                <p class="formError">This field is required</p>
+                }
+            </div>
 
             <div class="formDetail__inputWrapper__iconOverlay" (click)="toggleDropdownCategory()">
                 <div class="formDetail__inputWrapper__iconOverlay__icon">
