@@ -8,6 +8,7 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { TaskCard } from './components/task-card/task-card';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { TaskDetail } from './components/task-detail/task-detail';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { TaskDialog } from './components/task-dialog/task-dialog';
@@ -31,8 +32,12 @@ import { tasksService } from '../../shared/services/tasks-service';
 export class Board implements OnInit {
   dbTasks = inject(tasksService);
   cdr = inject(ChangeDetectorRef);
+  breakpointObserver = inject(BreakpointObserver);
 
   isDragging = false;
+  isDragDisabled = false;
+
+  searchQuery: string = '';
 
   boardColumns = [
     {
@@ -66,6 +71,17 @@ export class Board implements OnInit {
     effect(() => {
       this.syncBoardWithDatabase();
     });
+
+    this.breakpointObserver.observe(['(max-width: 1300px)']).subscribe((result) => {
+      this.isDragDisabled = result.matches;
+      this.cdr.markForCheck();
+    });
+  }
+
+  onSearch(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery = inputElement.value.toLowerCase();
+    this.syncBoardWithDatabase();
   }
 
   private syncBoardWithDatabase() {
@@ -73,10 +89,17 @@ export class Board implements OnInit {
 
     if (this.isDragging) return;
 
-    this.boardColumns[0].tasks = allDbTasks.filter((t) => t.status === 0);
-    this.boardColumns[1].tasks = allDbTasks.filter((t) => t.status === 1);
-    this.boardColumns[2].tasks = allDbTasks.filter((t) => t.status === 2);
-    this.boardColumns[3].tasks = allDbTasks.filter((t) => t.status === 3);
+    const filteredTasks = allDbTasks.filter((t) => {
+      const matchesTitle = t.title?.toLowerCase().includes(this.searchQuery) ?? false;
+      const matchesDesc = t.desc?.toLowerCase().includes(this.searchQuery) ?? false;
+
+      return matchesTitle || matchesDesc;
+    });
+
+    this.boardColumns[0].tasks = filteredTasks.filter((t) => t.status === 0);
+    this.boardColumns[1].tasks = filteredTasks.filter((t) => t.status === 1);
+    this.boardColumns[2].tasks = filteredTasks.filter((t) => t.status === 2);
+    this.boardColumns[3].tasks = filteredTasks.filter((t) => t.status === 3);
 
     this.cdr.markForCheck();
   }
