@@ -4,20 +4,40 @@
   @include flexbox(column, center, flex-start, 1rem);
   max-width: 16rem;
   width: 100%;
+  min-width: 7rem;
 
   padding: var(--space-md) var(--space-md);
   border-radius: var(--radius-lg);
 
   background-color: var(--bg-ultralight);
-
   box-shadow: var(--shadow-allaround);
 
   &__title {
     color: var(--text-color-dark);
+
+    /* Begrenzt den Titel auf maximal 2 Zeilen */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__description {
     color: var(--text-color-grey);
+
+    /* Begrenzt die Beschreibung auf maximal 5 Zeilen */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include respond-to(xl) {
+      min-height: var(--fs-body-large);
+    }
   }
 
   &__category {

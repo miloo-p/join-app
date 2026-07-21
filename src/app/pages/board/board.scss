@@ -4,9 +4,16 @@
   @include global_content_wrapper();
   background-color: var(--bg-light);
 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
   &__header {
     @include flexbox(row, space-between, center, 1rem);
     padding-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    flex-shrink: 0;
   }
 
   &__column-title {
@@ -28,7 +35,8 @@
 
   &__column-header {
     @include flexbox(row, space-between, center, 1rem);
-    padding-block: var(--space-md);
+    padding: var(--space-md) var(--space-md);
+    flex-shrink: 0;
   }
 
   &__column-title {
@@ -40,29 +48,45 @@
   &__add-btn {
     @include flexbox(row, center, center, 0);
     text-decoration: none;
+    background: none;
     cursor: pointer;
     border: none;
+    padding-right: 0.5rem;
   }
 
   &__content {
-    @include flexbox(row, space-between, stretch, 2rem);
+    @include flexbox(row, space-between, stretch, clamp(0rem, 0.25vw, 2rem));
+    flex: 1;
+    min-height: 0;
+    padding-bottom: var(--space-2xl);
   }
 
   &__column {
-    max-width: 16rem;
+    max-width: 19rem;
     width: 100%;
-    min-width: 10rem;
+    min-width: 13.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   &__task-list {
     @include flexbox(column, flex-start, stretch, 1rem);
     list-style-type: none;
     padding: 0;
-    min-height: calc(100vh - 250px);
+    margin: 0;
+
+    overflow-y: auto;
+    flex: 1;
+    min-height: 150px;
+
+    scrollbar-gutter: stable;
+    padding: 0.75rem;
   }
 
   &__task {
     text-align: left;
+    width: 100%;
   }
 
   &__empty-state {
@@ -73,7 +97,6 @@
     width: 100%;
     border: 2px dashed var(--border-clr-dark);
     border-radius: var(--radius-md);
-
     margin-top: 0;
     align-self: flex-start;
   }
@@ -87,26 +110,11 @@
   }
 }
 
-.cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  cursor: grabbing;
-}
-
 .cdk-drag-placeholder {
   opacity: 0.2;
   border: 2px dashed var(--border-clr-dark);
   border-radius: var(--radius-lg);
   min-height: 150px;
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.board__task-list.cdk-drop-list-dragging .board__task:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .board__task {
