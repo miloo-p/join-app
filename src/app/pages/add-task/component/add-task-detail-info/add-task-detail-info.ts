@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, HostListener, ElementRef, inject } from '@angular/core';
 import { ContactSelection } from '../contact-selection/contact-selection';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { ProfileIcon } from '../../../../shared/components/profile-icon/profile-icon';
@@ -24,6 +24,10 @@ export class AddTaskDetailInfo {
   @Input({ required: true }) form!: FormGroup;
 
   @ViewChild(AddTaskSubtasks) subtaskInfo!: AddTaskSubtasks;
+  @ViewChild('assignedDropdown') assignedDropdown!: ElementRef<HTMLElement>;
+  @ViewChild('categoryDropdown') categoryDropdown!: ElementRef<HTMLElement>;
+
+  private elementRef = inject(ElementRef);
 
   isContactDropdownOpen = false;
   isCategoryDropwDownOpen = false;
@@ -113,5 +117,23 @@ export class AddTaskDetailInfo {
   /** Returns the number of selected contacts hidden behind the counter icon. */
   getHiddenContactsCount(): number {
     return Math.max(this.getSelectedContacts().length - 3, 0);
+  }
+
+  /** Closes open dropdowns when the user clicks outside this component. */
+  @HostListener('document:click', ['$event'])
+  closeDropdownsOnOutsideClick(event: MouseEvent): void {
+    const target = event.target as Node;
+    const clickedInsideAssigned = this.assignedDropdown?.nativeElement.contains(target);
+    const clickedInsideCategory = this.categoryDropdown?.nativeElement.contains(target);
+
+    if (!clickedInsideAssigned) {
+      this.isContactDropdownOpen = false;
+    }
+    if (!clickedInsideCategory) {
+      if (this.isCategoryDropwDownOpen) {
+        this.form.get('category')?.markAsTouched();
+      }
+      this.isCategoryDropwDownOpen = false;
+    }
   }
 }

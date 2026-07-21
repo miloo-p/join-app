@@ -4,7 +4,7 @@
         <app-prio-selection [form]="form"></app-prio-selection>
     </div>
 
-    <div class="formDetail__inputWrapper formDetail__inputWrapper--assigned"
+    <div class="formDetail__inputWrapper formDetail__inputWrapper--assigned" #assignedDropdown
         [class.formDetail__inputWrapper--open]="isContactDropdownOpen">
         <label>
             Assigned to
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="formDetail__inputWrapper formDetail__inputWrapper--assigned"
+    <div class="formDetail__inputWrapper formDetail__inputWrapper--assigned" #categoryDropdown
         [class.formDetail__inputWrapper--open]="isCategoryDropwDownOpen">
         <label>
             Category<span class="requiredInput">*</span>
