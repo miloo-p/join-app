@@ -1,14 +1,23 @@
-import { Component, OnInit, inject, ViewChild, computed } from '@angular/core'; // 'computed' und 'inject' importieren!
+import { Component, OnInit, inject, ViewChild, computed } from '@angular/core';
+import { CdkDragDrop, CdkDropList, CdkDrag, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { TaskCard } from './components/task-card/task-card';
 import { TaskDetail } from './components/task-detail/task-detail';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { TaskDialog } from './components/task-dialog/task-dialog';
-import { tasksService } from '../../shared/services/tasks-service'; // Pfad ggf. anpassen
+import { tasksService } from '../../shared/services/tasks-service';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [TaskCard, TaskDetail, TaskDialog, ButtonComponent, TaskDetail],
+  imports: [
+    TaskCard,
+    TaskDetail,
+    TaskDialog,
+    ButtonComponent,
+    CdkDropList,
+    CdkDrag,
+    CdkDropListGroup,
+  ],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
@@ -72,5 +81,31 @@ export class Board implements OnInit {
 
   openEditTaskDialog(taskToEdit: any) {
     this.addTaskDialog.openDialog({ task: taskToEdit });
+  }
+
+  async drop(event: CdkDragDrop<any[]>, newColumnId: string) {
+    if (event.previousContainer !== event.container) {
+      const taskToMove = event.item.data;
+
+      let newStatus = 0;
+      switch (newColumnId) {
+        case 'todo':
+          newStatus = 0;
+          break;
+        case 'progress':
+          newStatus = 1;
+          break;
+        case 'feedback':
+          newStatus = 2;
+          break;
+        case 'done':
+          newStatus = 3;
+          break;
+      }
+
+      taskToMove.status = newStatus;
+
+      await this.dbTasks.updateTask(taskToMove);
+    }
   }
 }

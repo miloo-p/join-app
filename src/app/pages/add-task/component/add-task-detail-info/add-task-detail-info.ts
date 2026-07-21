@@ -11,7 +11,6 @@ import { ContactSelection } from '../contact-selection/contact-selection';
   styleUrl: './add-task-detail-info.scss',
 })
 export class AddTaskDetailInfo {
-
   isContactDropdownOpen = false;
   isCategoryDropwDownOpen = false;
   isUrgentSelected = false;
@@ -23,21 +22,21 @@ export class AddTaskDetailInfo {
   editingSubtaskId: number | null = null;
   isTextInSubtaskInput = false;
 
-  checkTextInSubtaskInput(inputElement: HTMLInputElement):void {
+  checkTextInSubtaskInput(inputElement: HTMLInputElement): void {
     const subtaskInputValue = inputElement.value;
-    if(subtaskInputValue === '') {
+    if (subtaskInputValue === '') {
       this.isTextInSubtaskInput = false;
     } else {
-      this.isTextInSubtaskInput = true; 
+      this.isTextInSubtaskInput = true;
     }
-  };
+  }
 
   toggleDropdown(): void {
     this.isContactDropdownOpen = !this.isContactDropdownOpen;
     if (this.isCategoryDropwDownOpen === true) {
       this.isCategoryDropwDownOpen = false;
     } else {
-      return
+      return;
     }
   }
 
@@ -46,7 +45,7 @@ export class AddTaskDetailInfo {
     if (this.isContactDropdownOpen === true) {
       this.isContactDropdownOpen = false;
     } else {
-      return
+      return;
     }
   }
 
@@ -60,30 +59,34 @@ export class AddTaskDetailInfo {
     if (this.isUrgentSelected === true) {
       this.isMediumSelected = false;
       this.isLowSelected = false;
-    };
+    }
     this.mediumBtnStandard();
-  };
+  }
 
   toggleMediumBtn(): void {
     this.isMediumSelected = !this.isMediumSelected;
     if (this.isMediumSelected === true) {
       this.isUrgentSelected = false;
       this.isLowSelected = false;
-    };
+    }
     this.mediumBtnStandard();
-  };
+  }
 
   toggleLowBtn(): void {
     this.isLowSelected = !this.isLowSelected;
     if (this.isLowSelected === true) {
       this.isUrgentSelected = false;
       this.isMediumSelected = false;
-    };
+    }
     this.mediumBtnStandard();
-  };
+  }
 
   mediumBtnStandard(): void {
-    if (this.isUrgentSelected === false && this.isMediumSelected === false && this.isLowSelected === false) {
+    if (
+      this.isUrgentSelected === false &&
+      this.isMediumSelected === false &&
+      this.isLowSelected === false
+    ) {
       this.isMediumSelected = true;
     }
   }
@@ -92,19 +95,19 @@ export class AddTaskDetailInfo {
     const value = inputElement.value;
     const subtask = {
       id: this.currentSubtaskId,
-      name: value
+      name: value,
     };
     this.currentSubtastks.push(subtask);
     this.currentSubtaskId++;
     inputElement.value = '';
-    this.isTextInSubtaskInput = false
+    this.isTextInSubtaskInput = false;
   }
 
   deleteSelectedSubtask(id: number) {
-    const subtaskIndex = this.currentSubtastks.findIndex(subtask => subtask.id === id);
+    const subtaskIndex = this.currentSubtastks.findIndex((subtask) => subtask.id === id);
 
     if (subtaskIndex !== -1) {
-      this.currentSubtastks.splice(subtaskIndex, 1)
+      this.currentSubtastks.splice(subtaskIndex, 1);
     }
   }
 
@@ -121,7 +124,7 @@ export class AddTaskDetailInfo {
     if (!trimmedName) {
       return;
     }
-    const subtask = this.currentSubtastks.find(subtask => subtask.id === id);
+    const subtask = this.currentSubtastks.find((subtask) => subtask.id === id);
     if (!subtask) {
       return;
     }
