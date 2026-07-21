@@ -1,28 +1,48 @@
-import { Component, ViewChild, inject, Input, OnChanges, AfterViewInit, output, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewChild,
+  inject,
+  output,
+} from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
 import { AddTaskBasicInfo } from './component/add-task-basic-info/add-task-basic-info';
 import { AddTaskDetailInfo } from './component/add-task-detail-info/add-task-detail-info';
 import { ButtonComponent } from '../../shared/components/button/button.component';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { tasksService } from '../../shared/services/tasks-service';
 import { Task } from '../../shared/interfaces/tasks';
 import { contactsService } from '../../shared/services/contacts-service';
+import { tasksService } from '../../shared/services/tasks-service';
+
+type Priority = 'urgent' | 'medium' | 'low';
+
+type AssignedContact = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  name: string;
+};
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [AddTaskBasicInfo, AddTaskDetailInfo, ButtonComponent, ReactiveFormsModule,],
+  imports: [AddTaskBasicInfo, AddTaskDetailInfo, ButtonComponent, ReactiveFormsModule],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
 export class AddTask implements OnChanges, AfterViewInit, OnInit {
+  @Input() task: Task | null = null;
 
-  private tasksService = inject(tasksService);
-
-  private contactDatabase = inject(contactsService);
-
-  private viewInitialized = false;
+  taskSaved = output<void>();
 
   @ViewChild(AddTaskDetailInfo) detailInfo!: AddTaskDetailInfo;
+
+  private tasksService = inject(tasksService);
+  private contactDatabase = inject(contactsService);
+  private viewInitialized = false;
 
   addTaskForm = new FormGroup({
     title: new FormControl('', {
@@ -36,16 +56,14 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-
-    assignedTo: new FormControl<{ id: number; name: string }[]>([], {
+    assignedTo: new FormControl<AssignedContact[]>([], {
       nonNullable: true,
     }),
-
     category: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    priority: new FormControl<'urgent' | 'medium' | 'low'>('medium', {
+    priority: new FormControl<Priority>('medium', {
       nonNullable: true,
     }),
     subtasks: new FormControl<{ id: number; name: string }[]>([], {
@@ -53,7 +71,33 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
     }),
   });
 
-  taskSaved = output<void>();
+  /** Loads contacts and patches edit task data once contacts are available. */
+  async ngOnInit(): Promise<void> {
+    await this.contactDatabase.getContacts();
+
+    if (this.task) {
+      this.patchTaskToForm();
+    }
+  }
+
+  /** Updates the form whenever a task is passed for editing. */
+  ngOnChanges(): void {
+    if (!this.task) {
+      this.clearTaskForm();
+      return;
+    }
+
+    this.patchTaskToForm();
+  }
+
+  /** Marks the child view as ready and loads edit subtasks into the subtask component. */
+  ngAfterViewInit(): void {
+    this.viewInitialized = true;
+
+    if (this.task?.subtasks) {
+      this.detailInfo?.loadSubtasks(this.task.subtasks);
+    }
+  }
 
   /** Resets the task form and clears local child component state. */
   clearTaskForm(): void {
@@ -66,47 +110,11 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
       priority: 'medium',
       subtasks: [],
     });
+
     this.detailInfo?.clearDetailInfo();
   }
 
-  /** Maps form values to the task payload expected by the database. */
-  private mapFormToTaskPayload() {
-    const formValue = this.addTaskForm.getRawValue();
-
-    return {
-      title: formValue.title,
-      desc: formValue.description,
-      due_date: formValue.dueDate,
-      status: 0,
-      priority: this.mapPriorityToNumber(formValue.priority),
-      collaborators: formValue.assignedTo.map((contact) => contact.id),
-      subtasks: formValue.subtasks.map((subtask) => ({
-        name: subtask.name,
-        status: 0,
-      })),
-      category: this.mapCategoryToNumber(formValue.category),
-    };
-  }
-
-  /** Converts the selected category label to its database value. */
-  private mapCategoryToNumber(category: string): number {
-    return category === 'User Story' ? 1 : 0;
-  }
-
-  /** Converts the selected priority label to its database value. */
-  private mapPriorityToNumber(priority: 'urgent' | 'medium' | 'low'): number {
-    if (priority === 'urgent') {
-      return 2;
-    }
-
-    if (priority === 'medium') {
-      return 1;
-    }
-
-    return 0;
-  }
-
-  /** Validates, saves, and clears the task form. */
+  /** Validates, creates or updates the task, then clears the form. */
   async createTask(): Promise<void> {
     if (this.addTaskForm.invalid) {
       this.addTaskForm.markAllAsTouched();
@@ -128,29 +136,7 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
     this.taskSaved.emit();
   }
 
-  @Input() task: Task | null = null;
-
-  async ngOnInit(): Promise<void> {
-    await this.contactDatabase.getContacts();
-
-    if (this.task) {
-      this.patchTaskToForm();
-    }
-  }
-
-  ngOnChanges(): void {
-    if (!this.task) {
-      this.clearTaskForm();
-      return;
-    }
-
-    this.patchTaskToForm();
-
-    if (this.viewInitialized) {
-      this.detailInfo?.loadSubtasks(this.task.subtasks || []);
-    }
-  }
-
+  /** Patches the selected edit task into the reactive form. */
   private patchTaskToForm(): void {
     if (!this.task) {
       return;
@@ -163,10 +149,11 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
       assignedTo: this.mapCollaboratorIdsToContacts(this.task.collaborators || []),
       category: this.mapCategoryFromNumber(this.task.category),
       priority: this.mapPriorityFromNumber(this.task.priority),
-      subtasks: this.task.subtasks?.map((subtask, index) => ({
-        id: index + 1,
-        name: subtask.name,
-      })) || [],
+      subtasks:
+        this.task.subtasks?.map((subtask, index) => ({
+          id: index + 1,
+          name: subtask.name,
+        })) || [],
     });
 
     if (this.viewInitialized) {
@@ -174,10 +161,30 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
     }
   }
 
-  private mapCollaboratorIdsToContacts(collaboratorIds: number[]) {
+  /** Maps form values to the task payload expected by the database. */
+  private mapFormToTaskPayload() {
+    const formValue = this.addTaskForm.getRawValue();
+
+    return {
+      title: formValue.title,
+      desc: formValue.description,
+      due_date: formValue.dueDate,
+      status: 0,
+      priority: this.mapPriorityToNumber(formValue.priority),
+      collaborators: formValue.assignedTo.map((contact) => contact.id),
+      subtasks: formValue.subtasks.map((subtask) => ({
+        name: subtask.name,
+        status: 0,
+      })),
+      category: this.mapCategoryToNumber(formValue.category),
+    };
+  }
+
+  /** Converts collaborator ids from the task into contact objects for the form. */
+  private mapCollaboratorIdsToContacts(collaboratorIds: number[]): AssignedContact[] {
     return collaboratorIds
       .map((id) => {
-        const contact = this.contactDatabase.contacts().find(contact => contact.id === id);
+        const contact = this.contactDatabase.contacts().find((contact) => contact.id === id);
 
         if (!contact || contact.id === undefined) {
           return null;
@@ -190,14 +197,34 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
           name: `${contact.firstname} ${contact.lastname}`,
         };
       })
-      .filter((contact): contact is { id: number; firstname: string; lastname: string; name: string } => contact !== null);
+      .filter((contact): contact is AssignedContact => contact !== null);
   }
 
+  /** Converts the selected category label to its database value. */
+  private mapCategoryToNumber(category: string): number {
+    return category === 'User Story' ? 0 : 1;
+  }
+
+  /** Converts the database category value to its form label. */
   private mapCategoryFromNumber(category: number): string {
     return category === 0 ? 'User Story' : 'Technical Task';
   }
 
-  private mapPriorityFromNumber(priority: number): 'urgent' | 'medium' | 'low' {
+  /** Converts the selected priority label to its database value. */
+  private mapPriorityToNumber(priority: Priority): number {
+    if (priority === 'urgent') {
+      return 2;
+    }
+
+    if (priority === 'medium') {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  /** Converts the database priority value to its form label. */
+  private mapPriorityFromNumber(priority: number): Priority {
     if (priority === 2) {
       return 'urgent';
     }
@@ -207,13 +234,5 @@ export class AddTask implements OnChanges, AfterViewInit, OnInit {
     }
 
     return 'low';
-  }
-
-  ngAfterViewInit(): void {
-    this.viewInitialized = true;
-
-    if (this.task?.subtasks) {
-      this.detailInfo?.loadSubtasks(this.task.subtasks);
-    }
   }
 }
