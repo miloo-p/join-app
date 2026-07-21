@@ -1,0 +1,125 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.prioSelection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+
+        app-button {
+            max-width: 31.5%;
+            min-width: 31.5%;
+            font-weight: var(--fw-regular);
+            --btn-gap: 8px;
+
+            @include respond-to(xsm) {
+                --btn-font-size: 14px;
+
+                svg {
+                    width: 15px;
+                }
+            }
+        }
+    }
+
+    &__icon {
+        height: auto;
+        display: block;
+        flex-shrink: 0;
+    }
+}
+
+.btn {
+    --btn-primary-color: var(--clr-black);
+    --btn-primary-color-hover: var(--btn-primary-color);
+
+    --btn-primary-bg: var(--clr-white);
+    --btn-primary-border: none;
+
+    --btn-font-size: 16px;
+    --btn-height: 40px;
+
+    --btn-primary-shadow: var(--shadow-allaround);
+
+    &__urgent {
+        --btn-primary-hover-bg: var(--btn-primary-bg);
+        --btn-primary-hover-border: var(--btn-primary-border);
+        --btn-primary-active-color: var(--clr-white);
+        --btn-primary-active-bg: var(--clr-feedback-urgent);
+        --btn-primary-active-border: var(--clr-feedback-urgent);
+    }
+
+    &__medium {
+        --btn-primary-hover-bg: var(--btn-primary-bg);
+        --btn-primary-hover-border: var(--btn-primary-border);
+        --btn-primary-active-color: var(--clr-white);
+        --btn-primary-active-bg: var(--clr-feedback-medium);
+        --btn-primary-active-border: var(--clr-feedback-medium);
+    }
+
+    &__low {
+        --btn-primary-hover-bg: var(--btn-primary-bg);
+        --btn-primary-hover-border: var(--btn-primary-border);
+        --btn-primary-active-color: var(--clr-white);
+        --btn-primary-active-bg: var(--clr-feedback-low);
+        --btn-primary-active-border: var(--clr-feedback-low);
+    }
+}
+
+.urgent {
+    color: var(--clr-feedback-urgent);
+}
+
+.medium {
+    color: var(--clr-feedback-medium);
+}
+
+.low {
+    color: var(--clr-feedback-low);
+}
+
+.urgent__selected {
+    --btn-primary-color: var(--clr-white);
+    --btn-primary-bg: var(--clr-feedback-urgent);
+    --btn-primary-active-color: var(--clr-white);
+    --btn-primary-active-bg: var(--clr-feedback-urgent);
+    --btn-primary-focus-color: var(--clr-white);
+    --btn-primary-focus-bg: var(--clr-feedback-urgent);
+    --btn-primary-shadow: none;
+}
+
+.medium__selected {
+    --btn-primary-color: var(--clr-white);
+    --btn-primary-bg: var(--clr-feedback-medium);
+    --btn-primary-active-color: var(--clr-white);
+    --btn-primary-active-bg: var(--clr-feedback-medium);
+    --btn-primary-focus-color: var(--clr-white);
+    --btn-primary-focus-bg: var(--clr-feedback-medium);
+    --btn-primary-shadow: none;
+}
+
+.low__selected {
+    --btn-primary-color: var(--clr-white);
+    --btn-primary-bg: var(--clr-feedback-low);
+    --btn-primary-active-color: var(--clr-white);
+    --btn-primary-active-bg: var(--clr-feedback-low);
+    --btn-primary-focus-color: var(--clr-white);
+    --btn-primary-focus-bg: var(--clr-feedback-low);
+    --btn-primary-shadow: none;
+}
+
+:host ::ng-deep .btn__urgent.urgent__selected .urgent,
+:host ::ng-deep .btn__medium.medium__selected .medium,
+:host ::ng-deep .btn__low.low__selected .low {
+    color: var(--clr-white);
+}
+
+:host ::ng-deep .btn__urgent:active .urgent,
+:host ::ng-deep .btn__medium:active .medium,
+:host ::ng-deep .btn__low:active .low {
+    color: var(--clr-white);
+}

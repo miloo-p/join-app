@@ -1,12 +1,114 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { AddTaskBasicInfo } from './component/add-task-basic-info/add-task-basic-info';
 import { AddTaskDetailInfo } from './component/add-task-detail-info/add-task-detail-info';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { tasksService } from '../../shared/services/tasks-service';
 
 @Component({
   selector: 'app-add-task',
-  imports: [AddTaskBasicInfo, AddTaskDetailInfo, ButtonComponent],
+  standalone: true,
+  imports: [AddTaskBasicInfo, AddTaskDetailInfo, ButtonComponent, ReactiveFormsModule,],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
-export class AddTask {}
+export class AddTask {
+
+  private tasksService = inject(tasksService);
+
+  @ViewChild(AddTaskDetailInfo) detailInfo!: AddTaskDetailInfo;
+
+  addTaskForm = new FormGroup({
+    title: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    description: new FormControl('', {
+      nonNullable: true,
+    }),
+    dueDate: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+
+    assignedTo: new FormControl<{ id: number; name: string }[]>([], {
+      nonNullable: true,
+    }),
+
+    category: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    priority: new FormControl<'urgent' | 'medium' | 'low'>('medium', {
+      nonNullable: true,
+    }),
+    subtasks: new FormControl<{ id: number; name: string }[]>([], {
+      nonNullable: true,
+    }),
+  });
+
+  /** Resets the task form and clears local child component state. */
+  clearTaskForm(): void {
+    this.addTaskForm.reset({
+      title: '',
+      description: '',
+      dueDate: '',
+      assignedTo: [],
+      category: '',
+      priority: 'medium',
+      subtasks: [],
+    });
+    this.detailInfo.clearDetailInfo();
+  }
+
+  /** Maps form values to the task payload expected by the database. */
+  private mapFormToTaskPayload() {
+    const formValue = this.addTaskForm.getRawValue();
+
+    return {
+      title: formValue.title,
+      desc: formValue.description,
+      due_date: formValue.dueDate,
+      status: 0,
+      priority: this.mapPriorityToNumber(formValue.priority),
+      collaborators: formValue.assignedTo.map((contact) => contact.id),
+      subtasks: formValue.subtasks.map((subtask) => ({
+        name: subtask.name,
+        status: 0,
+      })),
+      category: this.mapCategoryToNumber(formValue.category),
+    };
+  }
+
+  /** Converts the selected category label to its database value. */
+  private mapCategoryToNumber(category: string): number {
+    return category === 'User Story' ? 1 : 0;
+  }
+
+  /** Converts the selected priority label to its database value. */
+  private mapPriorityToNumber(priority: 'urgent' | 'medium' | 'low'): number {
+    if (priority === 'urgent') {
+      return 2;
+    }
+
+    if (priority === 'medium') {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  /** Validates, saves, and clears the task form. */
+  async createTask(): Promise<void> {
+    if (this.addTaskForm.invalid) {
+      this.addTaskForm.markAllAsTouched();
+      return;
+    }
+
+    const taskPayload = this.mapFormToTaskPayload();
+
+    await this.tasksService.setTask([taskPayload]);
+
+    this.clearTaskForm();
+  }
+}

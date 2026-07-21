@@ -1,15 +1,24 @@
-<form class="formBasic">
+<form class="formBasic" [formGroup]="form">
     <div class="formBasic__inputWrapper">
         <label>
             Title<span class="requiredInput">*</span>
         </label>
-        <input type="text" placeholder="Enter a title">
+        <div class="formBasic__inputWrapper__input">
+            <input type="text" placeholder="Enter a title" formControlName="title">
+
+            <div class="formBasic__inputWrapper__input__requiredText">
+                @if (form.get('title')?.hasError('required') && form.get('title')?.touched) {
+                <p class="formError">This field is required</p>
+                }
+            </div>
+        </div>
+
     </div>
     <div class="formBasic__inputWrapper">
         <label>
             Description
         </label>
-        <textarea placeholder="Enter a description"></textarea>
+        <textarea placeholder="Enter a description" formControlName="description"></textarea>
     </div>
     <div class="formBasic__inputWrapper">
         <label for="dueDate">
@@ -17,21 +26,23 @@
         </label>
 
         <div class="dateInputWrapper">
-            <span class="dateInputWrapper__dateDisplay" [class.dateInputWrapper__dateDisplay--placeholder]="!dueDate">
-                {{ dueDate ? formatDateForDisplay(dueDate) : 'dd/mm/yyyy' }}
+            <span class="dateInputWrapper__dateDisplay"
+                [class.dateInputWrapper__dateDisplay--placeholder]="!form.get('dueDate')?.value">
+                {{ form.get('dueDate')?.value ? formatDateForDisplay(form.get('dueDate')?.value) : 'dd/mm/yyyy' }}
             </span>
 
-            <input 
-                #dueDateInput
-                id="dueDate" 
-                type="date" 
-                [min]="today" 
-                max="2027-12-31" 
-                [(ngModel)]="dueDate" 
-                name="dueDate"
-                required 
-                (click)="openDatePicker(dueDateInput)" />
+            <div class="formBasic__inputWrapper__input">
+                <input #dueDateInput id="dueDate" type="date" [min]="today" max="2027-12-31"
+                    (click)="openDatePicker(dueDateInput)" formControlName="dueDate" />
+
+                <div class="formBasic__inputWrapper__input__requiredText">
+                    @if (form.get('dueDate')?.hasError('required') && form.get('dueDate')?.touched) {
+                    <p class="formError">This field is required</p>
+                    }
+                </div>
+            </div>
+
+
         </div>
     </div>
-
 </form>

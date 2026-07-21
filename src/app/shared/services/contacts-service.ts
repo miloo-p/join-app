@@ -7,10 +7,9 @@ import { Contact } from '../interfaces/contact';
   providedIn: 'root',
 })
 export class contactsService {
-  
   supabase = createClient(environment.apiUrl, environment.apiKey)
 
-  contacts = signal <{id:number,created_at: string, firstname:string, lastname:string, telephone:string, email:string}[]>([])
+  contacts = signal<Contact[]>([]);
 
   channels: RealtimeChannel | undefined;
 
