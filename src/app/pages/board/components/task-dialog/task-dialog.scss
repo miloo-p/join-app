@@ -1,10 +1,15 @@
 @use '../../../../../styles/abstracts/mixins' as *;
 
-.add-task-dialog {
-  border: none;
+dialog {
   padding: 0;
+}
+
+.add-task-dialog {
+  --dialog-header-height: 60px;
+  --dialog-footer-height: 104px;
+  border: none;
   background-color: transparent;
-  overflow: visible;
+  width: 98%;
 
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
@@ -12,7 +17,7 @@
 
   &__content {
     position: relative;
-    width: calc(100vw - (var(--space-md) * 2));
+    // width: calc(100% - (var(--space-md) * 2));
     max-width: 900px;
     max-height: 90vh;
     background-color: var(--bg-ultralight);
@@ -26,13 +31,14 @@
     // @include respond-to (lg) {
     //   width: calc(100vw - (var(--space-sm) * 2));
     // }
-    
+
   }
 
   &__body {
-    max-height: calc(90vh - 72px);
+    max-height: calc(90vh - var(--dialog-header-height) - var(--dialog-footer-height));
+
     overflow-y: auto;
-    padding: var(--space-2xl);
+    padding: var(--space-sm);
     box-sizing: border-box;
 
     scrollbar-width: thin;
