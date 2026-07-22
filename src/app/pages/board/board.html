@@ -1,9 +1,28 @@
 <section class="board">
   <header class="board__header">
-    <h2 class="board__title">Board</h2>
+    <div class="board__header-top">
+      <h2 class="board__title">Board</h2>
+
+      <button class="board__add-mobile" (click)="openAddTaskDialog('todo')">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="40" height="40" rx="10" fill="#2A3647" />
+          <path d="M20 10V30" stroke="white" stroke-width="2" stroke-linecap="round" />
+          <path d="M30 20L10.0005 20.138" stroke="white" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+
     <div class="board__interaction">
-      <input placeholder="Find Task" class="board__search" />
+      <input placeholder="Find Task" class="board__search" (input)="onSearch($event)" />
+
       <app-button
+        class="board__add-desktop"
         text="Add task"
         variant="primary"
         size="md"
@@ -80,9 +99,16 @@
           cdkDropList
           [cdkDropListData]="column.tasks"
           (cdkDropListDropped)="drop($event, column.id)"
+          [cdkDropListDisabled]="isDragDisabled"
         >
           @for (task of column.tasks; track task.id) {
-            <li class="board__task" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
+            <li
+              class="board__task"
+              cdkDrag
+              [cdkDragData]="task"
+              (cdkDragStarted)="isDragging = true"
+              (click)="openTaskDetails(task)"
+            >
               <app-task-card [task]="task"></app-task-card>
             </li>
           } @empty {
