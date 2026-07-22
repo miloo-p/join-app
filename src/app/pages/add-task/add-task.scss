@@ -184,6 +184,10 @@ app-add-task-detail-info {
     p {
         color: white;
     }
+
+    @include respond-to(lg) {
+        left: 50%
+    }
 }
 
 @keyframes slideSuccessIn {
