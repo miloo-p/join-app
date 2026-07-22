@@ -1,9 +1,11 @@
 <section class="addTaskLayout">
-    <form class="addTaskLayout__content" [formGroup]="addTaskForm">
+    <form class="addTaskLayout__content" [formGroup]="addTaskForm" [class.addTaskLayout__content--edit]="task">
 
+        @if (!task) {
         <div class="addTaskLayout__content__headline">
-            <h2>{{ task ? 'Edit Task' : 'Add Task' }}</h2>
+            <h2>Add Task</h2>
         </div>
+        }
 
         <div class="addTaskLayout__content__formComponents">
             <app-add-task-basic-info [form]="addTaskForm">
@@ -18,6 +20,8 @@
         <div class="addTaskLayout__content__footer">
             <p><span class="requiredInput">*</span>This field is required</p>
 
+
+            @if(!task) {
             <div class="addTaskLayout__content__footer__buttons">
                 <app-button text="Clear" variant="outline" size="md" width="auto" buttonType="button"
                     fontWeight="regular" (btnClick)="clearTaskForm()">
@@ -28,7 +32,7 @@
                     </svg>
                 </app-button>
 
-                <app-button [text]="task ? 'Save changes' : 'Create Task'" variant="primary" size="md" width="auto"
+                <app-button [text]="task ? 'Ok' : 'Create Task'" variant="primary" size="md" width="auto"
                     buttonType="button" (btnClick)="createTask()">
                     <svg width="18" height="18" viewBox="0 0 37 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.5 14.566L14.7288 25.6321L33.4434 3.5" stroke="white" stroke-width="3"
@@ -36,6 +40,10 @@
                     </svg>
                 </app-button>
             </div>
+            }
+
+
+
         </div>
     </form>
 </section>
@@ -52,5 +60,5 @@
             fill="white" />
     </svg>
 
-</div>    
+</div>
 }
