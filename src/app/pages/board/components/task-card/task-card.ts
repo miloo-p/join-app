@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Task } from '../../../../shared/interfaces/tasks';
 import { tasksService } from '../../../../shared/services/tasks-service';
 
