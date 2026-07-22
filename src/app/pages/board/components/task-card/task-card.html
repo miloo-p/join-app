@@ -53,6 +53,19 @@
 
     <h5 class="task-card__title">{{ task.title }}</h5>
     <p class="task-card__description">{{ task.desc }}</p>
+    
+    @if (task?.subtasks; as subtasks) {
+  @if (subtasks.length > 0) {
+  <div class="task-card__progression">
+    <div class="task-card__progressionbar">
+      <div class="task-card__progressionbar--fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <p class="task-card__progressiontext">
+      <span>{{ getCompletedSubtasksCount() }}</span>/<span>{{ subtasks.length }}</span> Subtasks
+    </p>
+  </div>
+  }
+  }
 
     <div
       class="task-card__popover"
