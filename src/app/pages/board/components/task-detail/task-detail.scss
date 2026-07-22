@@ -12,6 +12,7 @@
 }
 
 .task-detail {
+  @include flexbox(column, flex-start, stretch, 1.5rem);
   background-color: var(--bg-ultralight);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
@@ -39,9 +40,6 @@
     background: var(--border-clr-dark, #a8a8a8);
     border-radius: 4px;
   }
-  /* ---------------------------------- */
-
-  @include flexbox(column, flex-start, stretch, 1.5rem);
 
   &__header {
     @include flexbox(row, space-between, center, 0);

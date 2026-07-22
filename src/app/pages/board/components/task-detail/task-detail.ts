@@ -67,6 +67,17 @@ export class TaskDetail implements OnInit {
     await this.dbTasks.updateTask(this.task);
   }
 
+  async onDeleteClick() {
+    if (this.task && this.task.id !== undefined) {
+      try {
+        await this.dbTasks.deleteTask(this.task.id);
+        this.closeDialog();
+      } catch (error) {
+        console.error('Fehler beim Löschen des Tasks:', error);
+      }
+    }
+  }
+
   onEditClick() {
     if (this.task) {
       this.editTask.emit(this.task);
