@@ -169,14 +169,14 @@
       flex-wrap: nowrap;
       min-height: 180px;
 
-      margin-left: calc(clamp(var(--space-lg), 5vw, var(--space-2xl)) * -1);
+      /*       margin-left: calc(clamp(var(--space-lg), 5vw, var(--space-2xl)) * -1);
       margin-right: calc(clamp(var(--space-lg), 5vw, var(--space-2xl)) * -1);
 
       padding-left: clamp(var(--space-lg), 5vw, var(--space-2xl));
       padding-right: clamp(var(--space-lg), 5vw, var(--space-2xl));
 
       padding-bottom: 1rem;
-      padding-top: 0;
+      padding-top: 0; */
 
       width: auto;
       max-width: none;
