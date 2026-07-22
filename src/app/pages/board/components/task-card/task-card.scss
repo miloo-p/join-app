@@ -1,23 +1,112 @@
 @use '../../../../../styles/abstracts/mixins' as *;
 
 .task-card {
-  @include flexbox(column, center, flex-start, 1rem);
+  @include flexbox(column, center, flex-start, 0.5rem);
   max-width: 16rem;
   width: 100%;
+  min-width: 7rem;
 
   padding: var(--space-md) var(--space-md);
   border-radius: var(--radius-lg);
 
   background-color: var(--bg-ultralight);
-
   box-shadow: var(--shadow-allaround);
+
+  @include respond-to(xl) {
+    max-width: 16rem;
+    min-width: 16rem;
+  }
+
+  &__header {
+    @include flexbox(row, space-between, center, 0);
+    width: 100%;
+  }
+
+  &__move-btn {
+    display: none;
+
+    @include respond-to(xl) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      color: var(--text-color-dark);
+    }
+  }
+
+  &__popover {
+    position: absolute;
+    right: anchor(right);
+    top: anchor(bottom);
+    left: auto;
+
+    background-color: var(--bg-muted);
+    color: var(--text-color-ultralight);
+    width: 10rem;
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-lg) 0 var(--radius-lg) var(--radius-lg);
+    box-shadow: var(--shadow-default);
+
+    &-title {
+      font-size: var(--fs-small);
+      color: var(--text-color-muted);
+      margin-bottom: var(--space-xs);
+      display: block;
+    }
+
+    &-link {
+      background: none;
+      border: none;
+      color: var(--text-color-ultralight);
+      width: 100%;
+      text-align: left;
+      padding-block: var(--space-sm);
+      font-size: var(--fs-body-medium);
+
+      &:hover {
+        background-color: var(--bg-dark);
+        cursor: pointer;
+        color: var(--text-color-light);
+      }
+    }
+
+    &:popover-open {
+      @include flexbox(column, flex-start, flex-start, 0);
+    }
+  }
 
   &__title {
     color: var(--text-color-dark);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin-top: 0.5rem;
   }
 
   &__description {
     color: var(--text-color-grey);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin-top: -0.5rem;
+
+    @include respond-to(xl) {
+      min-height: var(--fs-body-large);
+    }
   }
 
   &__category {
