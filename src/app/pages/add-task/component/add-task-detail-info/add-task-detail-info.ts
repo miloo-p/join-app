@@ -1,9 +1,10 @@
-import { Component, Input, ViewChild, HostListener, ElementRef, inject } from '@angular/core';
-import { ContactSelection } from '../contact-selection/contact-selection';
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { ProfileIcon } from '../../../../shared/components/profile-icon/profile-icon';
-import { PrioSelection } from '../prio-selection/prio-selection';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 import { AddTaskSubtasks } from '../add-task-subtasks/add-task-subtasks';
+import { ContactSelection } from '../contact-selection/contact-selection';
+import { PrioSelection } from '../prio-selection/prio-selection';
+import { ProfileIcon } from '../../../../shared/components/profile-icon/profile-icon';
 
 /** Contact data used to render selected collaborator profile icons. */
 type AssignedCollaboratorIcon = {
@@ -26,8 +27,6 @@ export class AddTaskDetailInfo {
   @ViewChild(AddTaskSubtasks) subtaskInfo!: AddTaskSubtasks;
   @ViewChild('assignedDropdown') assignedDropdown!: ElementRef<HTMLElement>;
   @ViewChild('categoryDropdown') categoryDropdown!: ElementRef<HTMLElement>;
-
-  private elementRef = inject(ElementRef);
 
   isContactDropdownOpen = false;
   isCategoryDropwDownOpen = false;
@@ -62,7 +61,8 @@ export class AddTaskDetailInfo {
   /** Toggles the contact dropdown and closes the category dropdown. */
   toggleDropdown(): void {
     this.isContactDropdownOpen = !this.isContactDropdownOpen;
-    if (this.isCategoryDropwDownOpen === true) {
+
+    if (this.isCategoryDropwDownOpen) {
       this.isCategoryDropwDownOpen = false;
     }
   }
@@ -74,7 +74,8 @@ export class AddTaskDetailInfo {
     if (!this.isCategoryDropwDownOpen) {
       this.form.get('category')?.markAsTouched();
     }
-    if (this.isContactDropdownOpen === true) {
+
+    if (this.isContactDropdownOpen) {
       this.isContactDropdownOpen = false;
     }
   }
@@ -83,6 +84,11 @@ export class AddTaskDetailInfo {
   getCategory(text: string): void {
     this.form.patchValue({ category: text });
     this.isCategoryDropwDownOpen = false;
+  }
+
+  /** Loads existing subtasks into the subtask child component. */
+  loadSubtasks(subtasks: { name: string }[]): void {
+    this.subtaskInfo?.loadSubtasks(subtasks);
   }
 
   /** Resets local dropdown and subtask state. */
@@ -95,6 +101,16 @@ export class AddTaskDetailInfo {
   /** Returns the currently selected contacts from the task form. */
   getSelectedContacts(): AssignedCollaboratorIcon[] {
     return this.form.get('assignedTo')?.value || [];
+  }
+
+  /** Returns the first three selected contacts for the visible avatar icons. */
+  getVisibleContacts(): AssignedCollaboratorIcon[] {
+    return this.getSelectedContacts().slice(0, 3);
+  }
+
+  /** Returns the number of selected contacts hidden behind the counter icon. */
+  getHiddenContactsCount(): number {
+    return Math.max(this.getSelectedContacts().length - 3, 0);
   }
 
   /** Builds initials and avatar color data for a selected contact. */
@@ -110,17 +126,7 @@ export class AddTaskDetailInfo {
     };
   }
 
-  /** Returns the first three selected contacts for the visible avatar icons. */
-  getVisibleContacts(): AssignedCollaboratorIcon[] {
-    return this.getSelectedContacts().slice(0, 3);
-  }
-
-  /** Returns the number of selected contacts hidden behind the counter icon. */
-  getHiddenContactsCount(): number {
-    return Math.max(this.getSelectedContacts().length - 3, 0);
-  }
-
-  /** Closes open dropdowns when the user clicks outside this component. */
+  /** Closes open dropdowns when the user clicks outside their wrappers. */
   @HostListener('document:click', ['$event'])
   closeDropdownsOnOutsideClick(event: MouseEvent): void {
     const target = event.target as Node;
@@ -130,10 +136,12 @@ export class AddTaskDetailInfo {
     if (!clickedInsideAssigned) {
       this.isContactDropdownOpen = false;
     }
+
     if (!clickedInsideCategory) {
       if (this.isCategoryDropwDownOpen) {
         this.form.get('category')?.markAsTouched();
       }
+
       this.isCategoryDropwDownOpen = false;
     }
   }

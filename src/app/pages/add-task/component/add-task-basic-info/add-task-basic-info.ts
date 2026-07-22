@@ -16,7 +16,9 @@ export class AddTaskBasicInfo {
 
   /** Formats an ISO date string from yyyy-mm-dd to dd/mm/yyyy for display. */
   formatDateForDisplay(date: string): string {
-    const [year, month, day] = date.split('-');
+    const dateOnly = date.split('T')[0].split(' ')[0];
+    const [year, month, day] = dateOnly.split('-');
+
     return `${day}/${month}/${year}`;
   }
 

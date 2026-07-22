@@ -163,3 +163,39 @@ app-add-task-detail-info {
         display: none;
     }
 }
+
+.successMsg {
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    position: fixed;
+    top: 50%;
+    left: calc((100% + 232px) / 2);
+    transform: translate(-50%, -50%);
+    height: 60px;
+    width: 280px;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background-color: var(--clr-blue-muted);
+    animation: slideSuccessIn 200ms ease-out;
+
+    p {
+        color: white;
+    }
+
+    @include respond-to(lg) {
+        left: 50%
+    }
+}
+
+@keyframes slideSuccessIn {
+    from {
+        transform: translate(-50%, calc(100vh - 50% + 80px));
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
+}

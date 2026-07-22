@@ -54,7 +54,7 @@ export class AddTaskSubtasks {
 
   /** Removes a selected subtask from the local list and updates the form. */
   deleteSelectedSubtask(id: number): void {
-    this.currentSubtasks = this.currentSubtasks.filter(subtask => subtask.id !== id);
+    this.currentSubtasks = this.currentSubtasks.filter((subtask) => subtask.id !== id);
     this.updateSubtasksForm();
   }
 
@@ -76,7 +76,7 @@ export class AddTaskSubtasks {
       return;
     }
 
-    const subtask = this.currentSubtasks.find(subtask => subtask.id === id);
+    const subtask = this.currentSubtasks.find((subtask) => subtask.id === id);
 
     if (!subtask) {
       return;
@@ -84,6 +84,24 @@ export class AddTaskSubtasks {
 
     subtask.name = trimmedName;
     this.editingSubtaskId = null;
+    this.updateSubtasksForm();
+  }
+
+  /** Cancels subtask edit mode without saving changes. */
+  cancelEditSubtask(): void {
+    this.editingSubtaskId = null;
+  }
+
+  /** Loads existing subtasks into the local list for edit mode. */
+  loadSubtasks(subtasks: { name: string }[]): void {
+    this.currentSubtasks = subtasks.map((subtask, index) => ({
+      id: index + 1,
+      name: subtask.name,
+    }));
+
+    this.currentSubtaskId = this.currentSubtasks.length + 1;
+    this.editingSubtaskId = null;
+    this.isTextInSubtaskInput = false;
     this.updateSubtasksForm();
   }
 
@@ -101,10 +119,5 @@ export class AddTaskSubtasks {
     this.form.patchValue({
       subtasks: this.currentSubtasks,
     });
-  }
-
-  /** Cancels subtask edit mode without saving changes. */
-  cancelEditSubtask(): void {
-    this.editingSubtaskId = null;
   }
 }
