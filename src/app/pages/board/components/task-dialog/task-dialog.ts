@@ -1,33 +1,38 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AddTask } from '../../../add-task/add-task';
 import { Task } from '../../../../shared/interfaces/tasks';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-task-dialog',
   standalone: true,
-  imports: [AddTask],
+  imports: [AddTask, ButtonComponent],
   templateUrl: './task-dialog.html',
   styleUrl: './task-dialog.scss',
 })
 export class TaskDialog {
   @ViewChild('dialog') dialog!: ElementRef<HTMLDialogElement>;
+  @ViewChild(AddTask) addTaskComponent!: AddTask;
 
   currentTask: Task | null = null;
 
-  openDialog(data: { columnId?: string; task?: Task }) {
-    if (data.task) {
-      this.currentTask = data.task;
-    } else {
-      this.currentTask = null;
-    }
-
+  /** Opens the dialog in create or edit mode. */
+  openDialog(data: { columnId?: string; task?: Task } = {}): void {
+    this.currentTask = data.task || null;
     this.dialog.nativeElement.showModal();
   }
 
-  closeDialog() {
+  /** Closes the dialog and clears the selected edit task. */
+  closeDialog(): void {
     this.dialog.nativeElement.close();
+
     setTimeout(() => {
       this.currentTask = null;
     }, 300);
+  }
+
+  /** Saves the task through the embedded add task component. */
+  async saveTask(): Promise<void> {
+    await this.addTaskComponent.createTask();
   }
 }
