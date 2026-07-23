@@ -1,4 +1,4 @@
-<section class="addTaskLayout">
+<section class="addTaskLayout" [class.addTaskLayout--dialog]="isDialogMode">
     <form class="addTaskLayout__content" [formGroup]="addTaskForm" [class.addTaskLayout__content--edit]="task">
 
         @if (!task) {

@@ -38,6 +38,7 @@ type AssignedContact = {
 export class AddTask implements OnChanges, AfterViewInit, OnInit {
   @Input() task: Task | null = null;
   @Input() columnId = 'todo';
+  @Input() isDialogMode = false;
 
   taskSaved = output<void>();
 

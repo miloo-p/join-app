@@ -39,4 +39,8 @@ export class TaskDialog {
   async saveTask(): Promise<void> {
     await this.addTaskComponent.createTask();
   }
+
+  clearTask(): void {
+    this.addTaskComponent.clearTaskForm();
+  }
 }
