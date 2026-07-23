@@ -15,10 +15,13 @@ export class TaskDialog {
   @ViewChild(AddTask) addTaskComponent!: AddTask;
 
   currentTask: Task | null = null;
+  currentColumnId = 'todo';
 
   /** Opens the dialog in create or edit mode. */
   openDialog(data: { columnId?: string; task?: Task } = {}): void {
     this.currentTask = data.task || null;
+    this.currentColumnId = data.columnId || 'todo';
+
     this.dialog.nativeElement.showModal();
   }
 
@@ -28,6 +31,7 @@ export class TaskDialog {
 
     setTimeout(() => {
       this.currentTask = null;
+      this.currentColumnId = 'todo';
     }, 300);
   }
 
