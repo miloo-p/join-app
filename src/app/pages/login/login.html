@@ -1,4 +1,13 @@
 <section class="auth">
+    <header class="auth__header" [class.auth__header--visible]="!isAnimating()">
+        <div class="auth__header-nav">
+            <span class="auth__header-text">Not a Join user?</span>
+            <app-button [text]="'Sign up'" [variant]="'primary'" [size]="'md'" [buttonType]="'button'"
+                class="auth__custom-btn auth__custom-btn--signup" (click)="onSignupClick()">
+            </app-button>
+        </div>
+    </header>
+
     <div class="auth__splash" [class.auth__splash--animated]="!isAnimating()">
         <div class="auth__logo-wrapper">
             <svg width="100%" height="100%" viewBox="0 0 274 335" fill="currentColor" xmlns="http://w3.org">
@@ -92,9 +101,17 @@
             </div>
 
             <div class="auth__action-group">
-                <button type="submit" class="auth__btn auth__btn--login">Log in</button>
-                <button type="button" class="auth__btn auth__btn--guest">Guest Log in</button>
+
+                <app-button [text]="'Log in'" [variant]="'primary'" [size]="'md'" [buttonType]="'submit'"
+                    class="auth__custom-btn auth__custom-btn--login">
+                </app-button>
+
+                <app-button [text]="'Guest Log in'" [variant]="'secondary'" [size]="'md'" [buttonType]="'button'"
+                    class="auth__custom-btn auth__custom-btn--guest" (click)="onGuestLogin()">
+                </app-button>
+
             </div>
+
         </form>
     </div>
 </section>

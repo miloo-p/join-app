@@ -1,13 +1,16 @@
 import { Component, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [ButtonComponent],
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
 })
 export class Login implements OnInit {
+  constructor(private router: Router) {}
   
   /**
    * Reactive signal controlling the splash screen animation state.
@@ -68,5 +71,24 @@ export class Login implements OnInit {
     if (input.value.length === 0) {
       this.hidePassword.set(true);
     }
+  }
+
+  /**
+   * Handles the guest login action by instantly navigating the user to the dashboard.
+   * Driven by Figma behavior: triggers immediately with 0ms animation duration.
+   */
+    /**
+   * Handles the guest login action by programmatically navigating 
+   * the user directly to the application dashboard.
+   */
+  public onGuestLogin(): void {
+    this.router.navigate(['/contacts']);
+  }
+
+    /**
+   * Handles the navigation to the sign-up page when the header button is clicked.
+   */
+  public onSignupClick(): void {
+    this.router.navigate(['/signup']);
   }
 }
