@@ -1,0 +1,148 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.formDetail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+
+    &__inputWrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        z-index: 1;
+
+        &--open {
+            z-index: 50;
+        }
+
+        &--category {
+            z-index: 1;
+        }
+
+        label {
+            height: 24px;
+        }
+
+        &__selectWrapper {
+            position: relative;
+            width: 100%;
+            position: relative;
+
+            &__dropdown {
+                position: absolute;
+                top: -32px;
+                left: 0;
+                right: 0;
+                z-index: 10;
+            }
+
+            &__requiredText {
+                height: 40px;
+                position: absolute;
+                top: 42px;
+
+                p {
+                    font-size: 14px;
+                    color: var(--clr-feedback-error)
+                }
+            }
+        }
+
+        select {
+            position: relative;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-clr-light);
+            height: 40px;
+            width: 100%;
+            padding-inline: var(--space-md);
+            z-index: 20;
+
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: white;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &__iconOverlay {
+            height: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: var(--space-md);
+            position: absolute;
+            top: 0;
+            z-index: 21;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &__icon {
+                height: 28px;
+                width: 28px;
+                border-radius: var(--radius-pill);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                    background-color: var(--clr-feedback-disabled);
+                    cursor: pointer;
+                }
+
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}
+
+.categoryList {
+    background-color: var(--clr-white);
+    max-height: 240px;
+    overflow: scroll;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-allaround);
+    padding-top: 14px;
+    position: absolute;
+    top: calc(100% - 14px);
+    left: 0;
+    right: 0;
+
+    &__category {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding-inline: var(--space-sm);
+        border-radius: var(--radius-md);
+
+        &:hover {
+            background-color: var(--clr-tinted-grey);
+            cursor: pointer;
+        }
+    }
+}
+
+.requiredInput {
+    color: var(--clr-feedback-error)
+}
+
+.assignedContactIcons {
+    padding-top: var(--space-sm);
+    display: flex;
+    gap: var(--space-sm);
+}
+
+app-prio-selection,
+app-add-task-subtasks {
+    width: 100%;
+}

@@ -1,0 +1,98 @@
+<form class="formDetail" [formGroup]="form">
+
+    <div class="formDetail__inputWrapper">
+        <app-prio-selection [form]="form"></app-prio-selection>
+    </div>
+
+    <div class="formDetail__inputWrapper formDetail__inputWrapper--assigned" #assignedDropdown
+        [class.formDetail__inputWrapper--open]="isContactDropdownOpen">
+        <label>
+            Assigned to
+        </label>
+
+        <div class="formDetail__inputWrapper__selectWrapper">
+            <select>
+                <option value="" disabled selected>Select contacts to asign</option>
+            </select>
+
+            <div class="formDetail__inputWrapper__iconOverlay" (click)="toggleDropdown()">
+                <div class="formDetail__inputWrapper__iconOverlay__icon">
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M4.30598 0.300097L6.90598 2.9001C7.22265 3.21676 7.29348 3.57926 7.11848 3.9876C6.94348 4.39593 6.63098 4.6001 6.18098 4.6001L1.03098 4.6001C0.580982 4.6001 0.268482 4.39593 0.093482 3.9876C-0.0815182 3.57926 -0.0106845 3.21676 0.305982 2.9001L2.90598 0.300097C3.00598 0.200098 3.11432 0.125098 3.23098 0.0750976C3.34765 0.0250974 3.47265 9.77516e-05 3.60598 9.77516e-05C3.73932 9.77516e-05 3.86432 0.0250974 3.98098 0.0750976C4.09765 0.125098 4.20598 0.200098 4.30598 0.300097Z"
+                            fill="#2A3647" />
+                    </svg>
+                </div>
+            </div>
+
+            @if (isContactDropdownOpen) {
+            <app-contact-selection class="formDetail__inputWrapper__selectWrapper__dropdown"
+                [selectedContacts]="form.get('assignedTo')?.value || []"
+                (selectedContactsChange)="setAssignedCollaborators($event)">
+            </app-contact-selection>
+            }
+
+            @if (getSelectedContacts().length > 0) {
+            <div class="assignedContactIcons">
+                @for (contact of getVisibleContacts(); track contact.id) {
+                <app-profile-icon size="small" [initials]="getProfileData(contact).initials"
+                    [avatarColor]="getProfileData(contact).avatarColor">
+                </app-profile-icon>
+                }
+
+                @if (getHiddenContactsCount() > 0) {
+                <app-profile-icon size="small" [initials]="'+' + getHiddenContactsCount()"
+                    avatarColor="var(--clr-feedback-disabled)">
+                </app-profile-icon>
+                }
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="formDetail__inputWrapper formDetail__inputWrapper--assigned" #categoryDropdown
+        [class.formDetail__inputWrapper--open]="isCategoryDropwDownOpen">
+        <label>
+            Category<span class="requiredInput">*</span>
+        </label>
+
+        <div class="formDetail__inputWrapper__selectWrapper">
+            <select class="formDetail__inputWrapper__selectCategory" formControlName="category">
+                <option value="" disabled hidden>Select task category</option>
+                <option value="Technical Task">Technical Task</option>
+                <option value="User Story">User Story</option>
+            </select>
+
+            <div class="formDetail__inputWrapper__selectWrapper__requiredText">
+                @if (form.get('category')?.hasError('required') && form.get('category')?.touched) {
+                <p class="formError">This field is required</p>
+                }
+            </div>
+
+            <div class="formDetail__inputWrapper__iconOverlay" (click)="toggleDropdownCategory()">
+                <div class="formDetail__inputWrapper__iconOverlay__icon">
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M4.30598 0.300097L6.90598 2.9001C7.22265 3.21676 7.29348 3.57926 7.11848 3.9876C6.94348 4.39593 6.63098 4.6001 6.18098 4.6001L1.03098 4.6001C0.580982 4.6001 0.268482 4.39593 0.093482 3.9876C-0.0815182 3.57926 -0.0106845 3.21676 0.305982 2.9001L2.90598 0.300097C3.00598 0.200098 3.11432 0.125098 3.23098 0.0750976C3.34765 0.0250974 3.47265 9.77516e-05 3.60598 9.77516e-05C3.73932 9.77516e-05 3.86432 0.0250974 3.98098 0.0750976C4.09765 0.125098 4.20598 0.200098 4.30598 0.300097Z"
+                            fill="#2A3647" />
+                    </svg>
+                </div>
+            </div>
+
+            @if(isCategoryDropwDownOpen) {
+            <div class="categoryList formDetail__inputWrapper__selectWrapper__dropdown">
+                <div class="categoryList__category" (click)="getCategory('Technical Task')">
+                    <p>Technical Task</p>
+                </div>
+                <div class="categoryList__category" (click)="getCategory('User Story')">
+                    <p>User Story</p>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="formDetail__inputWrapper">
+        <app-add-task-subtasks [form]="form"></app-add-task-subtasks>
+    </div>
+</form>

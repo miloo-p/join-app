@@ -18,6 +18,12 @@
   }
 }
 
+.hidden-xl {
+  @media (max-width: $breakpoint-xl) {
+    display: none !important;
+  }
+}
+
 .hidden-lg {
   @media (max-width: $breakpoint-lg) {
     display: none !important;

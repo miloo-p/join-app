@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { ContactsDetailComponent } from '../../sections/contacts-detail/contacts-detail';
-import { ContactList, UIContact } from '../../sections/contacts-list/contacts-list';
-import { EditContactComponent } from '../../sections/edit-contact/edit-contact';
-import { Supabase } from '../../shared/services/supabase';
+import { contactsService } from '../../shared/services/contacts-service';
+import { ContactsDetailComponent } from './components/contacts-detail/contacts-detail';
+import { ContactList, UIContact } from './components/contacts-list/contacts-list';
+import { EditContactComponent } from './components/edit-contact/edit-contact';
 
 @Component({
   selector: 'app-contacts',
@@ -13,14 +13,14 @@ import { Supabase } from '../../shared/services/supabase';
   styleUrls: ['./contacts.scss'],
 })
 export class Contacts {
-  private supabaseService = inject(Supabase);
+  private contactsService = inject(contactsService);
 
-  /** 
+  /**
    * Central signal holding the currently active contact for the whole page.
    * Strictly typed to UIContact to ensure data integrity between list and detail views.
    */
   public activeContact = signal<UIContact | null>(null);
-  
+
   /** Signal controlling the visibility state of the edit contact component/overlay. */
   public isEditContactOpen = signal<boolean>(false);
 
@@ -54,7 +54,7 @@ export class Contacts {
   }
 
   /**
-   * Deletes a contact from the database using the Supabase service and clears the active selection.
+   * Deletes a contact from the database using the Contacts service and clears the active selection.
    * Fulfills User Story 4 (The option 'Delete' removes the contact permanently).
    * @param {UIContact} contact - The contact object requested for deletion.
    * @returns {Promise<void>}
@@ -64,7 +64,7 @@ export class Contacts {
       return;
     }
 
-    await this.supabaseService.deleteContact(contact.id);
+    await this.contactsService.deleteContact(contact.id);
 
     this.activeContact.set(null);
     this.isEditContactOpen.set(false);
@@ -81,9 +81,20 @@ export class Contacts {
       return;
     }
 
-    await this.supabaseService.updateContact(updatedContact);
+    await this.contactsService.updateContact(updatedContact);
 
     this.activeContact.set(updatedContact);
     this.closeEditContact();
+  }
+
+    /**
+   * Resets the active contact to null to return to the list view on mobile.
+   */
+  public handleBackToList(listComponent: ContactList): void {
+    this.activeContact.set(null);
+    
+    if (listComponent) {
+      listComponent.selectedContact.set(null); 
+    }
   }
 }

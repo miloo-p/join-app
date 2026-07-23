@@ -1,0 +1,112 @@
+<section class="contacts-main" [class.contacts-main--has-selected-contact]="!!contact">
+
+    <div class="contacts-main__header" role="banner">
+        @if (contact) {
+        <button class="contacts-main__btn-back hidden-desktop" aria-label="Go back to list" (click)="onCloseDetail()">
+
+            <svg class="contacts-main__btn-back-svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M10.437 14.6667H25.333C26.0694 14.6667 26.6663 15.2637 26.6663 16.0001C26.6663 16.7364 26.0694 17.3334 25.333 17.3334H10.437L16.6463 23.5427C17.167 24.0634 17.167 24.9074 16.6463 25.4281C16.1257 25.9487 15.2816 25.9487 14.761 25.4281L6.74722 17.4143C5.96617 16.6332 5.96617 15.3669 6.74722 14.5858L14.761 6.57206C15.2816 6.05144 16.1257 6.05144 16.6463 6.57206C17.167 7.09268 17.167 7.93677 16.6463 8.45739L10.437 14.6667Z"
+                    fill="currentColor" />
+            </svg>
+        </button>
+        }
+
+        <div class="contacts-main__header-text">
+            <h2 class="contacts-main__title">Contacts</h2>
+            <div class="contacts-main__header-subtitle-group">
+                <div class="contacts-main__header-divider"></div>
+                <span class="contacts-main__slogan">Better with a team</span>
+            </div>
+        </div>
+
+    </div>
+
+    @if (contact) {
+    <div class="contacts-main__details-view">
+        <div class="contacts-main__profile-header">
+            <div class="contacts-main__large-avatar" [style.background-color]="contact.avatarColor">
+                {{ contact.initials }}
+            </div>
+
+            <div class="contacts-main__name-actions">
+                <h2 class="contacts-main__profile-name">{{ contact.name }}</h2>
+
+                <div class="contacts-main__action-buttons">
+                    <button class="contacts-main__action-btn contacts-main__action-btn--edit" (click)="onEditContact()">
+                        <svg width="24" height="24" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2 16.25H3.4L12.025 7.625L10.625 6.225L2 14.85V16.25ZM16.3 6.175L12.05 1.975L13.45 0.575C13.8333 0.191667 14.3042 0 14.8625 0C15.4208 0 15.8917 0.191667 16.275 0.575L17.675 1.975C18.0583 2.35833 18.2583 2.82083 18.275 3.3625C18.2917 3.90417 18.1083 4.36667 17.725 4.75L16.3 6.175ZM14.85 7.65L4.25 18.25H0V14L10.6 3.4L14.85 7.65Z"
+                                fill="currentColor" />
+                        </svg>
+                        Edit
+                    </button>
+
+                    <button class="contacts-main__action-btn contacts-main__action-btn--delete"
+                        (click)="onDeleteContact()">
+                        <svg width="24" height="24" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3 18C2.45 18 1.97917 17.8042 1.5875 17.4125C1.19583 17.0208 1 16.55 1 16V3C0.716667 3 0.479167 2.90417 0.2875 2.7125C0.0958333 2.52083 0 2.28333 0 2C0 1.71667 0.0958333 1.47917 0.2875 1.2875C0.479167 1.09583 0.716667 1 1 1H5C5 0.716667 5.09583 0.479167 5.2875 0.2875C5.47917 0.0958333 5.71667 0 6 0H10C10.2833 0 10.5208 0.0958333 10.7125 0.2875C10.9042 0.479167 11 0.716667 11 1H15C15.2833 1 15.5208 1.09583 15.7125 1.2875C15.9042 1.47917 16 1.71667 16 2C16 2.28333 15.9042 2.52083 15.7125 2.7125C15.5208 2.90417 15.2833 3 15 3V16C15 16.55 14.8042 17.0208 14.4125 17.4125C14.0208 17.8042 13.55 18 13 18H3ZM3 3V16H13V3H3ZM5 13C5 13.2833 5.09583 13.5208 5.2875 13.7125C5.47917 13.9042 5.71667 14 6 14C6.28333 14 6.52083 13.9042 6.7125 13.7125C6.90417 13.5208 7 13.2833 7 13V6C7 5.71667 6.90417 5.47917 6.7125 5.2875C6.52083 5.09583 6.28333 5 6 5C5.71667 5 5.47917 5.09583 5.2875 5.2875C5.09583 5.47917 5 5.71667 5 6V13ZM9 13C9 13.2833 9.09583 13.5208 9.2875 13.7125C9.47917 13.9042 9.71667 14 10 14C10.2833 14 10.5208 13.9042 10.7125 13.7125C10.9042 13.5208 11 13.2833 11 13V6C11 5.71667 10.9042 5.47917 10.7125 5.2875C10.5208 5.09583 10.2833 5 10 5C9.71667 5 9.47917 5.09583 9.2875 5.2875C9.09583 5.47917 9 5.71667 9 6V13Z"
+                                fill="currentColor" />
+                        </svg>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="contacts-main__info-title">
+            <h3 class="contacts-main__section-subtitle">Contact Information</h3>
+        </div>
+
+        <div class="contacts-main__info-data-block">
+            <div class="contacts-main__data-group">
+                <span class="contacts-main__label">Email</span>
+                <span class="contacts-main__value contacts-main__value--email">{{ contact.email }}</span>
+            </div>
+            <div class="contacts-main__data-group">
+                <span class="contacts-main__label">Phone</span>
+                <span class="contacts-main__value contacts-main__value--phone">{{ contact.telephone }}</span>
+            </div>
+        </div>
+
+        <button class="contacts-main__btn-options-mobile hidden-desktop" aria-label="Contact options"
+            (click)="toggleMobileMenu()">
+            <svg class="contacts-main__btn-options-svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                xmlns="http://w3.org">
+                <mask id="mask0_71395_17969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32"
+                    height="32">
+                    <rect width="32" height="32" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_71395_17969)">
+                    <path
+                        d="M15.9997 26.6666C15.2663 26.6666 14.6386 26.4055 14.1163 25.8833C13.5941 25.361 13.333 24.7333 13.333 23.9999C13.333 23.2666 13.5941 22.6388 14.1163 22.1166C14.6386 21.5944 15.2663 21.3333 15.9997 21.3333C16.733 21.3333 17.3608 21.5944 17.883 22.1166C18.4052 22.6388 18.6663 23.2666 18.6663 23.9999C18.6663 24.7333 18.4052 25.361 17.883 25.8833C17.3608 26.4055 16.733 26.6666 15.9997 26.6666ZM15.9997 18.6666C15.2663 18.6666 14.6386 18.4055 14.1163 17.8833C13.5941 17.361 13.333 16.7333 13.333 15.9999C13.333 15.2666 13.5941 14.6388 14.1163 14.1166C14.6386 13.5944 15.2663 13.3333 15.9997 13.3333C16.733 13.3333 17.3608 13.5944 17.883 14.1166C18.4052 14.6388 18.6663 15.2666 18.6663 15.9999C18.6663 16.7333 18.4052 17.361 17.883 17.8833C17.3608 18.4055 16.733 18.6666 15.9997 18.6666ZM15.9997 10.6666C15.2663 10.6666 14.6386 10.4055 14.1163 9.88325C13.5941 9.36103 13.333 8.73325 13.333 7.99992C13.333 7.26659 13.5941 6.63881 14.1163 6.11659C14.6386 5.59436 15.2663 5.33325 15.9997 5.33325C16.733 5.33325 17.3608 5.59436 17.883 6.11659C18.4052 6.63881 18.6663 7.26659 18.6663 7.99992C18.6663 8.73325 18.4052 9.36103 17.883 9.88325C17.3608 10.4055 16.733 10.6666 15.9997 10.6666Z"
+                        fill="currentColor" />
+                </g>
+            </svg>
+        </button>
+        @if (isMobileMenuOpen) {
+        <div class="contacts-main__mobile-menu">
+            <button class="contacts-main__mobile-menu-btn" (click)="onEditContact(); toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 19 19" fill="none" xmlns="http://w3.org">
+                    <path
+                        d="M2 16.25H3.4L12.025 7.625L10.625 6.225L2 14.85V16.25ZM16.3 6.175L12.05 1.975L13.45 0.575C13.8333 0.191667 14.3042 0 14.8625 0C15.4208 0 15.8917 0.191667 16.275 0.575L17.675 1.975C18.0583 2.35833 18.2583 2.82083 18.275 3.3625C18.2917 3.90417 18.1083 4.36667 17.725 4.75L16.3 6.175ZM14.85 7.65L4.25 18.25H0V14L10.6 3.4L14.85 7.65Z"
+                        fill="currentColor" />
+                </svg>
+                Edit
+            </button>
+
+            <button class="contacts-main__mobile-menu-btn" (click)="onDeleteContact(); toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 16 18" fill="none" xmlns="http://w3.org">
+                    <path
+                        d="M3 18C2.45 18 1.97917 17.8042 1.5875 17.4125C1.19583 17.0208 1 16.55 1 16V3C0.716667 3 0.479167 2.90417 0.2875 2.7125C0.0958333 2.52083 0 2.28333 0 2C0 1.71667 0.0958333 1.47917 0.2875 1.2875C0.479167 1.09583 0.716667 1 1 1H5C5 0.716667 5.09583 0.479167 5.2875 0.2875C5.47917 0.0958333 5.71667 0 6 0H10C10.2833 0 10.5208 0.0958333 10.7125 0.2875C10.9042 0.479167 11 0.716667 11 1H15C15.2833 1 15.5208 1.09583 15.7125 1.2875C15.9042 1.47917 16 1.71667 16 2C16 2.28333 15.9042 2.52083 15.7125 2.7125C15.5208 2.90417 15.2833 3 15 3V16C15 16.55 14.8042 17.0208 14.4125 17.4125C14.0208 17.8042 13.55 18 13 18H3ZM3 3V16H13V3H3ZM5 13C5 13.2833 5.09583 13.5208 5.2875 13.7125C5.47917 13.9042 5.71667 14 6 14C6.28333 14 6.52083 13.9042 6.7125 13.7125C6.90417 13.5208 7 13.2833 7 13V6C7 5.71667 6.90417 5.47917 6.7125 5.2875C6.52083 5.09583 6.28333 5 6 5C5.71667 5 5.47917 5.09583 5.2875 5.2875C5.09583 5.47917 5 5.71667 5 6V13ZM9 13C9 13.2833 9.09583 13.5208 9.2875 13.7125C9.47917 13.9042 9.71667 14 10 14C10.2833 14 10.5208 13.9042 10.7125 13.7125C10.9042 13.5208 11 13.2833 11 13V6C11 5.71667 10.9042 5.47917 10.7125 5.2875C10.5208 5.09583 10.2833 5 10 5C9.71667 5 9.47917 5.09583 9.2875 5.2875C9.09583 5.47917 9 5.71667 9 6V13Z"
+                        fill="currentColor" />
+                </svg>
+                Delete
+            </button>
+        </div>
+        }
+    </div>
+    }
+</section>

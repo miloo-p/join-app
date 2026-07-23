@@ -1,0 +1,248 @@
+@use '../../../styles/abstracts/mixins' as *;
+
+.board {
+  @include global_content_wrapper();
+  background-color: var(--bg-light);
+
+  width: auto;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  @include respond-to(xl) {
+    width: 100%;
+    max-width: 100%;
+
+    height: auto;
+    min-height: 100%;
+  }
+
+  &__header {
+    @include flexbox(row, space-between, center, 1rem);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    flex-shrink: 0;
+
+    @include respond-to(xl) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.5rem;
+      padding-top: var(--space-xl);
+    }
+  }
+
+  &__header-top {
+    @include flexbox(row, flex-start, center, 1rem);
+
+    @include respond-to(xl) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  &__interaction {
+    @include flexbox(row, space-between, center, 2rem);
+
+    @include respond-to(xl) {
+      width: 100%;
+    }
+  }
+
+  &__search {
+    height: 3.5rem;
+    border-radius: var(--radius-md);
+    padding-inline: var(--space-md);
+    font-size: var(--fs-body-large);
+
+    @include respond-to(xl) {
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &__add-desktop {
+    display: inline-block;
+
+    @include respond-to(xl) {
+      display: none !important;
+    }
+  }
+
+  &__add-mobile {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 10px;
+
+    @include respond-to(xl) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    &:active svg rect {
+      fill: var(--clr-blue-dark);
+      transition: fill 100ms ease-in-out;
+    }
+  }
+
+  &__column-header {
+    @include flexbox(row, space-between, center, 1rem);
+    padding: var(--space-md) var(--space-md);
+    flex-shrink: 0;
+    @include respond-to(xl) {
+      @include flexbox(row, flex-start, center, 2rem);
+      padding: var(--space-sm) var(--space-sm);
+    }
+  }
+
+  &__column-title {
+    line-height: 28px;
+    margin: 0;
+    color: var(--text-color-dark);
+    @include respond-to(xl) {
+      font-size: var(--fs-body-medium);
+    }
+  }
+
+  &__add-btn {
+    @include flexbox(row, center, center, 0);
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+    border: none;
+    padding-right: 0.5rem;
+  }
+
+  &__content {
+    @include flexbox(row, space-between, stretch, clamp(0rem, 0.25vw, 2rem));
+    flex: 1;
+    min-height: 0;
+    padding-bottom: var(--space-2xl);
+
+    @include respond-to(xl) {
+      display: block;
+      width: 100%;
+      padding-bottom: var(--space-sm);
+    }
+  }
+
+  &__column {
+    max-width: 19rem;
+    width: 100%;
+    min-width: 13.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+
+    @include respond-to(xl) {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__task-list {
+    @include flexbox(column, flex-start, stretch, 1rem);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 150px;
+    scrollbar-gutter: stable;
+    padding: 0.75rem;
+
+    @include respond-to(xl) {
+      @include flexbox(row, flex-start, flex-start, 1rem);
+      overflow-y: hidden;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      min-height: 180px;
+
+      /*       margin-left: calc(clamp(var(--space-lg), 5vw, var(--space-2xl)) * -1);
+      margin-right: calc(clamp(var(--space-lg), 5vw, var(--space-2xl)) * -1);
+
+      padding-left: clamp(var(--space-lg), 5vw, var(--space-2xl));
+      padding-right: clamp(var(--space-lg), 5vw, var(--space-2xl));
+
+      padding-bottom: 1rem;
+      padding-top: 0; */
+
+      width: auto;
+      max-width: none;
+      min-width: 0;
+      box-sizing: border-box;
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  &__task {
+    text-align: left;
+    width: 100%;
+
+    @include respond-to(xl) {
+      flex: 0 0 16rem;
+      width: 16rem;
+      max-width: 16rem;
+
+      padding: var(--space-sm);
+    }
+  }
+
+  &__empty-state {
+    @include flexbox(row, center, center, 0);
+    color: var(--text-color-dark);
+    background-color: var(--clr-feedback-disabled);
+    height: 3.5rem;
+    width: 100%;
+    border: 2px dashed var(--border-clr-dark);
+    border-radius: var(--radius-md);
+    margin-top: 0;
+    align-self: flex-start;
+  }
+
+  &__empty-short {
+    display: none;
+
+    @include respond-to(xl) {
+      display: inline;
+    }
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.2;
+  border: 2px dashed var(--border-clr-dark);
+  border-radius: var(--radius-lg);
+  min-height: 150px;
+}
+
+.board__task {
+  @media (min-width: 1301px) {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    cursor: pointer;
+  }
+}

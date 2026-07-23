@@ -4,10 +4,12 @@
   --clr-blue-light: #29abe2;
   --clr-blue-muted: #2a3647;
   --clr-blue-dark: #091931;
+  
 
   --clr-black: #000000;
   --clr-white: #ffffff;
   --clr-tinted-grey: #f6f7f8;
+  --clr-darker-grey: #686868;
 
   // --- FEEDBACK COLORS ---
   --clr-feedback-error: #e60026;
@@ -103,6 +105,7 @@
   --text-color-light: var(--clr-feedback-disabled);
   --text-color-ultralight: var(--clr-white);
   --text-color-special: var(--clr-blue-light);
+  --text-color-grey: var(--clr-darker-grey);
 
   --bg-ultralight: var(--clr-white);
   --bg-light: var(--clr-tinted-grey);
@@ -115,6 +118,7 @@
 
   --border-clr-ultralight: var(--clr-white);
   --border-clr-light: var(--clr-feedback-disabled);
+  --border-clr-dark: var(--clr-blue-muted);
 
   --border-clr-error: var(--clr-feedback-error);
   --border-clr-active: var(--clr-blue-light);
@@ -125,5 +129,5 @@ $breakpoint-xsm: 410px; // Mobile Landscape
 $breakpoint-sm: 576px; // Mobile Landscape
 $breakpoint-md: 768px; // Tablet
 $breakpoint-lg: 992px; // Small Desktop
-$breakpoint-xl: 1200px; // Large Desktop
+$breakpoint-xl: 1300px; // Large Desktop
 $breakpoint-xxl: 1500px; // Large Desktop

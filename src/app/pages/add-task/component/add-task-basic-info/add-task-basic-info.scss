@@ -1,0 +1,120 @@
+@use '../../../../../styles/abstracts/mixins' as *;
+
+.formBasic {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+
+    &__inputWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        input {
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-clr-light);
+            height: 40px;
+            width: 100%;
+            padding-inline: var(--space-md);
+        }
+
+        textarea {
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-clr-light);
+            max-width: 100%;
+            min-width: 100%;
+            padding-inline: var(--space-md);
+            min-height: 120px;
+            max-height: 240px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            line-height: 1.2;
+            resize: vertical;
+        }
+
+        &__input {
+            position: relative;
+
+            &__requiredText {
+                height: 40px;
+                position: absolute;
+                top: 42px;
+
+                p {
+                    font-size: 14px;
+                    color: var(--clr-feedback-error)
+                }
+            }
+        }
+
+    }
+}
+
+.dateInputWrapper {
+    position: relative;
+    width: 100%;
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    input {
+        width: 100%;
+        height: 40px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-clr-light);
+        padding-inline: var(--space-md);
+        box-sizing: border-box;
+        background-color: white;
+        color: transparent;
+        caret-color: transparent;
+        cursor: inherit;
+
+        &:invalid,
+        &:focus,
+        &:valid {
+            color: transparent;
+        }
+    }
+
+    input::-webkit-calendar-picker-indicator {
+        opacity: 1;
+        display: block;
+        cursor: inherit;
+    }
+
+    &__dateDisplay {
+        position: absolute;
+        left: var(--space-md);
+        right: var(--space-md);
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-color-dark);
+        font-size: 1rem;
+        pointer-events: none;
+        z-index: 1;
+
+        &--placeholder {
+            color: #757575;
+        }
+    }
+}
+
+#dueDate {
+    color: transparent;
+    caret-color: transparent;
+}
+
+#dueDate::-webkit-datetime-edit,
+#dueDate::-webkit-datetime-edit-fields-wrapper,
+#dueDate::-webkit-datetime-edit-text,
+#dueDate::-webkit-datetime-edit-day-field,
+#dueDate::-webkit-datetime-edit-month-field,
+#dueDate::-webkit-datetime-edit-year-field {
+    color: transparent;
+}
+
+.requiredInput {
+    color: var(--clr-feedback-error)
+}

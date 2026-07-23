@@ -43,7 +43,9 @@ export class ProfileIcon {
 
   @Input() avatarColor = '';
 
-  @Input() contact!: UIContact;
+  @Input() contact?: UIContact;
+
+  @Input() size: 'normal' | 'small' | 'big' | 'eighty' | 'header' = 'normal';
 
 /*testing user*/
 public testContact!: UIContact;
