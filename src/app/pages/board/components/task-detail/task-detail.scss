@@ -78,6 +78,14 @@
   &__title {
     font-size: var(--fs-h2);
     margin: 0;
+
+    @include respond-to(xl) {
+      font-size: var(--fs-h3);
+    }
+
+    @include respond-to(lg) {
+      font-size: var(--fs-h4);
+    }
   }
 
   &__desc {
