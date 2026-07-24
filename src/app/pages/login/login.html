@@ -33,10 +33,11 @@
             <div class="auth__underline"></div>
         </div>
 
-        <form class="auth__form">
+        <form class="auth__form" (submit)="onLoginSubmit($event)" novalidate>
             <div class="auth__inputs-container">
-                <div class="auth__field-group">
-                    <input type="email" placeholder="Email" class="auth__input" required />
+                <div class="auth__field-group" [class.auth__field-group--invalid]="showError()">
+                    <input type="email" placeholder="Email" class="auth__input" (input)="onEmailInput($event)"
+                        required />
                     <svg class="auth__input-icon" width="24" height="24" viewBox="0 0 24 24" fill="#d1d1d1"
                         xmlns="http://w3.org">
                         <mask id="mask0_71395_17528" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
@@ -51,7 +52,7 @@
                     </svg>
                 </div>
 
-                <div class="auth__field-group">
+                <div class="auth__field-group" [class.auth__field-group--invalid]="showError()">
                     <input [type]="hidePassword() ? 'password' : 'text'" placeholder="Password" class="auth__input"
                         (input)="onPasswordInput($event)" required />
 
@@ -97,11 +98,13 @@
                         }
                     </button>
                     }
+                    @if (showError()) {
+                    <span class="auth__error-text">Check your email and password. Please try again.</span>
+                    }
                 </div>
             </div>
 
             <div class="auth__action-group">
-
                 <app-button [text]="'Log in'" [variant]="'primary'" [size]="'md'" [buttonType]="'submit'"
                     class="auth__custom-btn auth__custom-btn--login">
                 </app-button>
@@ -109,9 +112,14 @@
                 <app-button [text]="'Guest Log in'" [variant]="'secondary'" [size]="'md'" [buttonType]="'button'"
                     class="auth__custom-btn auth__custom-btn--guest" (click)="onGuestLogin()">
                 </app-button>
-
             </div>
-
         </form>
     </div>
+
+    <footer class="auth__footer" [class.auth__footer--visible]="!isAnimating()">
+        <div class="auth__footer-nav">
+            <a (click)="onPrivacyPolicyClick()" class="auth__footer-link">Privacy Policy</a>
+            <a (click)="onLegalNoticeClick()" class="auth__footer-link">Legal notice</a>
+        </div>
+    </footer>
 </section>

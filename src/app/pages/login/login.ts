@@ -31,6 +31,22 @@ export class Login implements OnInit {
   public hasPasswordText = signal<boolean>(false);
 
   /**
+   * Reactive signal holding the current value of the email input field.
+   */
+  public emailValue = signal<string>('');
+
+  /**
+   * Reactive signal holding the current value of the password input field.
+   */
+  public passwordValue = signal<string>('');
+
+  /**
+   * Reactive signal controlling the visibility of the global validation error message.
+   * True if the credentials failed validation checks, false otherwise.
+   */
+  public showError = signal<boolean>(false);
+
+  /**
    * Lifecycle hook that initializes the component and triggers the splash screen transition.
    */
   public ngOnInit(): void {
@@ -59,25 +75,74 @@ export class Login implements OnInit {
   }
 
   /**
+   * Listens to input events on the email field to update the reactive value signal.
+   * Automatically clears the validation error message state once the user resumes typing.
+   * 
+   * @param {Event} event - The HTML input event from the template.
+   */
+  public onEmailInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.emailValue.set(input.value);
+    
+    // Setzt den Fehlerstatus bedingungslos zurück, sobald der User tippt
+    this.showError.set(false);
+  }
+
+  /**
    * Listens to input events on the password field to dynamically show the correct control icons.
    * Resets visibility to hidden if the field becomes completely empty.
+   * Automatically clears the validation error message state once the user resumes typing.
    * 
    * @param {Event} event - The HTML input event from the template.
    */
   public onPasswordInput(event: Event): void {
     const input = event.target as HTMLInputElement;
+    this.passwordValue.set(input.value);
     this.hasPasswordText.set(input.value.length > 0);
     
     if (input.value.length === 0) {
       this.hidePassword.set(true);
     }
+
+    // Setzt den Fehlerstatus bedingungslos zurück, sobald der User tippt
+    this.showError.set(false);
   }
 
   /**
-   * Handles the guest login action by instantly navigating the user to the dashboard.
-   * Driven by Figma behavior: triggers immediately with 0ms animation duration.
+   * Validates the form data on submission. Verifies basic syntax requirements
+   * and non-empty values before performing a simulated mock credential check.
+   * Redirects to the contacts view on success or triggers error signals on failure.
+   * 
+   * @param {Event} event - The HTML form submission event.
    */
-    /**
+  public onLoginSubmit(event: Event): void {
+    event.preventDefault();
+
+    const email = this.emailValue().trim();
+    const password = this.passwordValue();
+
+    const isEmailInvalid = email.length === 0 || !email.includes('@');
+    const isPasswordInvalid = password.length === 0;
+
+    if (isEmailInvalid || isPasswordInvalid) {
+      this.showError.set(true);
+      return;
+    }
+
+    // --- TEMPORÄRER DB-TEST-BLOCK (MOCK) ---
+    // Simuliert den Datenbank-Abgleich deines Gruppenmitglieds vorab lokal.
+    const mockEmail = 'test@join.com';
+    const mockPassword = 'password123';
+
+    if (email === mockEmail && password === mockPassword) {
+      this.showError.set(false);
+      this.router.navigate(['/contacts']);  // Später zu summary!
+    } else {
+      this.showError.set(true);
+    }
+  }
+
+  /**
    * Handles the guest login action by programmatically navigating 
    * the user directly to the application dashboard.
    */
@@ -85,10 +150,24 @@ export class Login implements OnInit {
     this.router.navigate(['/contacts']);
   }
 
-    /**
+  /**
    * Handles the navigation to the sign-up page when the header button is clicked.
    */
   public onSignupClick(): void {
     this.router.navigate(['/signup']);
+  }
+
+  /**
+   * Navigates the user instantly to the external privacy policy view.
+   */
+  public onPrivacyPolicyClick(): void {
+    this.router.navigate(['/privacy-policy']);
+  }
+
+  /**
+   * Navigates the user instantly to the external legal notice view.
+   */
+  public onLegalNoticeClick(): void {
+    this.router.navigate(['/legal-notice']);
   }
 }
