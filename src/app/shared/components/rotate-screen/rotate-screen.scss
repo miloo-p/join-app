@@ -1,4 +1,4 @@
-@use '../../../styles/abstracts/mixins' as *;
+@use '../../../../styles/abstracts/mixins' as *;
 
 .rotate-screen {
     position: fixed;
@@ -43,8 +43,8 @@
     }
 }
 
-@include landscape-mobile {
+@include landscape-mobile  {
   .rotate-screen {
-    display: flex;
+    display: flex !important;
   }
 }
