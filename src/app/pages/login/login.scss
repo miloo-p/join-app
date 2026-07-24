@@ -3,7 +3,7 @@
 .auth {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background-color: var(--bg-light);
     overflow-x: hidden;
 
@@ -44,7 +44,7 @@
 
         .auth__splash--animated & {
             top: var(--space-2xl); 
-            left: var(--space-4xl); 
+            left: var(--space-2xl); 
             transform: translate(0px, 0); 
             width: 101px;
             height: 122px;
