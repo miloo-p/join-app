@@ -36,7 +36,13 @@
                 gap: var(--space-xl);
             }
 
-            &__secondLane {}
+            &__secondLane {
+                &:hover {
+                    .border  {
+                        background-color: white;
+                    }
+                }
+            }
 
             &__thirdLane {
                 display: flex;
@@ -47,65 +53,86 @@
 }
 
 .card {
-  background-color: white;
-  height: 160px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-allaround);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-xl);
-
-  h2 {
-    margin: 0;
-  }
-
-  &__text {
+    background-color: white;
+    height: 160px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-allaround);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    p {
-      text-align: center;
-    }
-  }
-
-  &__svg {
-    background-color: var(--clr-blue-dark);
-    border-radius: var(--radius-pill);
+    gap: var(--space-xl);
     padding: var(--space-md);
 
-    svg {
+    h2 {
+        margin: 0;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    &__svg {
+        background-color: var(--clr-blue-dark);
+        border-radius: var(--radius-pill);
+        padding: var(--space-md);
+
+        svg {
+            color: white;
+            width: 28px;
+            height: 28px;
+        }
+        
+        &__secondLane {
+            background-color: #ff3d00;
+            border-radius: var(--radius-pill);
+            padding: var(--space-md);
+        }
+    }
+
+    &:hover {
+        background-color: var(--clr-blue-dark);
+        cursor: pointer;
         color: white;
-        width: 28px;
-        height: 28px;
+
+        .card__svg {
+            background-color: white;
+
+            svg {
+                color: var(--clr-blue-dark);
+            }
+        }
     }
-  }
 
-  &:hover {
-    background-color: var(--clr-blue-dark);
-    cursor: pointer;
-    color: white;
-
-    .card__svg {
-      background-color: white;
-
-      svg {
-        color: var(--clr-blue-dark);
-      }
+    &--firstLane {
+        width: 50%;
     }
-  }
 
-  &--firstLane {
-    width: 50%;
-  }
+    &--secondLane {
+        width: 100%;
 
-  &--secondLane {
-    width: 100%;
-  }
+        &__summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xl);
+        }
+    }
 
-  &--thirdLane {
-    width: 33%;
-  }
+    &--thirdLane {
+        width: 33%;
+    }
+}
+
+.border {
+    width: 2px;
+    height: 80px;
+    background-color: var(--clr-darker-grey);
+    border-radius: var(--radius-pill);
 }
