@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   templateUrl: './greeting.html',
   styleUrl: './greeting.scss',
 })
-export class Greeting {}
+export class Greeting {
+
+  get greetingGetter(): string {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 11) return 'Good morning!';
+    if (hour >= 11 && hour < 17) return 'Good day!';
+    if (hour >= 17 && hour < 22) return 'Good evening!';
+    return 'Good night!';
+  }
+}
