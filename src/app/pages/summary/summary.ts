@@ -2,14 +2,16 @@ import { Component, computed, inject, OnInit } from '@angular/core';
 import { tasksService } from '../../shared/services/tasks-service';
 import { RouterLink } from '@angular/router';
 import { Task } from '../../shared/interfaces/tasks';
+import { Greeting } from './greeting/greeting';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
+  imports: [RouterLink, Greeting],
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
-  imports: [RouterLink],
 })
+
 export class Summary implements OnInit {
   private tasksService = inject(tasksService);
 

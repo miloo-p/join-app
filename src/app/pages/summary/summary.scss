@@ -24,6 +24,9 @@
     }
 
     &__main {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-xl);
 
         &__summary {
             width: 60%;
@@ -135,4 +138,8 @@
     height: 80px;
     background-color: var(--clr-darker-grey);
     border-radius: var(--radius-pill);
+}
+
+app-greeting {
+    width: 40%;
 }
