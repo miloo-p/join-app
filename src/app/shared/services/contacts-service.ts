@@ -80,16 +80,14 @@ export class contactsService {
    * @param {Contact} contact - The mutated contact entity payload containing the localized property changes and its relational identifier.
    */
   async updateContact(contact: Contact): Promise<void> {
-  const updateData = {
-    firstname: contact.firstname,
-    lastname: contact.lastname,
-    email: contact.email,
-    telephone: contact.telephone,};
+    const updateData = {
+      firstname: contact.firstname,
+      lastname: contact.lastname,
+      email: contact.email,
+      telephone: contact.telephone,
+    };
 
-    const { error } = await this.supabase
-      .from('contacts')
-      .update(updateData)
-      .eq('id', contact.id);
+    const { error } = await this.supabase.from('contacts').update(updateData).eq('id', contact.id);
 
     if (error) {
       console.error('Contacts update contact error', error);
@@ -102,7 +100,13 @@ export class contactsService {
    * @param {number} id - The unique numerical index resolving to the contact entity targeted for destruction.
    */
   async deleteContact(id: number) {
-    const response = await this.supabase.from('contacts').delete().eq('id', id);
+    const { error } = await this.supabase.from('contacts').delete().eq('id', id);
+
+    if (error) {
+      console.error('Error deleting contact', error);
+      return;
+    }
+    this.contacts.update((contacts) => contacts.filter((c) => c.id !== id));
   }
 
   /**
