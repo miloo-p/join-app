@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import {
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    OnInit,
-    Output,
-    ViewChild,
-    computed,
-    effect,
-    inject,
-    signal,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+  computed,
+  effect,
+  inject,
+  signal,
 } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { Contact } from '../../../../shared/interfaces/contact';
@@ -17,7 +17,7 @@ import { contactsService } from '../../../../shared/services/contacts-service';
 import { ContactAddNewContactDialog } from '../contact-add-new-contact-dialog/contact-add-new-contact-dialog';
 
 /**
- * Extended contact interface enriched with visual layout properties 
+ * Extended contact interface enriched with visual layout properties
  * required exclusively by UI presentation layers.
  */
 export interface UIContact extends Contact {
@@ -27,7 +27,7 @@ export interface UIContact extends Contact {
 }
 
 /**
- * Dictionary blueprint for clustering UI-ready contacts under 
+ * Dictionary blueprint for clustering UI-ready contacts under
  * matching single-character alphabetical headlines.
  */
 interface ContactGroup {
@@ -37,7 +37,7 @@ interface ContactGroup {
 
 /**
  * Component managing the rendering and grouping of user contact records.
- * Orchestrates real-time cache sync streams and provides event bindings for 
+ * Orchestrates real-time cache sync streams and provides event bindings for
  * sub-overlay interactions and selection highlights.
  */
 @Component({
@@ -50,10 +50,10 @@ interface ContactGroup {
 export class ContactList implements OnInit {
   /** Reference injected service managing shared contact entities and DB bridges. */
   public contactsService = inject(contactsService);
-  
+
   /** Injected Angular ChangeDetectorRef to force template evaluation ticks on micro-tasks. */
   private cdr = inject(ChangeDetectorRef);
-  
+
   /** Signal capturing the currently highlighted or viewed entity in the list view. */
   public selectedContact = signal<UIContact | null>(null);
 
@@ -71,9 +71,9 @@ export class ContactList implements OnInit {
   constructor() {
     effect(() => {
       const rawContacts = this.contactsService.contacts();
-      
+
       if (this.pendingCreatedContactId !== null && rawContacts && rawContacts.length > 0) {
-        const found = rawContacts.find(c => c.id === this.pendingCreatedContactId);
+        const found = rawContacts.find((c) => c.id === this.pendingCreatedContactId);
         if (found) {
           setTimeout(() => {
             this.selectContact(found);
@@ -115,7 +115,7 @@ export class ContactList implements OnInit {
 
   /**
    * Intercepts successful creation signals to schedule an automated focus action.
-   * 
+   *
    * @param {any} contact - The newly committed contact payload from dialog events.
    */
   public handleNewContactCreated(contact: any): void {
@@ -132,7 +132,10 @@ export class ContactList implements OnInit {
     const rawContacts = this.contactsService.contacts();
     if (!rawContacts || rawContacts.length === 0) return [];
 
-    const sorted = [...rawContacts].sort((a, b) => a.firstname.localeCompare(b.firstname));
+    const sorted = [...rawContacts].sort((a, b) =>
+      (a.firstname || '').localeCompare(b.firstname || ''),
+    );
+
     return this.buildAlphabeticalGroups(sorted);
   });
 
@@ -169,7 +172,6 @@ export class ContactList implements OnInit {
           this.cdr.detectChanges();
         }
       }, 150);
-
     } else {
       (transformed as any).isFirstClick = false;
       this.selectedContact.set(transformed);
