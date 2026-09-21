@@ -93,7 +93,7 @@ Wer länger als 15 bis 30 Minuten an einem Bug festhängt, ohne erkennbaren Fort
 Um das Projekt lokal auszuführen, klone das Repository und nutze die Angular CLI:
 
 ```bash
-git clone [deine-repo-url]
+git clone https://github.com/miloo-p/join-app.git
 cd join
 npm install
 ng serve
